@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        android:titleTextColor="@android:color/white"
+        android:background="#1976D2">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toolbar Title"
+            android:textColor="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_gravity="center"
+            />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Llamada de Gestion"
+            android:textSize="23dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1">
+
+            <TextView
+                android:id="@+id/nombreLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Nombre del Grupo"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.01"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="Grupo"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/numGrupo"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.78"
+                android:ems="10"
+                android:gravity="center_vertical|center_horizontal"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLength="5"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="20sp" >
+
+                <requestFocus />
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="Ciclo"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/ciclo"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="Semana"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/semana"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_weight="0.3"
+            android:layout_marginRight="5dp"
+            android:text="@string/select_gestion"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <Spinner
+            android:id="@+id/gestionsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:entries="@array/gestionsi"
+            android:scrollbarStyle="outsideInset"
+            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_weight="0.3"
+            android:layout_marginRight="5dp"
+            android:text="@string/select_cerro"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <Spinner
+            android:id="@+id/cerroSi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:entries="@array/gestionsi"
+            android:scrollbarStyle="outsideInset"
+            style="@style/Widget.AppCompat.Spinner.Underlined" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_weight="0.3"
+            android:layout_marginRight="5dp"
+            android:text="@string/select_registros"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <Spinner
+            android:id="@+id/subioSi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:entries="@array/gestionsi"
+            android:scrollbarStyle="outsideInset"
+            style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fechaLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="left"
+            android:text="Fecha y Hora de Llamada"
+            android:textSize="21dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fechaTxt"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="0.3"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:background="#5A669E"
+                android:singleLine="true"
+                android:imeOptions="actionNext" />
+
+            <TextView
+                android:id="@+id/horaTxt"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="0.6"
+                android:layout_marginRight="10dp"
+                android:background="#5A669E"
+                android:singleLine="true"
+                android:imeOptions="actionNext" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08">
+
+        <!--Button
+            android:id="@+id/cerrarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:background="#1976D2"
+            android:text="Cerrar"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"/-->
+
+        <Button
+            android:id="@+id/guardarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:background="#1976D2"
+            android:text="Guardar"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:background="#1976D2">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="CrediClub"
+            android:textSize="24dp"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

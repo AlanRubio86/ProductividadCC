@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        android:titleTextColor="@android:color/white"
+        android:background="#1976D2">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toolbar Title"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1">
+
+            <TextView
+                android:id="@+id/nombreLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Nombre del Grupo"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.01"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="Grupo"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/group"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.78"
+                android:ems="10"
+                android:gravity="center_vertical|center_horizontal"
+                android:hint="Group ID"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLength="5"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="20sp" >
+
+                <requestFocus />
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="Ciclo"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/ciclo"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="Semana"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/semana"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="Integrantes"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/integrantes"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Asistencia Completa"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
+                android:layout_weight="0.27"
+                android:text="Pago Completo"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="135dp"
+                android:layout_height="36dp"
+                android:layout_weight="0.27"
+                android:text="Ahorro Completo"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <CheckBox
+                android:id="@+id/CheckBox01"
+                android:layout_width="120dp"
+                android:layout_height="36dp"
+                android:layout_weight="0.27"
+                android:text="Grupo No Asistio"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/CheckBox02"
+                android:layout_width="135dp"
+                android:layout_height="36dp"
+                android:layout_weight="0.27"
+                android:text="No visite Grupo"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Anterior"
+            android:visibility="invisible"/>
+        <!--style="@style/button"-->
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.5"
+            android:text="Continuar" />
+    </LinearLayout>
+
+</LinearLayout>

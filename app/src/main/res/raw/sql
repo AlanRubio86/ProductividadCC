@@ -1,0 +1,9 @@
+<sql>
+    <statement>
+        CREATE TABLE IF NOT EXISTS events
+        (
+        _id 			INTEGER PRIMARY KEY AUTOINCREMENT,
+        status			INTEGER
+        )
+    </statement>
+</sql>
