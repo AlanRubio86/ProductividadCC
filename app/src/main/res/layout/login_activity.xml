@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:background="#1173BB">
-
-        <ImageView
-            android:id="@+id/headerImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/login_header" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/credilogo"
+        android:layout_weight="0.06" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.025"
-        android:background="#1173BB">
+        android:background="#FFFFFF">
 
         <EditText
             android:id="@+id/numTxt"
-            android:layout_width="fill_parent"
+            style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:background="#ffffff"
-            android:singleLine="true"
+            android:hint="No. Empleado"
             android:inputType="number"
             android:maxLength="5"
-            android:hint="No. Empleado"/>
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -45,35 +39,36 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.025"
-        android:background="#1173BB">
+        android:background="#FFFFFF">
 
         <EditText
             android:id="@+id/passTxt"
-            android:layout_width="fill_parent"
+            style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:background="#ffffff"
-            android:singleLine="true"
+            android:hint="Contraseña"
             android:inputType="numberPassword"
-            android:hint="Contraseña"/>
+            android:singleLine="true" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.025"
-        android:background="#1173BB">
+        android:background="#FFFFFF">
 
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:gravity="center"
-            android:layout_marginRight="80dp"
             android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
             android:background="#ED9332"
+            android:gravity="center"
             android:text="Entrar"
             android:textColor="#ffffff"
             android:textSize="20dp" />
@@ -83,7 +78,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.05"
-        android:background="#1173BB">
+        android:background="#FFFFFF">
 
     </LinearLayout>
 
