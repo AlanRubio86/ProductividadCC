@@ -1,89 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="80dp"
+        android:background="#FFFFFF"
+        android:paddingTop="60dp"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.02"
+        android:text="Asistente CrediClub 3.0"
+        android:textAlignment="center"
+        android:background="#ffffff"
+        android:textColor="#DC9330"
+        android:textSize="26sp"
+        android:paddingTop="20dp"/>
+
+
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:background="#1173BB">
-
-        <ImageView
-            android:id="@+id/headerImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/login_header" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.025"
-        android:background="#1173BB">
+        android:layout_height="30dp"
+        android:layout_weight="0.03"
+        android:background="#FFFFFF"
+        android:hint="Número de empleado">
 
         <EditText
             android:id="@+id/numTxt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
-            android:background="#ffffff"
-            android:singleLine="true"
+            android:layout_marginRight="40dp"
             android:inputType="number"
             android:maxLength="5"
-            android:hint="No. Empleado"/>
+            android:background="@drawable/edittext" />
 
-    </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.025"
-        android:background="#1173BB">
+        android:layout_height="30dp"
+        android:layout_weight="0.03"
+        android:background="#FFFFFF"
+        android:paddingTop="10dp"
+        android:hint="Contraseña">
 
         <EditText
             android:id="@+id/passTxt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
-            android:background="#ffffff"
-            android:singleLine="true"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/edtitext"
             android:inputType="numberPassword"
-            android:hint="Contraseña"/>
-    </LinearLayout>
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.025"
-        android:background="#1173BB">
+        android:layout_height="30dp"
+        android:layout_weight="0.03"
+        android:background="#FFFFFF"
+        android:paddingTop="5dp">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="385dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.01"
+        android:background="#FFFFFF"
+        android:paddingTop="20dp"
+        android:textAlignment="center">
 
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:layout_marginRight="80dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="80dp"
-            android:background="#ED9332"
+            android:layout_marginRight="80dp"
+            android:background="#00508C"
+            android:gravity="center"
             android:text="Entrar"
+
             android:textColor="#ffffff"
             android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.05"
-        android:background="#1173BB">
+        android:background="#FFFFFF">
 
     </LinearLayout>
 
