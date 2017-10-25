@@ -2,80 +2,108 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/credilogo"
-        android:layout_weight="0.06" />
+        android:paddingBottom="80dp"
+        android:background="#FFFFFF"
+        android:paddingTop="60dp"
+        app:srcCompat="@drawable/logo" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.02"
+        android:text="Asistente CrediClub 3.0"
+        android:textAlignment="center"
+        android:background="#ffffff"
+        android:textColor="#DC9330"
+        android:textSize="26sp"
+        android:paddingTop="20dp"/>
+
+
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.025"
-        android:background="#FFFFFF">
+        android:layout_height="30dp"
+        android:layout_weight="0.03"
+        android:background="#FFFFFF"
+        android:hint="Número de empleado">
 
         <EditText
             android:id="@+id/numTxt"
-            style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:background="#ffffff"
-            android:hint="No. Empleado"
             android:inputType="number"
             android:maxLength="5"
-            android:singleLine="true" />
+            android:background="@drawable/edittext" />
 
-    </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.025"
-        android:background="#FFFFFF">
+        android:layout_height="30dp"
+        android:layout_weight="0.03"
+        android:background="#FFFFFF"
+        android:paddingTop="10dp"
+        android:hint="Contraseña">
 
         <EditText
             android:id="@+id/passTxt"
-            style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:background="#ffffff"
-            android:hint="Contraseña"
+            android:background="@drawable/edtitext"
             android:inputType="numberPassword"
             android:singleLine="true" />
-    </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.025"
-        android:background="#FFFFFF">
+        android:layout_height="30dp"
+        android:layout_weight="0.03"
+        android:background="#FFFFFF"
+        android:paddingTop="5dp">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="385dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.01"
+        android:background="#FFFFFF"
+        android:paddingTop="20dp"
+        android:textAlignment="center">
 
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
-            android:background="#ED9332"
+            android:background="#00508C"
             android:gravity="center"
             android:text="Entrar"
+
             android:textColor="#ffffff"
             android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.05"
         android:background="#FFFFFF">
