@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,6 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.productividadcc.utilerias.Globales;
+import com.productividadcc.utilerias.GroupModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +35,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class Bitacora extends AppCompatActivity {
+
+public class NewGroupsActivity extends AppCompatActivity {
 
     ListView listView;
     String[] agendaArray;
@@ -45,15 +49,7 @@ public class Bitacora extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*String languageToLoad  = "es"; // your language
-        Locale locale = new Locale(languageToLoad);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());*/
-
-        setContentView(R.layout.bitacora_activity);
+        setContentView(R.layout.newgroups_activity);
         context = getApplicationContext();
 
         // Find the toolbar view and set as ActionBar
@@ -62,53 +58,100 @@ public class Bitacora extends AppCompatActivity {
         // ...
         // Display icon in the toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         // Remove default title text
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Get access to the custom title view
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Bitácora de Eventos Cerrados");
+        mTitle.setText("Nuevos Grupos");
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Bitacora.this, MainActivity.class);
+                Intent intent = new Intent(NewGroupsActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.agregaGrupoBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewGroupsActivity.this, GrupoNuevo.class);
                 startActivity(intent);
                 finish();
             }
         });
 
         mprogressBar = (ProgressBar) findViewById(R.id.progressBar);
-        //seeScheule();
-
+        LoadNewGroups();
     }
 
-    /*private ArrayList<ListCell> sortAndAddSections(ArrayList<ListCell> itemList)
+    public void LoadNewGroups()
     {
+        GroupModel arrayObjetos[]=new GroupModel[6];
 
-        ArrayList<ListCell> tempList = new ArrayList<ListCell>();
-        //First we sort the array
-        //Collections.sort(itemList);
+        //Creamos objetos en cada posicion
+        arrayObjetos[0]=new GroupModel("11-09-2017", "Grupo 23776", 1,"1");
+        arrayObjetos[1]=new GroupModel("13-09-2017", "Grupo 21345", 2,"2");
+        arrayObjetos[2]=new GroupModel("14-09-2017", "Grupo 23776", 2,"3");
+        arrayObjetos[3]=new GroupModel("15-09-2017", "Grupo 23776", 3,"4");
+        arrayObjetos[4]=new GroupModel("14-09-2017", "Grupo 19556", 4,"5");
+        arrayObjetos[5]=new GroupModel("14-09-2017", "Grupo 23776", 2,"6");
 
-        //Loops thorugh the list and add a section before each sectioncell start
-        String header = "";
-        for(int i = 0; i < itemList.size(); i++)
+        ArrayList<ListCell> items = new ArrayList<ListCell>();
+        for (int i=0; i<arrayObjetos.length; i++)
         {
-            //If it is the start of a new section we create a new listcell and add it to our array
-            if(!header.equals(itemList.get(i).getCategory())){
-                ListCell sectionCell = new ListCell(itemList.get(i).getCategory(), null, null);
-                sectionCell.setToSectionHeader();
-                tempList.add(sectionCell);
-                header = itemList.get(i).getCategory();
+            String statusName = "";
+            switch (arrayObjetos[i].get_statusId()) {
+                case 1:
+                    statusName = "Visto Bueno";
+                    break;
+                case 2:
+                    statusName = "Capacitacion 1";
+                    break;
+                case 3:
+                    statusName = "Capacitacion 2";
+                    break;
+                case 4:
+                    statusName = "Desembolso";
+                    break;
+
             }
-            tempList.add(itemList.get(i));
+
+            items.add(new ListCell(arrayObjetos[i].get_date()+" "+ arrayObjetos[i].get_name() +" "+statusName,arrayObjetos[i].get_statusId(),arrayObjetos[i].get_Id(),arrayObjetos[i].get_date()));
         }
 
-        return tempList;
-    }*/
+        final ListView list = (ListView) findViewById(R.id.groupsListView);
+
+        //items = sortAndAddSections(items);
+
+        ListAdapter adapter = new ListAdapter(getContext(), items);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(new OnItemClickListener()
+        {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO Auto-generated method stub
+                    TextView textView = (TextView) view.findViewById(R.id.name);
+                    TextView idTextView = (TextView) view.findViewById(R.id.ID);
+                    if (!idTextView.getText().toString().equals("")) {
+                                Intent intent = new Intent(NewGroupsActivity.this, AgendaLoader.class);
+                                startActivity(intent);
+                                finish();
+
+                    }
+
+            }
+        });
+
+        mprogressBar.setVisibility(View.GONE);
+
+    }
 
     // Menu icons are inflated just as they were with actionbar
     @Override
@@ -117,14 +160,14 @@ public class Bitacora extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
-    /*public void seeScheule() {
+/*
+    public void seeScheule() {
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-
         SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         String empleadoID = shared.getString("userNumber", "0");
+
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET,
-                "http://asistente.crediclub.com/2.0/consultaBitacora.php?empleadoID="+empleadoID,
+                "http://asistente.crediclub.com/2.0/consultaAgenda.php?empleadoID="+empleadoID,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -204,83 +247,32 @@ public class Bitacora extends AppCompatActivity {
                                         tipoEvento = "Promoción";
                                         break;
                                     case "12":
-                                        tipoEvento = "LLamada de Gestion";
+                                        tipoEvento = "Llamada Gestion";
                                         break;
 
                                 }
 
                                 idList.add(appointmentArray[0]);
+                                String fechaFormato = Globales.STR_VACIO;
+                                fechaFormato = Globales.convierteTexto(appointmentArray[1].replace(" ",""));
                                 String currentDay = new SimpleDateFormat("EEEE").format(date);
-                                if (currentDay.equals("lunes") || currentDay.equals("Monday")) {
-                                    //mondayArray.add(agendaArray[i]);
-                                    if (!appointmentArray[5].equals(" ")) {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2] + ", Grupo: " + appointmentArray[5], "Lunes "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    } else {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2], "Lunes "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    }
-                                    //items.add(new ListCell(appointmentArray[7]+", "+appointmentArray[8],  "Lunes "+ appointmentArray[1].replace(" ",""), null));
-                                } else if (currentDay.equals("martes") || currentDay.equals("Tuesday")) {
-                                    //tuesdayArray.add(agendaArray[i]);
-                                    if (!appointmentArray[5].equals(" ")) {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2] + ", Grupo: " + appointmentArray[5], "Martes "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    } else {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2], "Martes "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    }
-                                    //items.add(new ListCell(appointmentArray[7]+", "+appointmentArray[8],  "Martes "+ appointmentArray[1].replace(" ",""), null));
-                                } else if (currentDay.equals("miércoles") || currentDay.equals("Thursday")) {
-                                    //wednesdayArray.add(agendaArray[i]);
-                                    if (!appointmentArray[5].equals(" ")) {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2] + ", Grupo: " + appointmentArray[5], "Miércoles "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    } else {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2], "Miércoles "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    }
-                                    //items.add(new ListCell(appointmentArray[7]+", "+appointmentArray[8],  "Miércoles "+ appointmentArray[1].replace(" ",""), null));
-                                } else if (currentDay.equals("jueves") || currentDay.equals("Wednesday")) {
-                                    //thursdayArray.add(agendaArray[i]);
-                                    if (!appointmentArray[5].equals(" ")) {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2] + ", Grupo: " + appointmentArray[5], "Jueves "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    } else {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2], "Jueves "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    }
-                                    //items.add(new ListCell(appointmentArray[7]+", "+appointmentArray[8],  "Jueves "+ appointmentArray[1].replace(" ",""), null));
-                                } else if (currentDay.equals("viernes") || currentDay.equals("Friday")) {
-                                    //fridayArray.add(agendaArray[i]);
-                                    if (!appointmentArray[5].equals(" ")) {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2] + ", Grupo: " + appointmentArray[5], "Viernes "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    } else {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2], "Viernes "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    }
-                                    //items.add(new ListCell(appointmentArray[7]+", "+appointmentArray[8],  "Viernes "+ appointmentArray[1].replace(" ",""), null));
-                                } else if (currentDay.equals("sábado") || currentDay.equals("Saturday")) {
-                                    //fridayArray.add(agendaArray[i]);
-                                    if (!appointmentArray[5].equals(" ")) {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2] + ", Grupo: " + appointmentArray[5], "Sábado "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    } else {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2], "Sábado "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    }
-                                    //items.add(new ListCell(appointmentArray[7]+", "+appointmentArray[8],  "Sábado "+ appointmentArray[1].replace(" ",""), null));
-                                } else if (currentDay.equals("domingo") || currentDay.equals("Sunday")) {
-                                    //fridayArray.add(agendaArray[i]);
-                                    if (!appointmentArray[5].equals(" ")) {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2] + ", Grupo: " + appointmentArray[5], "Domingo "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    } else {
-                                        items.add(new ListCell(tipoEvento + " " + appointmentArray[2], "Domingo "+ appointmentArray[1].replace(" ",""), appointmentArray[0]));
-                                    }
-                                    //items.add(new ListCell(appointmentArray[7]+", "+appointmentArray[8],  "Domingo "+ appointmentArray[1].replace(" ",""), null));
-                                }
+
+
+                                //Log.d("appointmentArray[0]", appointmentArray[0].toString());
                             }
                             idArray = new String[idList.size()];
                             idList.toArray(idArray);
 
                             final ListView list = (ListView) findViewById(R.id.agendaListView);
+                            list.setItemsCanFocus(true);
 
-                            items = sortAndAddSections(items);
+
 
                             ListAdapter adapter = new ListAdapter(getContext(), items);
                             list.setAdapter(adapter);
 
                             // ListView on item selected listener.
-                            /*list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                            list.setOnItemClickListener(new OnItemClickListener()
                             {
 
                                 @Override
@@ -299,10 +291,10 @@ public class Bitacora extends AppCompatActivity {
                                                 String appointmentArrayID = appointmentArray[0].replace(" ", "");
                                                 if (appointmentArrayID.equals(appointmentID)) {
 
-                                                    Intent intent = new Intent(Bitacora.this, AgendaLoader.class);
+                                                    Intent intent = new Intent(NewGroupsActivity.this, AgendaLoader.class);
                                                     intent.putExtra("data", appointmentArray[3]);
                                                     intent.putExtra("groupName", appointmentArray[5]);
-                                                    intent.putExtra("eventId", appointmentArray[9]);
+                                                    intent.putExtra("eventId", appointmentArray[0]);
                                                     startActivity(intent);
                                                     finish();
                                                     break;
@@ -329,7 +321,7 @@ public class Bitacora extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 //This code is executed if there is an error.
                 Log.d("Schedule", "response error" + error.toString());
-                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: "+error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar.", Toast.LENGTH_LONG).show();
                 mprogressBar.setVisibility(View.GONE);
             }
         }) {
@@ -341,10 +333,11 @@ public class Bitacora extends AppCompatActivity {
         };
 
         MyRequestQueue.add(MyStringRequest);
-    }*/
-
+    }
+*/
     public static Context getContext()
     {
         return context;
     }
 }
+

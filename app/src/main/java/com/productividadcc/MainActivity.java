@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.agendaBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AgendaActivity.class);
+                Intent intent = new Intent(MainActivity.this, NewGroupsActivity.class);
                 startActivity(intent);
                 finish();
             }

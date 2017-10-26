@@ -100,7 +100,7 @@ public class AgendaActivity extends AppCompatActivity {
         });
 
         mprogressBar = (ProgressBar) findViewById(R.id.progressBar);
-        seeScheule();
+        //seeScheule();
 
         /*findViewById(R.id.testLabel).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +113,7 @@ public class AgendaActivity extends AppCompatActivity {
         });*/
     }
 
-    private ArrayList<ListCell> sortAndAddSections(ArrayList<ListCell> itemList)
+   /* private ArrayList<ListCell> sortAndAddSections(ArrayList<ListCell> itemList)
     {
 
         ArrayList<ListCell> tempList = new ArrayList<ListCell>();
@@ -135,7 +135,7 @@ public class AgendaActivity extends AppCompatActivity {
         }
 
         return tempList;
-    }
+    }*/
 
     // Menu icons are inflated just as they were with actionbar
     @Override
@@ -144,7 +144,7 @@ public class AgendaActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
+/*
     public void seeScheule() {
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
@@ -373,7 +373,7 @@ public class AgendaActivity extends AppCompatActivity {
 
         MyRequestQueue.add(MyStringRequest);
     }
-
+*/
     public static Context getContext()
     {
         return context;

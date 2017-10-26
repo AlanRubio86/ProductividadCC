@@ -1,21 +1,23 @@
 package com.productividadcc;
 
+import java.util.Date;
+
 /**
  * Created by cesarrdz on 9/9/16.
  */
-public class ListCell implements Comparable<ListCell>{
+public class ListCell{
 
     private String name;
-    private String category;
+    private int statusId;
     private String id;
-    private boolean isSectionHeader;
+    private String date;
 
-    public ListCell(String name, String category, String id)
+    public ListCell(String name, int statusId, String id, String date )
     {
         this.name = name;
-        this.category = category;
+        this.statusId = statusId;
         this.id = id;
-        isSectionHeader = false;
+        this.date=date;
     }
 
     public String getName()
@@ -23,9 +25,9 @@ public class ListCell implements Comparable<ListCell>{
         return name;
     }
 
-    public String getCategory()
+    public int getStatusId()
     {
-        return category;
+        return statusId;
     }
 
     public String getId()
@@ -33,19 +35,10 @@ public class ListCell implements Comparable<ListCell>{
         return id;
     }
 
-    public void setToSectionHeader()
+    public String getDate()
     {
-        isSectionHeader = true;
+        return date;
     }
 
-    public boolean isSectionHeader()
-    {
-        return isSectionHeader;
-    }
-
-    @Override
-    public int compareTo(ListCell other) {
-        return this.category.compareTo(other.category);
-    }
 
 }

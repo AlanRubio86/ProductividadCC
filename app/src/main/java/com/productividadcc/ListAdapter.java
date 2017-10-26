@@ -3,6 +3,7 @@ package com.productividadcc;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -11,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by cesarrdz on 9/9/16.
@@ -19,8 +22,10 @@ import android.widget.TextView;
 public class ListAdapter extends ArrayAdapter<ListCell> {
 
     LayoutInflater inflater;
+    private Context context;
     public ListAdapter(Context context, ArrayList<ListCell> items) {
         super(context, 0, items);
+        this.context=context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -30,31 +35,24 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
         ListCell cell = getItem(position);
 
         //If the cell is a section header we inflate the header layout
-        if(cell.isSectionHeader())
-        {
-            v = inflater.inflate(R.layout.section_header, null);
 
-            v.setClickable(false);
-
-            TextView header = (TextView) v.findViewById(R.id.section_header);
-            header.setText(cell.getName());
-            header.setGravity(Gravity.RIGHT);
-            header.setTypeface(null, Typeface.BOLD);
-        }
-        else
-        {
             v = inflater.inflate(R.layout.item_cell, null);
             TextView name = (TextView) v.findViewById(R.id.name);
             TextView id = (TextView) v.findViewById(R.id.ID);
+            ImageButton map = (ImageButton) v.findViewById(R.id.locationBtn);
+       // Button Button1= (Button)  convertView  .findViewById(R.id.BUTTON1_ID);
+            map.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view) {
+                             Intent intent = new Intent(getContext(), AgendaLoader.class);
+                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                             context.startActivity(intent);
+                           }
+            });
 
             name.setText(cell.getName());
-            // REVISAMOS SI EL TEXTO TRAE LOS DOS PUNTOS DEL FORMATO DE LA HORA, DE SER ASI, SE LE DA OTRO COLOR AL BACKGROUND DEL TEXTO
-            if(name.getText().toString().substring(2,3).equalsIgnoreCase(":")){
-                name.setTypeface(null, Typeface.BOLD);
-                name.setTextColor(Color.BLUE);
-            }
-            id.setText(cell.getId());
-        }
+            id.setText(cell.getId().toString());
+
         return v;
     }
 }

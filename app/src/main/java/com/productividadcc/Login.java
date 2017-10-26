@@ -121,7 +121,7 @@ public class Login extends AppCompatActivity implements LocationListener {
                             Log.d("WS Login Emplea:", strNombreEmpleado);
                             Intent intent = new Intent(Login.this, MainActivity.class);
                             //intent.putExtra("nombreEmpleado",getIntent().getExtras().getString("eventId"));
-                            intent.putExtra("nombreEmpleado", "Bienvenido " + strNombreEmpleado);
+                            intent.putExtra("nombreEmpleado", strNombreEmpleado);
                             startActivity(intent);
                             finish();
                         } else {

@@ -71,7 +71,7 @@
 
             <TableRow
                 android:id="@+id/tableRow1"
-                android:background="#00508C"
+                android:background="@drawable/itemedittext"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -101,7 +101,7 @@
 
             <TableRow
                 android:id="@+id/tableRow2"
-                android:background="#00508C"
+                android:background="@drawable/itemedittext"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:gravity="center"
@@ -129,7 +129,7 @@
 
             <TableRow
                 android:id="@+id/tableRow3"
-                android:background="#00508C"
+                android:background="@drawable/itemedittext"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:gravity="center"

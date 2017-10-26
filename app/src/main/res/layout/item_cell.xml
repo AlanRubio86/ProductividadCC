@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
 
 
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="62dp"
         android:layout_weight="1"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:text="Name"
-        android:textColor="@android:color/black"
-        android:layout_marginLeft="15dp"
-        android:gravity="center_vertical"/>
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/itemedittext" />
 
     <TextView
         android:id="@+id/ID"
@@ -28,15 +30,17 @@
         android:layout_marginRight="10dp"
         android:gravity="center_vertical|right"/>
 
-    <!--<Button
+    <ImageButton
         android:id="@+id/locationBtn"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:gravity="right"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/blue_pin"/>
+        android:paddingTop="0dp"
+        android:focusable="false"
+        android:layout_marginRight="3dp"
+        android:background="@drawable/iconmapmarker"/>
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/category"
         android:layout_width="0dp"
         android:layout_height="match_parent"

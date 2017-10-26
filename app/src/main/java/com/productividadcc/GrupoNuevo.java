@@ -64,7 +64,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GrupoNuevo.this, AgregarEvento.class);
+                Intent intent = new Intent(GrupoNuevo.this, NewGroupsActivity.class);
                 startActivity(intent);
                 finish();
             }
