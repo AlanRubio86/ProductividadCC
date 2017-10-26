@@ -15,25 +15,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:titleTextColor="?attr/colorPrimary"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:gravity="center">
     </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:background="@color/done_text_color_dark_normal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="46dp"
+            android:gravity="center"
+            android:text="Bienvenido "
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorTitleLabel"
+            android:textSize="30dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="fill_content"
+
         android:gravity="center"
         android:background="@color/done_text_color_dark_normal">
 
         <TextView
             android:id="@+id/nombreEmpleado"
             android:layout_width="fill_parent"
-            android:layout_height="96dp"
+            android:layout_height="56dp"
             android:gravity="center"
-            android:text="Bienvenido "
+            android:text=""
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorTitleLabel"
             android:textSize="30dp" />
     </LinearLayout>
 
@@ -66,7 +84,7 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="30dp"
                     android:scaleType="centerCrop"
-                    android:src="@android:drawable/ic_menu_edit" />
+                    android:src="@drawable/iconogruposwhite" />
 
                 <TextView
                     android:id="@+id/agendaBtn"
@@ -95,7 +113,7 @@
                     android:layout_height="70dp"
                     android:layout_marginLeft="30dp"
                     android:scaleType="centerCrop"
-                    android:src="@android:drawable/ic_menu_recent_history" />
+                    android:src="@drawable/iconrecontratacion" />
 
                 <TextView
                     android:id="@+id/agregarEventoBtn"
@@ -103,9 +121,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Recontrataciones"
+                    android:text="Grupos de Recontrataciones"
                     android:textColor="#FFFFFF"
-                    android:textSize="28dp"></TextView>
+                    android:textSize="25dp"></TextView>
             </TableRow>
             <TableRow  android:layout_weight="0.05"/>
 
@@ -123,7 +141,7 @@
                     android:layout_height="70dp"
                     android:layout_marginLeft="30dp"
                     android:scaleType="centerCrop"
-                    android:src="@android:drawable/stat_notify_sync" />
+                    android:src="@drawable/iconsincronizacion" />
 
                 <TextView
                     android:id="@+id/sincronizarBtn"
@@ -133,26 +151,9 @@
                     android:gravity="center_vertical"
                     android:text=" Sincronizar"
                     android:textColor="#FFFFFF"
-                    android:textSize="28dp"></TextView>
+                    android:textSize="25dp"></TextView>
             </TableRow>
 
-            <!--TableRow
-                android:id="@+id/tableRow4"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.25"
-                android:background="@color/done_text_color_dark_normal"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/bitacoraBtn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:textColor="#FFFFFF"
-                    android:textSize="28dp"></TextView>
-            </TableRow-->
         </TableLayout>
     </LinearLayout>
 
