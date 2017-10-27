@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:contentInsetLeft="0dp"
         android:contentInsetStart="0dp"
-        android:titleTextColor="@android:color/white"
-        android:background="#1976D2">
+        android:titleTextColor="#00508C"
+        android:background="#FFFFFF">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -49,12 +49,11 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="5dp"
-        android:layout_weight="0.1"
+        android:layout_height="65dp"
         android:paddingBottom="10dp">
 
         <Button
-            android:id="@+id/cerrarBtn"
+            android:id="@+id/continueBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
@@ -79,7 +78,7 @@
             android:textSize="17dp" />
 
         <Button
-            android:id="@+id/guardarBtn"
+            android:id="@+id/cerrarBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
@@ -91,35 +90,37 @@
             android:textSize="17dp" />
     </LinearLayout>
 
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
+        android:layout_height="65dp"
+        android:hint="Cantidad de Integrantes"
         android:orientation="vertical"
-        android:hint="Digite el Número de Grupo"
-        android:paddingTop="20dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+        android:paddingTop="10dp"
+        android:textColorHint="#00508C"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        android:visibility="invisible"
+        android:id="@+id/llIntegrant">
 
         <EditText
-            android:id="@+id/numeroTxt"
+            android:id="@+id/integrantesTxt"
             android:layout_width="300dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:inputType="number"
-            android:imeOptions="actionNext" />
+            android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
+        android:layout_height="65dp"
         android:orientation="vertical"
-        android:hint="Digite el Monto del Grupo"
-        android:paddingTop="20dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+        android:hint="Monto Autorizado"
+        android:paddingTop="10dp"
+        android:textColorHint="#00508C"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        android:visibility="invisible"
+        android:id="@+id/llAmount">
         <EditText
             android:id="@+id/montoTxt"
             android:layout_width="300dp"
@@ -131,77 +132,45 @@
             android:imeOptions="actionNext" />
     </android.support.design.widget.TextInputLayout>
 
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="vertical"
-        android:hint="Digite la cantidad de Integrantes"
-        android:paddingTop="20dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
-
-        <EditText
-            android:id="@+id/integrantesTxt"
-            android:layout_width="300dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/edittext"
-            android:singleLine="true"
-            android:inputType="number"
-            android:imeOptions="actionNext" />
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="vertical"
-        android:paddingTop="30dp">
-        <TextView
-            android:id="@+id/desembolsoLabel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="left"
-            android:text="Fecha y Hora de Desembolso"
-            android:textSize="21dp"
-            android:textColor="#00508C"/>
-    </android.support.design.widget.TextInputLayout>
-
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal">
+        android:layout_height="65dp"
+        android:paddingTop="10dp"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:id="@+id/llDate">
 
         <TextView
             android:id="@+id/fechaTxt"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_weight="0.3"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edittext"
             android:singleLine="true"
+            android:textColor="#00508C"
             android:imeOptions="actionNext" />
 
-        <TextView
-            android:id="@+id/horaTxt"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="0.6"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/edittext"
-            android:singleLine="true"
-            android:imeOptions="actionNext" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:visibility="invisible"
+        android:id="@+id/btnSave">
 
-
-
-
-
+        <ImageView
+            android:id="@+id/guardarGpoBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:scaleType="centerCrop"
+            android:text="Guardar"
+            android:background="#FFFFFF"
+            android:src="@drawable/iconsave" />
+    </LinearLayout>
 
 </LinearLayout>
 

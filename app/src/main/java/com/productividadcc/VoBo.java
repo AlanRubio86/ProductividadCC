@@ -10,6 +10,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,18 +93,20 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
             }
         });
 
-        horaTxt = (TextView) findViewById(R.id.horaTxt);
-        findViewById(R.id.horaTxt).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.continueBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog.newInstance(VoBo.this, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), true).show(getFragmentManager(), "timePicker");
-            }
-        });
+                LinearLayout integrants = (LinearLayout) findViewById(R.id.llIntegrant);
+                LinearLayout date = (LinearLayout) findViewById(R.id.llDate);
+                LinearLayout amount = (LinearLayout) findViewById(R.id.llAmount);
+                LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
 
-        findViewById(R.id.guardarBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!numGrupo.getText().toString().equals("") && !montoTxt.getText().toString().equals("") && !integrantesTxt.getText().toString().equals("") && !fechaTxt.getText().toString().equals("")
+                integrants.setVisibility(View.VISIBLE);
+                date.setVisibility(View.VISIBLE);
+                amount.setVisibility(View.VISIBLE);
+                btnsave.setVisibility(View.VISIBLE);
+                //numGrupo.setVisibility(View.VISIBLE);
+                /*if (!numGrupo.getText().toString().equals("") && !montoTxt.getText().toString().equals("") && !integrantesTxt.getText().toString().equals("") && !fechaTxt.getText().toString().equals("")
                         && !horaTxt.getText().toString().equals("")) {
                     if (Utils.isNetworkAvailable(VoBo.this)) {
                         sendEventInfo();
@@ -112,7 +115,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Faltan datos por capturar", Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         });
 

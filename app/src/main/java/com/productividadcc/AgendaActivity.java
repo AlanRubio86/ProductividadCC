@@ -54,6 +54,7 @@ public class AgendaActivity extends AppCompatActivity {
     ListView listView;
     String[] agendaArray;
     String[] idArray;
+
     private static Context context;
     ProgressBar mprogressBar;
     String weekDay;
