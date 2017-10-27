@@ -147,14 +147,17 @@ public class NewGroupsActivity extends AppCompatActivity {
                                         intent = new Intent(NewGroupsActivity.this, VoBo.class);
                                         break;
                                     case "2":
+                                        intent = new Intent(NewGroupsActivity.this, GroupTrainingActivity.class);
                                         break;
                                     case "3":
+                                        intent = new Intent(NewGroupsActivity.this, GroupTraining2Activity.class);
                                         break;
                                     case "4":
                                         break;
 
                                 }
                                 intent.putExtra("groupName",textView.getText());
+                                intent.putExtra("groupId",idTextView.getText());
                                 startActivity(intent);
                                 finish();
 

@@ -2,43 +2,25 @@ package com.productividadcc;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.productividadcc.database.Event;
 import com.productividadcc.utilerias.Globales;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class GroupTraining2Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
     private Calendar calendar;
     EditText numGrupo ,montoTxt, integrantesTxt;
@@ -51,7 +33,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.vobo_activity);
+        setContentView(R.layout.grouptraining2_activity);
 
         // Find the toolbar view and set as ActionBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -70,14 +52,13 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         final LinearLayout integrants = (LinearLayout) findViewById(R.id.llIntegrant);
         final LinearLayout date = (LinearLayout) findViewById(R.id.llDate);
         final LinearLayout amount = (LinearLayout) findViewById(R.id.llAmount);
-        final LinearLayout dispersion = (LinearLayout) findViewById(R.id.lldispersion);
         final LinearLayout reprogram = (LinearLayout) findViewById(R.id.llDateReprogram);
-        final LinearLayout reprogrammotive = (LinearLayout) findViewById(R.id.llmotive);
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
+        final LinearLayout groupNameLayout = (LinearLayout) findViewById(R.id.llname);
 
 
-        mTitle.setText("Visto Bueno");
+        mTitle.setText("Capacitación 2");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -99,7 +80,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         findViewById(R.id.fechaTxt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog.newInstance(VoBo.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+                DatePickerDialog.newInstance(GroupTraining2Activity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
@@ -114,7 +95,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VoBo.this, NewGroupsActivity.class);
+                Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -123,29 +104,25 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         findViewById(R.id.continueBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                groupNameLayout.setVisibility(View.VISIBLE);
                 integrants.setVisibility(View.VISIBLE);
                 date.setVisibility(View.VISIBLE);
                 amount.setVisibility(View.VISIBLE);
                 btnsave.setVisibility(View.VISIBLE);
-                dispersion.setVisibility(View.VISIBLE);
-                reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
                 movement=1;
-
             }
         });
 
         findViewById(R.id.reprogBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                groupNameLayout.setVisibility(View.GONE);
                     integrants.setVisibility(View.GONE);
                     date.setVisibility(View.GONE);
                     amount.setVisibility(View.GONE);
                     btnsave.setVisibility(View.VISIBLE);
-                    dispersion.setVisibility(View.GONE);
-                    reprogrammotive.setVisibility(View.VISIBLE);
                     reprogram.setVisibility(View.VISIBLE);
                     cancelmotive.setVisibility(View.GONE);
                      movement=2;
@@ -156,12 +133,11 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                groupNameLayout.setVisibility(View.GONE);
                 integrants.setVisibility(View.GONE);
                 date.setVisibility(View.GONE);
                 amount.setVisibility(View.GONE);
                 btnsave.setVisibility(View.VISIBLE);
-                dispersion.setVisibility(View.GONE);
-                reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
                 movement=3;

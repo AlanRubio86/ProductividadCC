@@ -91,56 +91,20 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llIntegrant"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:hint="Cantidad de Integrantes"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:text="Total de integrantes:"
-            android:paddingTop="17dp"
-            android:textColor="#00508C"
-            />
-
-        <EditText
-            android:id="@+id/integrantesTxt"
-            android:layout_width="60dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="120dp"
-            android:background="@drawable/edittext"
-            android:ems="2"
-            android:hint="0"
-            android:imeOptions="actionNext"
-            android:textColorHint="#00508C"
-            android:inputType="number"
-            android:textAlignment="center"
-            android:singleLine="true" />
-
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
-        android:hint="Monto Autorizado"
-        android:paddingTop="10dp"
         android:id="@+id/llAmount"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:hint="Monto grupal estimado"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
         android:visibility="invisible">
 
         <TextView
             android:layout_width="240dp"
             android:layout_height="45dp"
-            android:text="Monto grupal autorizado:"
-            android:paddingTop="17dp"
-            android:textColor="#00508C"
-            />
+            android:paddingTop="18dp"
+            android:text="Monto grupal estimado:"
+            android:textColor="#00508C" />
 
         <EditText
             android:id="@+id/montoTxt"
@@ -149,12 +113,46 @@
             android:layout_marginLeft="5dp"
             android:background="@drawable/edittext"
             android:hint="0.00"
-            android:textColorHint="#00508C"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textColorHint="#00508C" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llIntegrant"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:hint="Total de integrantes estimado:"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:text="Total de integrantes estimado:"
+            android:paddingTop="17dp"
+            android:textColor="#00508C"
+            />
+
+        <EditText
+            android:id="@+id/integrantesTxt"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/edittext"
+            android:ems="2"
+            android:hint="0"
+            android:imeOptions="actionNext"
+            android:textColorHint="#00508C"
+            android:inputType="number"
             android:textAlignment="center"
             android:singleLine="true" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -167,7 +165,7 @@
         <TextView
             android:layout_width="230dp"
             android:layout_height="45dp"
-            android:text="Fecha estimada de desembolso:"
+            android:text="Fecha estimada de Capacitación 2:"
             android:paddingTop="17dp"
             android:textColor="#00508C"
             />
@@ -186,33 +184,6 @@
             android:textAlignment="center"/>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
-        android:visibility="invisible"
-        android:id="@+id/lldispersion"
-        >
-
-        <TextView
-            android:layout_width="230dp"
-            android:layout_height="45dp"
-            android:text="Tipo de dispersion:"
-            android:paddingTop="17dp"
-            android:textColor="#00508C"
-            />
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="120dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
-            android:entries="@array/dispersionItems"
-            android:textColorHint="#00508C"
-            android:textAlignment="center"
-            android:background="@drawable/edittext"
-            style="@style/Widget.AppCompat.Spinner.Underlined"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -225,7 +196,7 @@
         <TextView
             android:layout_width="230dp"
             android:layout_height="45dp"
-            android:text="Fecha estimada de desembolso:"
+            android:text="Fecha de reprogramacion de Cap. 1:"
             android:paddingTop="17dp"
             android:textColor="#00508C"
             />
@@ -250,33 +221,6 @@
         android:layout_height="65dp"
         android:orientation="horizontal"
         android:visibility="invisible"
-        android:id="@+id/llmotive"
-        >
-
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="45dp"
-            android:text="Motivo:"
-            android:paddingTop="17dp"
-            android:textColor="#00508C"
-            />
-        <Spinner
-            android:id="@+id/spinnermotive"
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
-            android:entries="@array/reprogramItems"
-            android:textColorHint="#00508C"
-            android:textAlignment="center"
-            android:background="@drawable/edittext"
-            style="@style/Widget.AppCompat.Spinner.Underlined"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
-        android:visibility="invisible"
         android:id="@+id/llmotivecancel"
         >
 
@@ -292,7 +236,7 @@
             android:layout_width="280dp"
             android:layout_height="45dp"
             android:layout_marginLeft="5dp"
-            android:entries="@array/cancelItems"
+            android:entries="@array/trainingCancelItems"
             android:textColorHint="#00508C"
             android:textAlignment="center"
             android:background="@drawable/edittext"

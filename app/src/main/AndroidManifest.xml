@@ -41,6 +41,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".GroupTrainingActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NewGroupsActivity" />
+        </activity>
+        <activity android:name=".GroupTraining2Activity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NewGroupsActivity" />
+        </activity>
         <activity android:name=".AgendaLoader">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,7 +94,7 @@
         <activity android:name=".VoBo">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
+                android:value=".NewGroupsActivity" />
         </activity>
         <activity android:name=".VoBoRenovacion">
             <meta-data
