@@ -6,12 +6,14 @@ public class GroupModel {
     private String _date,_name;
     private String _statusId;
     private String _id;
+    private String category;
 
-    public GroupModel(String date,String name, String statusId, String id) {
+    public GroupModel(String date,String name, String statusId, String id, String category) {
         _date = date;
         _name=name;
         _statusId=statusId;
         _id=id;
+        this.category=category;
 
     }
 
@@ -35,4 +37,5 @@ public class GroupModel {
         return _id;
     }
 
+    public String getCategory() { return category; }
 }

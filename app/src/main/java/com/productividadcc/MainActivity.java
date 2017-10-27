@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.agregarEventoBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AgregarEvento.class);
+                Intent intent = new Intent(MainActivity.this, OldGroupsActivity.class);
                 startActivity(intent);
                 finish();
             }
