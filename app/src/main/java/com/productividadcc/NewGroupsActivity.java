@@ -95,12 +95,12 @@ public class NewGroupsActivity extends AppCompatActivity {
         GroupModel arrayObjetos[]=new GroupModel[6];
 
         //Creamos objetos en cada posicion
-        arrayObjetos[0]=new GroupModel("11-09-2017", "Grupo 23776", "1","1");
-        arrayObjetos[1]=new GroupModel("13-09-2017", "Grupo 21345", "2","2");
-        arrayObjetos[2]=new GroupModel("14-09-2017", "Grupo 23776", "2","3");
-        arrayObjetos[3]=new GroupModel("15-09-2017", "Grupo 23776", "3","4");
-        arrayObjetos[4]=new GroupModel("14-09-2017", "Grupo 19556", "4","5");
-        arrayObjetos[5]=new GroupModel("14-09-2017", "Grupo 23776", "2","6");
+        arrayObjetos[0]=new GroupModel("11-09-2017", "Grupo 23776", "1","1", "");
+        arrayObjetos[1]=new GroupModel("13-09-2017", "Grupo 21345", "2","2", "");
+        arrayObjetos[2]=new GroupModel("14-09-2017", "Grupo 23776", "2","3","");
+        arrayObjetos[3]=new GroupModel("15-09-2017", "Grupo 23776", "3","4","");
+        arrayObjetos[4]=new GroupModel("14-09-2017", "Grupo 19556", "4","5","");
+        arrayObjetos[5]=new GroupModel("14-09-2017", "Grupo 23776", "2","6","");
 
         ArrayList<ListCell> items = new ArrayList<ListCell>();
         for (int i=0; i<arrayObjetos.length; i++)
@@ -122,7 +122,7 @@ public class NewGroupsActivity extends AppCompatActivity {
 
             }
 
-            items.add(new ListCell(arrayObjetos[i].get_date()+" "+ arrayObjetos[i].get_name() +" "+statusName,arrayObjetos[i].get_statusId(),arrayObjetos[i].get_Id(),arrayObjetos[i].get_date()));
+            items.add(new ListCell(arrayObjetos[i].get_date()+" "+ arrayObjetos[i].get_name() +" "+statusName,arrayObjetos[i].get_statusId(),arrayObjetos[i].get_Id(),arrayObjetos[i].get_date(), ""));
         }
 
         final ListView list = (ListView) findViewById(R.id.groupsListView);
