@@ -8,11 +8,11 @@ import java.util.Date;
 public class ListCell{
 
     private String name;
-    private int statusId;
+    private String statusId;
     private String id;
     private String date;
 
-    public ListCell(String name, int statusId, String id, String date )
+    public ListCell(String name, String statusId, String id, String date )
     {
         this.name = name;
         this.statusId = statusId;
@@ -25,7 +25,7 @@ public class ListCell{
         return name;
     }
 
-    public int getStatusId()
+    public String getStatusId()
     {
         return statusId;
     }

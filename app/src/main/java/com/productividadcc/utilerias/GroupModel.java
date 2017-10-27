@@ -4,10 +4,10 @@ package com.productividadcc.utilerias;
 public class GroupModel {
 
     private String _date,_name;
-    int _statusId;
+    private String _statusId;
     private String _id;
 
-    public GroupModel(String date,String name, int statusId, String id) {
+    public GroupModel(String date,String name, String statusId, String id) {
         _date = date;
         _name=name;
         _statusId=statusId;
@@ -25,7 +25,7 @@ public class GroupModel {
         return _name;
     }
 
-    public int get_statusId()
+    public String get_statusId()
     {
         return _statusId;
     }

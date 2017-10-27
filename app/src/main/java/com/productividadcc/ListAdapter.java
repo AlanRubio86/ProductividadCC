@@ -51,7 +51,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
             });
 
             name.setText(cell.getName());
-            id.setText(cell.getId().toString());
+            id.setText(cell.getStatusId().toString());
 
         return v;
     }

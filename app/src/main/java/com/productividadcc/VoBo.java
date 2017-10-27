@@ -74,7 +74,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         if (getIntent().getExtras() != null) {
             String groupName = getIntent().getExtras().getString("groupName");
             nombreLbl.setText(groupName);
-            eventID = getIntent().getExtras().getString("eventId").replace(" ", "");
+            //eventID = getIntent().getExtras().getString("eventId").replace(" ", "");
         } else {
             eventID = "0";
         }
