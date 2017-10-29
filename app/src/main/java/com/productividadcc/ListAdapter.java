@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,27 +33,52 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
-        ListCell cell = getItem(position);
+        final ListCell cell = getItem(position);
 
         //If the cell is a section header we inflate the header layout
+        if(cell.IsSectionHeader())
+        {
+            v = inflater.inflate(R.layout.section_header, null);
 
+            v.setClickable(false);
+
+            TextView header = (TextView) v.findViewById(R.id.section_header);
+            header.setText(cell.getName());
+            header.setGravity(Gravity.RIGHT);
+            header.setTypeface(null, Typeface.BOLD);
+        }
+        else {
             v = inflater.inflate(R.layout.item_cell, null);
             TextView name = (TextView) v.findViewById(R.id.name);
             TextView id = (TextView) v.findViewById(R.id.ID);
             ImageButton map = (ImageButton) v.findViewById(R.id.locationBtn);
-       // Button Button1= (Button)  convertView  .findViewById(R.id.BUTTON1_ID);
             map.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
-                             Intent intent = new Intent(getContext(), AgendaLoader.class);
-                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                             context.startActivity(intent);
-                           }
+                @Override
+                public void onClick(View view) {
+
+                    if(cell.getParent().toString().equalsIgnoreCase("new")){
+                        String url = "http://maps.google.com/maps?daddr=" + cell.getUbication().toString();
+                        Intent goZe = new Intent(Intent.ACTION_VIEW);
+                        goZe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        goZe.setData(Uri.parse(url));
+                        context.startActivity(goZe);
+                    }
+
+                    if(cell.getParent().toString().equalsIgnoreCase("old")){
+                        String url = "http://maps.google.com/maps?daddr=" + cell.getUbication().toString();
+                        Intent goZe = new Intent(Intent.ACTION_VIEW);
+                        goZe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        goZe.setData(Uri.parse(url));
+                        context.startActivity(goZe);
+                    }
+
+
+                }
             });
 
             name.setText(cell.getName());
             id.setText(cell.getStatusId().toString());
-
+        }
         return v;
     }
 }

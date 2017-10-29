@@ -2,43 +2,25 @@ package com.productividadcc;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.productividadcc.database.Event;
 import com.productividadcc.utilerias.Globales;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class OldGroupRecontrationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
     private Calendar calendar;
     EditText numGrupo ,montoTxt, integrantesTxt;
@@ -51,7 +33,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.vobo_activity);
+        setContentView(R.layout.oldgrouprecontration_activity);
 
         // Find the toolbar view and set as ActionBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -68,16 +50,16 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         integrantesTxt = (EditText) findViewById(R.id.integrantesTxt);
         fechaTxt = (TextView) findViewById(R.id.fechaTxt);
         final LinearLayout integrants = (LinearLayout) findViewById(R.id.llIntegrant);
+        final LinearLayout llnews = (LinearLayout) findViewById(R.id.llNews);
+        final LinearLayout llrecontratation = (LinearLayout) findViewById(R.id.llRecontratation);
         final LinearLayout date = (LinearLayout) findViewById(R.id.llDate);
         final LinearLayout amount = (LinearLayout) findViewById(R.id.llAmount);
-        final LinearLayout dispersion = (LinearLayout) findViewById(R.id.lldispersion);
         final LinearLayout reprogram = (LinearLayout) findViewById(R.id.llDateReprogram);
-        final LinearLayout reprogrammotive = (LinearLayout) findViewById(R.id.llmotive);
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
 
 
-        mTitle.setText("Visto Bueno");
+        mTitle.setText("Inicio de Recontratación");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -99,7 +81,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         findViewById(R.id.fechaTxt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog.newInstance(VoBo.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+                DatePickerDialog.newInstance(OldGroupRecontrationActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
@@ -114,7 +96,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VoBo.this, NewGroupsActivity.class);
+                Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -124,15 +106,14 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
             @Override
             public void onClick(View view) {
                 integrants.setVisibility(View.VISIBLE);
+                llnews.setVisibility(View.VISIBLE);
+                llrecontratation.setVisibility(View.VISIBLE);
                 date.setVisibility(View.VISIBLE);
                 amount.setVisibility(View.VISIBLE);
                 btnsave.setVisibility(View.VISIBLE);
-                dispersion.setVisibility(View.VISIBLE);
-                reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
                 movement=1;
-
             }
         });
 
@@ -141,11 +122,11 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
             public void onClick(View view) {
 
                     integrants.setVisibility(View.GONE);
+                    llnews.setVisibility(View.GONE);
+                    llrecontratation.setVisibility(View.GONE);
                     date.setVisibility(View.GONE);
                     amount.setVisibility(View.GONE);
                     btnsave.setVisibility(View.VISIBLE);
-                    dispersion.setVisibility(View.GONE);
-                    reprogrammotive.setVisibility(View.VISIBLE);
                     reprogram.setVisibility(View.VISIBLE);
                     cancelmotive.setVisibility(View.GONE);
                      movement=2;
@@ -157,11 +138,11 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
             @Override
             public void onClick(View view) {
                 integrants.setVisibility(View.GONE);
+                llnews.setVisibility(View.GONE);
+                llrecontratation.setVisibility(View.GONE);
                 date.setVisibility(View.GONE);
                 amount.setVisibility(View.GONE);
                 btnsave.setVisibility(View.VISIBLE);
-                dispersion.setVisibility(View.GONE);
-                reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
                 movement=3;
@@ -191,7 +172,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
                 "&semRen=" + Globales.STR_CERO +
                 "&coment=" + Globales.STR_VACIO;
 
-        Log.d("WS VoBo:", URL);
+        Log.d("WS NewGroupVoBo:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
@@ -203,7 +184,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
                         clearFields();
                         Toast.makeText(getApplicationContext(), "Evento guardado correctamente " + response, Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(VoBo.this, MainActivity.class);
+                        Intent intent = new Intent(NewGroupVoBo.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -265,7 +246,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
                 "&semRen=" + Globales.STR_CERO +
                 "&coment=" + Globales.STR_VACIO;
 
-        Log.d("DB VoBo:", URL);
+        Log.d("DB NewGroupVoBo:", URL);
 
         MainActivity.event = new Event();
         MainActivity.event.setUrlWS(URL);
@@ -275,7 +256,7 @@ public class VoBo extends AppCompatActivity implements DatePickerDialog.OnDateSe
         clearFields();
         Toast.makeText(getApplicationContext(), "Los datos han sido guardados de manera offline", Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(VoBo.this, MainActivity.class);
+        Intent intent = new Intent(NewGroupVoBo.this, MainActivity.class);
         startActivity(intent);
         finish();
 

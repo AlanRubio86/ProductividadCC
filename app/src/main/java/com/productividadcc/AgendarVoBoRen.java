@@ -54,7 +54,7 @@ public class AgendarVoBoRen extends AppCompatActivity implements DatePickerDialo
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Get access to the custom title view
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Agendar VoBo Renovación");
+        mTitle.setText("Agendar NewGroupVoBo Renovación");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

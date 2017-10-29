@@ -174,7 +174,7 @@ public class Bitacora extends AppCompatActivity {
                                         tipoEvento = "Agendar Capacitacion 1";
                                         break;
                                     case "2":
-                                        tipoEvento = "Agendar VoBo Renovación";
+                                        tipoEvento = "Agendar NewGroupVoBo Renovación";
                                         break;
                                     case "3":
                                         tipoEvento = "Agendar Cobranza Temprana";
@@ -186,10 +186,10 @@ public class Bitacora extends AppCompatActivity {
                                         tipoEvento = "Capacitación 2";
                                         break;
                                     case "6":
-                                        tipoEvento = "VoBo";
+                                        tipoEvento = "NewGroupVoBo";
                                         break;
                                     case "7":
-                                        tipoEvento = "VoBo Renovación";
+                                        tipoEvento = "NewGroupVoBo Renovación";
                                         break;
                                     case "8":
                                         tipoEvento = "Desembolso";

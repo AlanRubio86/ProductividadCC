@@ -13,16 +13,23 @@ public class ListCell implements Comparable<ListCell>{
     private String date;
     private String category;
     private boolean isSectionHeader;
+    private String parent;
+    private String ubication;
 
-    public ListCell(String name, String statusId, String id, String date, String category  )
+    public ListCell(String name, String statusId, String id, String date, String category,String parent,String ubication  )
     {
         this.name = name;
         this.statusId = statusId;
         this.id = id;
         this.date=date;
+        this.category=category;
         isSectionHeader=false;
+        this.parent=parent;
+        this.ubication=ubication;
 
     }
+
+    public String getUbication() {return ubication;}
 
     public void setToSectionHeader() {
         isSectionHeader=true;
@@ -34,6 +41,11 @@ public class ListCell implements Comparable<ListCell>{
 
     public String getCategory() {
         return category;
+    }
+
+    public String getParent()
+    {
+        return parent;
     }
 
     public String getName()

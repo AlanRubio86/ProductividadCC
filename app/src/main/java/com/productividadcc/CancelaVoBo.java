@@ -51,7 +51,7 @@ public class CancelaVoBo extends AppCompatActivity  {
         // Get access to the custom title view
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         events = (Spinner) findViewById(R.id.motVoBo);
-        mTitle.setText("Cancelacion VoBo");
+        mTitle.setText("Cancelacion NewGroupVoBo");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

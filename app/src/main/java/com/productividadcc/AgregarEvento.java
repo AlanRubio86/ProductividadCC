@@ -53,11 +53,11 @@ public class AgregarEvento extends AppCompatActivity {
                     Intent intent = new Intent(AgregarEvento.this, AgendarCapacitacion2.class);
                     startActivity(intent);
                     finish();
-                } else if (selectedOption.equals("Agendar VoBo")) {
+                } else if (selectedOption.equals("Agendar NewGroupVoBo")) {
                     Intent intent = new Intent(AgregarEvento.this, AgendarVoBo.class);
                     startActivity(intent);
                     finish();
-                } else if (selectedOption.equals("Agendar VoBo Renovación")) {
+                } else if (selectedOption.equals("Agendar NewGroupVoBo Renovación")) {
                     Intent intent = new Intent(AgregarEvento.this, AgendarVoBoRen.class);
                     startActivity(intent);
                     finish();
@@ -69,11 +69,11 @@ public class AgregarEvento extends AppCompatActivity {
                     Intent intent = new Intent(AgregarEvento.this, Capacitacion2.class);
                     startActivity(intent);
                     finish();
-                }*/ else if (selectedOption.equals("VoBo")) {
-                    Intent intent = new Intent(AgregarEvento.this, VoBo.class);
+                }*/ else if (selectedOption.equals("NewGroupVoBo")) {
+                    Intent intent = new Intent(AgregarEvento.this, NewGroupVoBo.class);
                     startActivity(intent);
                     finish();
-                } else if (selectedOption.equals("VoBo Renovación")) {
+                } else if (selectedOption.equals("NewGroupVoBo Renovación")) {
                     Intent intent = new Intent(AgregarEvento.this, VoBoRenovacion.class);
                     startActivity(intent);
                     finish();

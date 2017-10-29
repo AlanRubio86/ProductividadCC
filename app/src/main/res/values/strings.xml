@@ -181,6 +181,35 @@
         <item name="solidary">No aceptan el solidario</item>
         <item name="specificRisk">Riesgos específicos</item>
     </string-array>
-
+    <string-array name="groupTypeItems">
+        <item name="superstar">Super Estrella (27.32% -$70.00)</item>
+        <item name="start">Super Estrella (43.35% -$72.00)</item>
+        <item name="consolidated">Super Estrella (55.22% -$73.50)</item>
+        <item name="new">Super Estrella (59.13% -$74.00)</item>
+    </string-array>
+    <string-array name="cancelMotiveItems">
+        <item name="superstar">Se detectó algún riesgo</item>
+        <item name="start">El grupo ya no desea el crédito</item>
+        <item name="consolidated">Mal comportamiento del grupo</item>
+    </string-array>
+    <string-array name="reprogramItemsDisbursement">
+        <item name="notarrive">Clientes no llegan a tiempo</item>
+        <item name="changedate">Grupo menor al mínimo de integrantes requerido</item>
+        <item name="incomplete">No están todas las integrantes presentes</item>
+    </string-array>
+    <string-array name="recontratationCancelItems">
+        <item name="incomplete">No se completó el grupo</item>
+        <item name="rest">El grupo desea descansar</item>
+        <item name="badservice">Mal servicio</item>
+        <item name="mora">Grupo presentó mora</item>
+        <item name="notinterested">Ya no les interesa el producto</item>
+    </string-array>
+    <string-array name="oldGroupReprogramItemsDisbursement">
+        <item name="notarrive">Clientes no llegan a tiempo</item>
+        <item name="incomplete">No están todas las integrantes presentes</item>
+        <item name="erroramount">Error en montos</item>
+        <item name="errorname">Error en nombres</item>
+        <item name="changedate">Cambio de fecha</item>
+    </string-array>
 
 </resources>

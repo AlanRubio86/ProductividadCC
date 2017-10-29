@@ -51,6 +51,41 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NewGroupsActivity" />
         </activity>
+        <activity android:name=".GroupDisrbursementActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NewGroupsActivity" />
+        </activity>
+        <activity android:name=".OldGroupVoBo">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OldGroupsActivity" />
+        </activity>
+        <activity android:name=".OldGroupRecontrationActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OldGroupsActivity" />
+        </activity>
+        <activity android:name=".OldGroupDisrbursementActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OldGroupsActivity" />
+        </activity>
+        <activity android:name=".OldGroupNewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OldGroupsActivity" />
+        </activity>
+        <activity android:name=".NewGroupMapActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NewGroupsActivity" />
+        </activity>
+        <activity android:name=".OldGroupMapActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OldGroupsActivity" />
+        </activity>
         <activity android:name=".AgendaLoader">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -91,7 +126,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AgregarEvento" />
         </activity>
-        <activity android:name=".VoBo">
+        <activity android:name=".NewGroupVoBo">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NewGroupsActivity" />

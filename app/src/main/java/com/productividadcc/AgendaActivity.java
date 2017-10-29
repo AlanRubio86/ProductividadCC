@@ -145,8 +145,8 @@ public class AgendaActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-/*
-    public void seeScheule() {
+
+    /*public void seeScheule() {
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         String empleadoID = shared.getString("userNumber", "0");
@@ -202,7 +202,7 @@ public class AgendaActivity extends AppCompatActivity {
                                         tipoEvento = "Agendar Capacitacion 1";
                                         break;
                                     case "2":
-                                        tipoEvento = "Agendar VoBo Renovación";
+                                        tipoEvento = "Agendar NewGroupVoBo Renovación";
                                         break;
                                     case "3":
                                         tipoEvento = "Agendar Cobranza Temprana";
@@ -214,10 +214,10 @@ public class AgendaActivity extends AppCompatActivity {
                                         tipoEvento = "Capacitación 2";
                                         break;
                                     case "6":
-                                        tipoEvento = "VoBo";
+                                        tipoEvento = "NewGroupVoBo";
                                         break;
                                     case "7":
-                                        tipoEvento = "VoBo Renovación";
+                                        tipoEvento = "NewGroupVoBo Renovación";
                                         break;
                                     case "8":
                                         tipoEvento = "Desembolso";
@@ -373,8 +373,8 @@ public class AgendaActivity extends AppCompatActivity {
         };
 
         MyRequestQueue.add(MyStringRequest);
-    }
-*/
+    }*/
+
     public static Context getContext()
     {
         return context;

@@ -2,12 +2,9 @@ package com.productividadcc;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,26 +12,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.productividadcc.utilerias.Globales;
 import com.productividadcc.utilerias.GroupModel;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 
 public class NewGroupsActivity extends AppCompatActivity {
 
@@ -95,12 +76,12 @@ public class NewGroupsActivity extends AppCompatActivity {
         GroupModel arrayObjetos[]=new GroupModel[6];
 
         //Creamos objetos en cada posicion
-        arrayObjetos[0]=new GroupModel("11-09-2017", "Grupo 23776", "1","1", "");
-        arrayObjetos[1]=new GroupModel("13-09-2017", "Grupo 21345", "2","2", "");
-        arrayObjetos[2]=new GroupModel("14-09-2017", "Grupo 23776", "2","3","");
-        arrayObjetos[3]=new GroupModel("15-09-2017", "Grupo 23776", "3","4","");
-        arrayObjetos[4]=new GroupModel("14-09-2017", "Grupo 19556", "4","5","");
-        arrayObjetos[5]=new GroupModel("14-09-2017", "Grupo 23776", "2","6","");
+        arrayObjetos[0]=new GroupModel("11-09-2017", "Grupo 23776", "1","1", "","new","25.7081288,-100.31593951");
+        arrayObjetos[1]=new GroupModel("13-09-2017", "Grupo 21345", "2","2", "","new","25.7083839,-100.31657691");
+        arrayObjetos[2]=new GroupModel("14-09-2017", "Grupo 23776", "2","3","","new","25.7080813,-100.31587884");
+        arrayObjetos[3]=new GroupModel("15-09-2017", "Grupo 23776", "3","4","","new","25.7082823,-100.31601878");
+        arrayObjetos[4]=new GroupModel("14-09-2017", "Grupo 19556", "4","5","","new","25.70821548,-100.31595457");
+        arrayObjetos[5]=new GroupModel("14-09-2017", "Grupo 23776", "2","6","","new","25.70827793,-100.31601517");
 
         ArrayList<ListCell> items = new ArrayList<ListCell>();
         for (int i=0; i<arrayObjetos.length; i++)
@@ -122,7 +103,7 @@ public class NewGroupsActivity extends AppCompatActivity {
 
             }
 
-            items.add(new ListCell(arrayObjetos[i].get_date()+" "+ arrayObjetos[i].get_name() +" "+statusName,arrayObjetos[i].get_statusId(),arrayObjetos[i].get_Id(),arrayObjetos[i].get_date(), ""));
+            items.add(new ListCell(arrayObjetos[i].get_date()+" "+ arrayObjetos[i].get_name() +" "+statusName,arrayObjetos[i].get_statusId(),arrayObjetos[i].get_Id(),arrayObjetos[i].get_date(), "", arrayObjetos[i].get_Parent(), arrayObjetos[i].get_Ubication()));
         }
 
         final ListView list = (ListView) findViewById(R.id.groupsListView);
@@ -144,7 +125,7 @@ public class NewGroupsActivity extends AppCompatActivity {
                                 switch(idTextView.getText().toString())
                                 {
                                     case "1":
-                                        intent = new Intent(NewGroupsActivity.this, VoBo.class);
+                                        intent = new Intent(NewGroupsActivity.this, NewGroupVoBo.class);
                                         break;
                                     case "2":
                                         intent = new Intent(NewGroupsActivity.this, GroupTrainingActivity.class);
@@ -153,6 +134,7 @@ public class NewGroupsActivity extends AppCompatActivity {
                                         intent = new Intent(NewGroupsActivity.this, GroupTraining2Activity.class);
                                         break;
                                     case "4":
+                                        intent = new Intent(NewGroupsActivity.this, GroupDisrbursementActivity.class);
                                         break;
 
                                 }
@@ -234,7 +216,7 @@ public class NewGroupsActivity extends AppCompatActivity {
                                         tipoEvento = "Agendar Capacitacion 1";
                                         break;
                                     case "2":
-                                        tipoEvento = "Agendar VoBo Renovación";
+                                        tipoEvento = "Agendar NewGroupVoBo Renovación";
                                         break;
                                     case "3":
                                         tipoEvento = "Agendar Cobranza Temprana";
@@ -246,10 +228,10 @@ public class NewGroupsActivity extends AppCompatActivity {
                                         tipoEvento = "Capacitación 2";
                                         break;
                                     case "6":
-                                        tipoEvento = "VoBo";
+                                        tipoEvento = "NewGroupVoBo";
                                         break;
                                     case "7":
-                                        tipoEvento = "VoBo Renovación";
+                                        tipoEvento = "NewGroupVoBo Renovación";
                                         break;
                                     case "8":
                                         tipoEvento = "Desembolso";

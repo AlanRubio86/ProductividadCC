@@ -57,7 +57,7 @@ public class VoBoRenovacion extends AppCompatActivity implements DatePickerDialo
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Get access to the custom title view
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("VoBo Renovación");
+        mTitle.setText("NewGroupVoBo Renovación");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -143,7 +143,7 @@ public class VoBoRenovacion extends AppCompatActivity implements DatePickerDialo
                 "&semRen=" + Globales.STR_CERO +
                 "&coment=" + Globales.STR_VACIO;
 
-        Log.d("WS VoBo:", URL);
+        Log.d("WS NewGroupVoBo:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
@@ -218,7 +218,7 @@ public class VoBoRenovacion extends AppCompatActivity implements DatePickerDialo
                 "&semRen=" + Globales.STR_CERO +
                 "&coment=" + Globales.STR_VACIO;
 
-        Log.d("DB VoBo:", URL);
+        Log.d("DB NewGroupVoBo:", URL);
 
         MainActivity.event = new Event();
         MainActivity.event.setUrlWS(URL);

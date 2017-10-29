@@ -58,12 +58,12 @@ public class OldGroupsActivity extends AppCompatActivity {
     private static Context context;
     ProgressBar mprogressBar;
     String weekDay;
-
+    ArrayList<ListCell> items = new ArrayList<ListCell>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.agenda_activity);
+        setContentView(R.layout.oldgroupsactivity);
         context = getApplicationContext();
 
         // Find the toolbar view and set as ActionBar
@@ -72,13 +72,11 @@ public class OldGroupsActivity extends AppCompatActivity {
         // ...
         // Display icon in the toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
         // Remove default title text
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Get access to the custom title view
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Agenda");
+        mTitle.setText("Grupos de Recontratación");
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -94,7 +92,7 @@ public class OldGroupsActivity extends AppCompatActivity {
         findViewById(R.id.agregaGrupoBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OldGroupsActivity.this, GrupoNuevo.class);
+                Intent intent = new Intent(OldGroupsActivity.this, OldGroupNewActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -102,7 +100,7 @@ public class OldGroupsActivity extends AppCompatActivity {
 
         mprogressBar = (ProgressBar) findViewById(R.id.progressBar);
         loadOldGroups();
-
+        mprogressBar.setVisibility(View.GONE);
         /*findViewById(R.id.testLabel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,17 +120,19 @@ public class OldGroupsActivity extends AppCompatActivity {
         //Collections.sort(itemList);
 
         //Loops thorugh the list and add a section before each sectioncell start
-        String header = "";
+        String header ="";
         for(int i = 0; i < itemList.size(); i++)
         {
             //If it is the start of a new section we create a new listcell and add it to our array
-            if(!header.equals(itemList.get(i).getCategory())){
+            if(!header.equalsIgnoreCase(itemList.get(i).getCategory())){
                 ListCell sectionCell = new ListCell(itemList.get(i).getName(), itemList.get(i).getStatusId(),
-                        itemList.get(i).getId(), itemList.get(i).getDate() , itemList.get(i).getCategory());
+                        itemList.get(i).getId(), itemList.get(i).getDate() , itemList.get(i).getCategory(),itemList.get(i).getParent(),itemList.get(i).getUbication());
                 sectionCell.setToSectionHeader();
                 tempList.add(sectionCell);
                 header = itemList.get(i).getCategory();
             }
+
+            //if(!itemList.get(i).getParent())
             tempList.add(itemList.get(i));
         }
 
@@ -140,18 +140,16 @@ public class OldGroupsActivity extends AppCompatActivity {
     }
 
     public void loadOldGroups() {
-        GroupModel arrayObjetos[] = new GroupModel[6];
+        GroupModel arrayObjetos[] = new GroupModel[3];
 
         //Creamos objetos en cada posicion
-        arrayObjetos[0] = new GroupModel("11-09-2017", "Grupo 23776", "1", "1", "1");
-        arrayObjetos[1] = new GroupModel("13-09-2017", "Grupo 21345", "2", "2", "2");
-        arrayObjetos[2] = new GroupModel("14-09-2017", "Grupo 23776", "2", "3", "1");
-        arrayObjetos[3] = new GroupModel("15-09-2017", "Grupo 23776", "3", "4", "2");
-        arrayObjetos[4] = new GroupModel("14-09-2017", "Grupo 19556", "4", "5", "1");
-        arrayObjetos[5] = new GroupModel("14-09-2017", "Grupo 23776", "2", "6", "2");
-        ArrayList<ListCell> items = new ArrayList<ListCell>();
+        arrayObjetos[0] = new GroupModel("11-09-2017", "Grupo 23776", "1", "1", "1","old","25.7081288,-100.31593951");
+        arrayObjetos[1] = new GroupModel("13-09-2017", "Grupo 21345", "2", "2", "2","old","25.7083839,-100.31657691");
+        arrayObjetos[2] = new GroupModel("14-09-2017", "Grupo 23776", "3", "3", "1","old","25.7080813,-100.31587884");
+
+
         for (int i = 0; i < arrayObjetos.length; i++) {
-            String statusName = "";
+            String statusName = "",categoryName="";
             switch (arrayObjetos[i].get_statusId()) {
                 case "1":
                     statusName = "Capacitacion 1";
@@ -160,7 +158,20 @@ public class OldGroupsActivity extends AppCompatActivity {
                     statusName = "Capacitacion 2";
                     break;
             }
-            items.add(new ListCell(arrayObjetos[i].get_date() + " " + arrayObjetos[i].get_name() + " " + statusName, arrayObjetos[i].get_statusId(), arrayObjetos[i].get_Id(), arrayObjetos[i].get_date(), ""));
+
+            switch (arrayObjetos[i].getCategory()) {
+                case "1":
+                    categoryName = "En gestión";
+                    break;
+                case "2":
+                    categoryName = "Sin gestionar";
+                    break;
+            }
+
+
+            items.add(new ListCell(arrayObjetos[i].get_date() + " " + arrayObjetos[i].get_name() + " " + statusName, arrayObjetos[i].get_statusId(), arrayObjetos[i].get_Id(), arrayObjetos[i].get_date(), arrayObjetos[i].getCategory(), arrayObjetos[i].get_Parent(),arrayObjetos[i].get_Ubication()));
+            //items.add(new ListCell(categoryName,"","","",arrayObjetos[i].getCategory(),true));
+
         }
         final ListView list = (ListView) findViewById(R.id.oldGroupsListView);
 
@@ -168,6 +179,47 @@ public class OldGroupsActivity extends AppCompatActivity {
 
         ListAdapter adapter = new ListAdapter(getContext(), items);
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new OnItemClickListener()
+        {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO Auto-generated method stub
+                if (view.findViewById(R.id.section_header) == null) {
+
+                    TextView textView = (TextView) view.findViewById(R.id.name);
+                    TextView idTextView = (TextView) view.findViewById(R.id.ID);
+                        for (int i=0; i<items.size(); i++) {
+                            String  itemId = idTextView.getText().toString();
+                            if (items.get(i).getId().equals(itemId))
+                            {
+                                    if (!idTextView.getText().toString().equals(""))
+                                    {
+                                        Intent intent = null;
+                                        switch (items.get(i).getStatusId()) {
+                                            case "2":
+                                                intent = new Intent(OldGroupsActivity.this,OldGroupVoBo.class);
+                                                break;
+                                            case "3":
+                                                intent = new Intent(OldGroupsActivity.this, OldGroupDisrbursementActivity.class);
+                                                break;
+                                            case "1":
+                                                intent = new Intent(OldGroupsActivity.this, OldGroupRecontrationActivity.class);
+                                                break;
+                                        }
+                                        intent.putExtra("groupName", textView.getText());
+                                        intent.putExtra("groupId", idTextView.getText());
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                            }
+                        }
+                }
+
+            }
+        });
+
     }
 
     // Menu icons are inflated just as they were with actionbar
@@ -227,7 +279,7 @@ public class OldGroupsActivity extends AppCompatActivity {
                                             tipoEvento = "Agendar Capacitacion 1";
                                             break;
                                         case "2":
-                                            tipoEvento = "Agendar VoBo Renovación";
+                                            tipoEvento = "Agendar NewGroupVoBo Renovación";
                                             break;
                                         case "3":
                                             tipoEvento = "Agendar Cobranza Temprana";
@@ -239,10 +291,10 @@ public class OldGroupsActivity extends AppCompatActivity {
                                             tipoEvento = "Capacitación 2";
                                             break;
                                         case "6":
-                                            tipoEvento = "VoBo";
+                                            tipoEvento = "NewGroupVoBo";
                                             break;
                                         case "7":
-                                            tipoEvento = "VoBo Renovación";
+                                            tipoEvento = "NewGroupVoBo Renovación";
                                             break;
                                         case "8":
                                             tipoEvento = "Desembolso";

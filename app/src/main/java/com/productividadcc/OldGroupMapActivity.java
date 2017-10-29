@@ -2,6 +2,7 @@ package com.productividadcc;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -10,18 +11,17 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.os.CountDownTimer;
 import android.widget.Toast;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 
-public class AgendaLoader extends AppCompatActivity implements LocationListener {
+public class OldGroupMapActivity extends AppCompatActivity implements LocationListener {
     LocationManager locationManager;
     String mprovider;
     double latitude, longitude;
@@ -30,7 +30,7 @@ public class AgendaLoader extends AppCompatActivity implements LocationListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.agenda_loader_activity);
+        setContentView(R.layout.oldgroupmap_activity);
 
         // Find the toolbar view inside the activity layout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,63 +61,7 @@ public class AgendaLoader extends AppCompatActivity implements LocationListener 
         MyCountDownTimer myCountDownTimer = new MyCountDownTimer(3000, 1000);
         myCountDownTimer.start();
 
-        findViewById(R.id.continuarBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String eventData = getIntent().getExtras().getString("data");
-                String eventID = eventData.replace(" ", "");
-                /*Log.d("AgendaLoader, data", eventData);
-                Log.d("AgendaLoader, eventID", eventID);
-                Log.d("AgendaLoader, eventID", getIntent().getExtras().getString("eventId"));*/
 
-                int tipoEvento = Integer.parseInt(eventID);
-
-                Intent main = new Intent();
-
-                switch (tipoEvento) {
-                    case 1:
-                        main = new Intent(AgendaLoader.this, AgendarCapacitacion.class);
-                        break;
-                    case 2:
-                        main = new Intent(AgendaLoader.this, AgendarVoBo.class);
-                        break;
-                    case 3:
-                        main = new Intent(AgendaLoader.this, AgendarCobranza.class);
-                        break;
-                    case 4:
-                        main = new Intent(AgendaLoader.this, Capacitacion1.class);
-                        break;
-                    case 5:
-                        main = new Intent(AgendaLoader.this, Capacitacion2.class);
-                        break;
-                    case 6:
-                        main = new Intent(AgendaLoader.this, NewGroupVoBo.class);
-                        break;
-                    case 7:
-                        main = new Intent(AgendaLoader.this, VoBoRenovacion.class);
-                        break;
-                    case 8:
-                        main = new Intent(AgendaLoader.this, Desembolso.class);
-                        break;
-                    case 9:
-                        main = new Intent(AgendaLoader.this, VisitaSemanal.class);
-                        break;
-                    case 10:
-                        main = new Intent(AgendaLoader.this, Verificacion.class);
-                        break;
-                    case 11:
-                        main = new Intent(AgendaLoader.this, GrupoNuevo.class);
-                        break;
-                    case 12:
-                        main = new Intent(AgendaLoader.this, LlamadaGestion.class);
-                        break;
-                }
-                main.putExtra("groupName",getIntent().getExtras().getString("groupName"));
-                main.putExtra("eventId",getIntent().getExtras().getString("eventId"));
-                startActivity(main);
-                finish();
-            }
-        });
     }
 
     public class MyCountDownTimer extends CountDownTimer {
@@ -153,7 +97,7 @@ public class AgendaLoader extends AppCompatActivity implements LocationListener 
 
     public void showLocationLabel () {
         if (latitude == 0 && longitude == 0) {
-            AlertDialog.Builder locationAlert = new AlertDialog.Builder(AgendaLoader.this);
+            AlertDialog.Builder locationAlert = new AlertDialog.Builder(OldGroupMapActivity.this);
             locationAlert.setTitle("No detectamos tu localización, por favor activa el gps y vuelve a intentarlo");
             locationAlert.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogo1, int id) {

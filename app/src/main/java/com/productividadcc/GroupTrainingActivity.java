@@ -164,7 +164,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                 "&semRen=" + Globales.STR_CERO +
                 "&coment=" + Globales.STR_VACIO;
 
-        Log.d("WS VoBo:", URL);
+        Log.d("WS NewGroupVoBo:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
@@ -176,7 +176,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                         clearFields();
                         Toast.makeText(getApplicationContext(), "Evento guardado correctamente " + response, Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(VoBo.this, MainActivity.class);
+                        Intent intent = new Intent(NewGroupVoBo.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -238,7 +238,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                 "&semRen=" + Globales.STR_CERO +
                 "&coment=" + Globales.STR_VACIO;
 
-        Log.d("DB VoBo:", URL);
+        Log.d("DB NewGroupVoBo:", URL);
 
         MainActivity.event = new Event();
         MainActivity.event.setUrlWS(URL);
@@ -248,7 +248,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
         clearFields();
         Toast.makeText(getApplicationContext(), "Los datos han sido guardados de manera offline", Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(VoBo.this, MainActivity.class);
+        Intent intent = new Intent(NewGroupVoBo.this, MainActivity.class);
         startActivity(intent);
         finish();
 
