@@ -31,11 +31,6 @@
                 android:value="com.productividadcc.SplashScreen" />
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".AgendaActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
         <activity android:name=".NewGroupsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -76,120 +71,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".OldGroupsActivity" />
         </activity>
-        <activity android:name=".NewGroupMapActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsActivity" />
-        </activity>
-        <activity android:name=".OldGroupMapActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsActivity" />
-        </activity>
-        <activity android:name=".AgendaLoader">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".AgregarEvento">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".AgendarCapacitacion">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".AgendarCapacitacion2">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".AgendarVoBo">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".AgendarVoBoRen">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".Capacitacion1">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".Capacitacion2">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
         <activity android:name=".NewGroupVoBo">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NewGroupsActivity" />
-        </activity>
-        <activity android:name=".VoBoRenovacion">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".Desembolso">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".ReprogAgenda">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".VisitaSemanal">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".VisitaEvaluacion">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".VisitaSemanal" />
-        </activity>
-        <activity android:name=".Verificacion">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".LlamadaGestion">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".AgendarCobranza">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".AgendarPromocion">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AgregarEvento" />
-        </activity>
-        <activity android:name=".CancelaCap1">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".CancelaCap2">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".CancelaVoBo">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
         <activity android:name=".GrupoNuevo">
             <meta-data
@@ -201,17 +86,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".CancelaDesem">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
         <activity android:name=".SincAgenda">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".Bitacora">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

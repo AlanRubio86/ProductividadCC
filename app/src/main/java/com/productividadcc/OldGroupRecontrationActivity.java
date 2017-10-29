@@ -45,7 +45,6 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
-        numGrupo = (EditText) findViewById(R.id.numeroTxt);
         montoTxt = (EditText) findViewById(R.id.montoTxt);
         integrantesTxt = (EditText) findViewById(R.id.integrantesTxt);
         fechaTxt = (TextView) findViewById(R.id.fechaTxt);
