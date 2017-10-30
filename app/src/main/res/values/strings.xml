@@ -147,23 +147,27 @@
     <string name="title_item_detail">Item Detail</string>
 
     <string-array name="dispersionItems">
+        <item name="none">(Seleccionar)</item>
         <item name="spei">SPEI</item>
         <item name="odpsantander">ODP,Santader $20.00</item>
         <item name="odpscotiabank">ODP,Scotiabank $15.00</item>
     </string-array>
     <string-array name="reprogramItems">
+        <item name="none">(Seleccionar)</item>
         <item name="notarrive">Clientes no llegan a tiempo</item>
         <item name="changedate">Cambio de fecha</item>
         <item name="incomplete">No están todas las integrantes presentes</item>
         <item name="changed">Área de Análisis solicita reprogramación</item>
     </string-array>
     <string-array name="cancelItems">
+        <item name="none">(Seleccionar)</item>
         <item name="fraud">Se detectó prestanombres</item>
         <item name="fake">Información falsa</item>
         <item name="relational">Clientes no se conocen</item>
         <item name="risk">Se detectó algún riesgo</item>
     </string-array>
     <string-array name="trainingCancelItems">
+        <item name="none">(Seleccionar)</item>
         <item name="highrate">Tasa alta</item>
         <item name="incomplete">No se completó el grupo</item>
         <item name="badexperience">Malas experiencias con competencia</item>
@@ -173,6 +177,7 @@
         <item name="notconvinced">No planean dejar a la competencia</item>
     </string-array>
     <string-array name="training2CancelItems">
+        <item name="none">(Seleccionar)</item>
         <item name="highrate">Tasa alta</item>
         <item name="incomplete">No se completó el grupo</item>
         <item name="badexperience">Malas experiencias con competencia</item>
@@ -182,22 +187,26 @@
         <item name="specificRisk">Riesgos específicos</item>
     </string-array>
     <string-array name="groupTypeItems">
+        <item name="none">(Seleccionar)</item>
         <item name="superstar">Super Estrella (27.32% -$70.00)</item>
         <item name="start">Super Estrella (43.35% -$72.00)</item>
         <item name="consolidated">Super Estrella (55.22% -$73.50)</item>
         <item name="new">Super Estrella (59.13% -$74.00)</item>
     </string-array>
     <string-array name="cancelMotiveItems">
+        <item name="none">(Seleccionar)</item>
         <item name="superstar">Se detectó algún riesgo</item>
         <item name="start">El grupo ya no desea el crédito</item>
         <item name="consolidated">Mal comportamiento del grupo</item>
     </string-array>
     <string-array name="reprogramItemsDisbursement">
+        <item name="none">(Seleccionar)</item>
         <item name="notarrive">Clientes no llegan a tiempo</item>
         <item name="changedate">Grupo menor al mínimo de integrantes requerido</item>
         <item name="incomplete">No están todas las integrantes presentes</item>
     </string-array>
     <string-array name="recontratationCancelItems">
+        <item name="none">(Seleccionar)</item>
         <item name="incomplete">No se completó el grupo</item>
         <item name="rest">El grupo desea descansar</item>
         <item name="badservice">Mal servicio</item>
@@ -205,6 +214,7 @@
         <item name="notinterested">Ya no les interesa el producto</item>
     </string-array>
     <string-array name="oldGroupReprogramItemsDisbursement">
+        <item name="none">(Seleccionar)</item>
         <item name="notarrive">Clientes no llegan a tiempo</item>
         <item name="incomplete">No están todas las integrantes presentes</item>
         <item name="erroramount">Error en montos</item>

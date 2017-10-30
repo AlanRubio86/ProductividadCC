@@ -34,8 +34,8 @@
         android:orientation="horizontal"
         android:gravity="right">
 
-        <ImageView
-            android:id="@+id/guardarGpoBtn"
+        <ImageButton
+            android:id="@+id/btnSaveGroup"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="10dp"
@@ -49,16 +49,18 @@
 
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtContact"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:background="#FFFFFF"
         android:hint="Nombre del Contacto"
-        android:textColorHint="#00508C"
         android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+        android:textColorHint="#00508C"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext">
 
         <EditText
-            android:id="@+id/nombreContactoTxt"
+            android:id="@+id/editContact"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -67,20 +69,25 @@
             android:layout_weight="0.00"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtContactPhone"
         android:layout_width="fill_parent"
         android:layout_height="62dp"
         android:background="#FFFFFF"
         android:textColorHint="#00508C"
         android:hint="Telefono del Contacto"
         android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext">
 
         <EditText
-            android:id="@+id/telContactoTxt"
+            android:id="@+id/editContactPhone"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -89,20 +96,26 @@
             android:layout_weight="0.00"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
-            android:inputType="number" />
+            android:inputType="phone"
+            android:textColor="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtContactPhoneRef"
         android:layout_width="fill_parent"
         android:layout_height="68dp"
         android:background="#FFFFFF"
         android:textColorHint="#00508C"
         android:hint="Referencia del Contacto"
         android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext"
+       >
 
         <EditText
-            android:id="@+id/refContactoTxt"
+            android:id="@+id/editContactPhoneRef"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -111,50 +124,60 @@
             android:layout_weight="0.00"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="fill_parent"
-        android:layout_height="55dp"
-        android:background="#FFFFFF"
-        android:textColorHint="#00508C"
-        android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
-
-        <TextView
-            android:id="@+id/fechaDesembolso"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/edittext"
-            android:imeOptions="actionNext"
-            android:hint="Fecha Estimada de Desembolso"
-            android:textColorHint="#00508C"
-            android:textColor="#00508C"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="fill_parent"
-        android:layout_height="59dp"
-        android:background="#FFFFFF"
-        android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
-
-        <TextView
-            android:id="@+id/fechaCap1"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textColorHint="#00508C"
+            android:inputType="phone"
             android:textColor="#00508C"
-            android:hint="Fecha de Capacitacion 1"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtDisbursement"
+        android:layout_width="fill_parent"
+        android:layout_height="62dp"
+        android:background="#FFFFFF"
+        android:paddingTop="10dp"
+        android:textColorHint="#00508C"
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+
+        <EditText
+            android:id="@+id/dateDisbursement"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
-            android:imeOptions="actionNext" />
+            android:focusable="false"
+            android:hint="Fecha Estimada de Desembolso"
+            android:imeOptions="actionNext"
+            android:textColor="#00508C"
+            android:textColorHint="#00508C" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtCap1"
+        android:layout_width="fill_parent"
+        android:layout_height="64dp"
+        android:background="#FFFFFF"
+        android:paddingTop="10dp"
+        android:textColorHint="#00508C"
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+
+        <EditText
+            android:id="@+id/dateCap1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/edittext"
+            android:focusable="false"
+            android:hint="Fecha de Capacitacion 1"
+            android:imeOptions="actionNext"
+            android:textColor="#00508C"
+            android:textColorHint="#00508C" />
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

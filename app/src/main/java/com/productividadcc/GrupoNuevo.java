@@ -1,15 +1,19 @@
 package com.productividadcc;
 
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -37,11 +41,10 @@ import java.util.Locale;
 import java.util.Map;
 
 public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    String imeiNumber;
+    String imeiNumber="";
     private Calendar calendar;
     private Calendar calendar2;
-    EditText prospectosTxt;
-    TextView fechaTxt, fechaCap1;
+    EditText fechaTxt, fechaCap1;
 
     String eventID;
     int idFechaDesembolso = 0;
@@ -73,8 +76,8 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
             }
         });
 
-        TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+        //TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -84,19 +87,24 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        imeiNumber = telephonyManager.getDeviceId();
+        imeiNumber = telephonyManager.getDeviceId();*/
 
         if (getIntent().getExtras() != null) {
             eventID = getIntent().getExtras().getString("eventId").replace(" ", "");
         } else {
             eventID = "0";
         }
-
-        prospectosTxt = (EditText) findViewById(R.id.nombreContactoTxt);
+        //Get All Controls
+        fechaTxt = (EditText) findViewById(R.id.dateDisbursement);
+        final TextInputLayout txtContact= (TextInputLayout) findViewById(R.id.txtContact);
+        final TextInputLayout txtContactPhone = (TextInputLayout) findViewById(R.id.txtContactPhone);
+        final TextInputLayout txtContactPhoneRef = (TextInputLayout) findViewById(R.id.txtContactPhoneRef);
+        final TextInputLayout txtDisbursement = (TextInputLayout) findViewById(R.id.txtDisbursement);
+        final TextInputLayout txtCap1 = (TextInputLayout) findViewById(R.id.txtCap1);
+        fechaCap1 = (EditText) findViewById(R.id.dateCap1);
 
         calendar = Calendar.getInstance();
-        fechaTxt = (TextView) findViewById(R.id.fechaDesembolso);
-        findViewById(R.id.fechaDesembolso).setOnClickListener(new View.OnClickListener() {
+        fechaTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final View vv = view;
@@ -108,8 +116,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
         });
 
         calendar2 = Calendar.getInstance();
-        fechaCap1 = (TextView) findViewById(R.id.fechaCap1);
-        findViewById(R.id.fechaCap1).setOnClickListener(new View.OnClickListener() {
+        fechaCap1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 idFechaDesembolso = 0;
@@ -117,18 +124,143 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
             }
         });
 
-        findViewById(R.id.guardarGpoBtn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnSaveGroup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!prospectosTxt.getText().toString().equals("") && !fechaTxt.getText().toString().equals("")) {
-                    if (Utils.isNetworkAvailable(GrupoNuevo.this)) {
-                        sendEventInfo();
-                    } else {
-                        saveEventInfo();
-                    }
+                if(txtContact.getEditText().getText().toString().isEmpty())
+                {
+                    txtContact.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
                 } else {
-                    Toast.makeText(getApplicationContext(), "Faltan datos por capturar", Toast.LENGTH_LONG).show();
+                    txtContact.setError(null);
                 }
+
+                if(txtContactPhone.getEditText().getText().toString().isEmpty())
+                {
+                    txtContactPhone.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
+                } else {
+                    txtContactPhone.setError(null);
+                }
+
+                if(txtContactPhoneRef.getEditText().getText().toString().isEmpty())
+                {
+                    txtContactPhoneRef.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
+                } else {
+                    txtContactPhoneRef.setError(null);
+                }
+
+                if(fechaTxt.getText().toString().isEmpty())
+                {
+                    txtDisbursement.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
+                } else {
+                    txtDisbursement.setError(null);
+                }
+
+                if(fechaCap1.getText().toString().isEmpty())
+                {
+                    txtCap1.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
+                    return;
+                } else {
+                    txtCap1.setError(null);
+                }
+                Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(GrupoNuevo.this, NewGroupsActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+
+        EditText editContact = (EditText) findViewById(R.id.editContact);
+        editContact.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtContact.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        EditText editContactPhone = (EditText) findViewById(R.id.editContactPhone);
+        editContactPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtContactPhone.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        EditText editContactPhoneRef = (EditText) findViewById(R.id.editContactPhoneRef);
+        editContactPhoneRef.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtContactPhoneRef.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        fechaTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtDisbursement.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        fechaCap1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtCap1.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
@@ -136,7 +268,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
     public void sendEventInfo() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         final String selectedStringDate = fechaTxt.getText().toString();
-        final String prospectos = prospectosTxt.getText().toString();
+        final String prospectos = "";//prospectosTxt.getText().toString();
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
 
         URL +=  "fecha=" + selectedStringDate +
@@ -210,7 +342,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
     public void saveEventInfo() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         final String selectedStringDate = fechaTxt.getText().toString();
-        final String prospectos = prospectosTxt.getText().toString();
+        final String prospectos = "";//prospectosTxt.getText().toString();
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
 
         URL +=  "fecha=" + selectedStringDate +
@@ -247,11 +379,11 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
     }
 
 
-    @Override
+   @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Log.d("Log Pruebas", String.valueOf(idFechaDesembolso));
-        if(idFechaDesembolso == R.id.fechaDesembolso){
+        if(idFechaDesembolso == R.id.dateDisbursement){
             calendar.set(year, monthOfYear, dayOfMonth);
             fechaTxt.setText(df.format(calendar.getTime()));
         }else{
@@ -261,8 +393,9 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
     }
 
     public void clearFields () {
-        prospectosTxt.setText("");
+        //prospectosTxt.setText("");
         fechaTxt.setText("");
         fechaCap1.setText("");
     }
+
 }

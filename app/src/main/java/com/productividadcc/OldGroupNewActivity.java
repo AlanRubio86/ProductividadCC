@@ -227,7 +227,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Log.d("Log Pruebas", String.valueOf(idFechaDesembolso));
-        if(idFechaDesembolso == R.id.fechaDesembolso){
+        if(idFechaDesembolso == R.id.dateDisbursement){
             calendar.set(year, monthOfYear, dayOfMonth);
             fechaTxt.setText(df.format(calendar.getTime()));
         }else{

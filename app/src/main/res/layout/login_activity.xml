@@ -47,9 +47,12 @@
             android:layout_gravity="center"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
+            android:background="@drawable/edittext"
             android:inputType="number"
             android:maxLength="5"
-            android:background="@drawable/edittext" />
+            android:textColor="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -72,7 +75,10 @@
             android:layout_marginRight="40dp"
             android:background="@drawable/edittext"
             android:inputType="numberPassword"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
