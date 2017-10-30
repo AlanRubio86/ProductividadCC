@@ -3,13 +3,18 @@ package com.productividadcc;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
@@ -22,8 +27,9 @@ import java.util.Locale;
 
 public class OldGroupRecontrationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
-    private Calendar calendar;
-    EditText numGrupo ,montoTxt, integrantesTxt;
+    private Calendar calendar,calendar2;
+    EditText editIntegrant ,editNewIntegrant, editIntegrantRec,editAmount,editDateEstimated,editDateReprogram;
+    Spinner spnCancelMotive;
     TextView fechaTxt, horaTxt;
     String groupID;
     TextView nombreLbl;
@@ -45,17 +51,24 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
-        montoTxt = (EditText) findViewById(R.id.montoTxt);
-        integrantesTxt = (EditText) findViewById(R.id.integrantesTxt);
-        fechaTxt = (TextView) findViewById(R.id.fechaTxt);
-        final LinearLayout integrants = (LinearLayout) findViewById(R.id.llIntegrant);
-        final LinearLayout llnews = (LinearLayout) findViewById(R.id.llNews);
-        final LinearLayout llrecontratation = (LinearLayout) findViewById(R.id.llRecontratation);
-        final LinearLayout date = (LinearLayout) findViewById(R.id.llDate);
-        final LinearLayout amount = (LinearLayout) findViewById(R.id.llAmount);
-        final LinearLayout reprogram = (LinearLayout) findViewById(R.id.llDateReprogram);
+
+        final TextInputLayout integrants = (TextInputLayout) findViewById(R.id.llIntegrant);
+        final TextInputLayout llnews = (TextInputLayout) findViewById(R.id.llNews);
+        final TextInputLayout llrecontratation = (TextInputLayout) findViewById(R.id.llRecontratation);
+        final TextInputLayout date = (TextInputLayout) findViewById(R.id.llDate);
+        final TextInputLayout amount = (TextInputLayout) findViewById(R.id.llAmount);
+        final TextInputLayout reprogram = (TextInputLayout) findViewById(R.id.llDateReprogram);
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
+
+       editIntegrant = (EditText) findViewById(R.id.editIntegrant);
+       editNewIntegrant = (EditText) findViewById(R.id.editNewIntegrant);
+       editIntegrantRec = (EditText) findViewById(R.id.editIntegrantRec);
+       editAmount = (EditText) findViewById(R.id.editAmount);
+       editDateEstimated = (EditText) findViewById(R.id.editDateEstimated);
+       editDateReprogram = (EditText) findViewById(R.id.editDateReprogram);
+       spnCancelMotive=(Spinner) findViewById(R.id.spnCancelMotive);
+
 
 
         mTitle.setText("Inicio de Recontratación");
@@ -77,18 +90,155 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
 
         calendar = Calendar.getInstance();
 
-        findViewById(R.id.fechaTxt).setOnClickListener(new View.OnClickListener() {
+        editDateEstimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog.newInstance(OldGroupRecontrationActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
+        calendar2 = Calendar.getInstance();
+
+        editDateReprogram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog.newInstance(OldGroupRecontrationActivity.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+            }
+        });
+
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(movement==1) {
+                    if (editIntegrant.getText().toString().isEmpty()) {
+                        integrants.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
+                        ;
+                        return;
+                    } else {
+                        integrants.setError(null);
+                    }
+                    if (editNewIntegrant.getText().toString().isEmpty()) {
+                        llnews.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
+                        ;
+                        return;
+                    } else {
+                        llnews.setError(null);
+                    }
+                    if (editIntegrantRec.getText().toString().isEmpty()) {
+                        llrecontratation.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
+                        ;
+                        return;
+                    } else {
+                        llrecontratation.setError(null);
+                    }
+                    if (editAmount.getText().toString().isEmpty()) {
+                        amount.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
+                        ;
+                        return;
+                    } else {
+                        amount.setError(null);
+                    }
+
+                    if (editDateEstimated.getText().toString().isEmpty()) {
+                        date.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
+                        ;
+                        return;
+                    } else {
+                        date.setError(null);
+                    }
+                    Toast.makeText(getApplicationContext(), "Se realizo el inicio de recontratación correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if(movement==2)
+                {
+                    if (editDateReprogram.getText().toString().isEmpty()) {
+                        reprogram.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
+                        ;
+                        return;
+                    } else {
+                        reprogram.setError(null);
+                    }
+
+                    Toast.makeText(getApplicationContext(), "Se realizo la reprogramación correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if(movement==3) {
+                    if (spnCancelMotive.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        return;
+                    }
+                    Toast.makeText(getApplicationContext(), "Se realizo la cancelación del visto bueno correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
+
+
+                }
 
             }
+        });
+
+        editIntegrant.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { integrants.setError(null);  }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+        editNewIntegrant.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { llnews.setError(null);  }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+        editIntegrantRec.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { llrecontratation.setError(null);  }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+
+        editAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { amount.setError(null);  }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        editDateEstimated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { date.setError(null);  }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+        editDateReprogram.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { reprogram.setError(null);  }
+            @Override
+            public void afterTextChanged(Editable s) { }
         });
 
 
@@ -267,7 +417,9 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         calendar.set(year, monthOfYear, dayOfMonth);
-        fechaTxt.setText(df.format(calendar.getTime()));
+        editDateEstimated.setText(df.format(calendar.getTime()));
+        calendar2.set(year, monthOfYear, dayOfMonth);
+        editDateReprogram.setText(df.format(calendar2.getTime()));
     }
 
     @Override
@@ -278,8 +430,8 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
     }
 
     public void clearFields () {
-        montoTxt.setText("");
-        integrantesTxt.setText("");
+        //montoTxt.setText("");
+        //integrantesTxt.setText("");
         fechaTxt.setText("");
         horaTxt.setText("");
     }

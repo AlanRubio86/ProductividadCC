@@ -152,10 +152,13 @@ public class OldGroupsActivity extends AppCompatActivity {
             String statusName = "",categoryName="";
             switch (arrayObjetos[i].get_statusId()) {
                 case "1":
-                    statusName = "Capacitacion 1";
+                    statusName = "Inicio Recontratación";
                     break;
                 case "2":
-                    statusName = "Capacitacion 2";
+                    statusName = "Visto Bueno";
+                    break;
+                case "3":
+                    statusName = "Desembolso";
                     break;
             }
 
@@ -175,7 +178,7 @@ public class OldGroupsActivity extends AppCompatActivity {
         }
         final ListView list = (ListView) findViewById(R.id.oldGroupsListView);
 
-        items = sortAndAddSections(items);
+       // items = sortAndAddSections(items);
 
         ListAdapter adapter = new ListAdapter(getContext(), items);
         list.setAdapter(adapter);

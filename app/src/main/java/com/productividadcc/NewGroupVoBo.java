@@ -161,6 +161,18 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                     Intent intent = new Intent(NewGroupVoBo.this, NewGroupsActivity.class);
                     startActivity(intent);
                     finish();
+                } else if(movement==3)
+                {
+
+                    if (spnCancelMotive.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        return;
+                    }
+                    Toast.makeText(getApplicationContext(), "Se realizo la cancelación del visto bueno correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(NewGroupVoBo.this, NewGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
 
             }

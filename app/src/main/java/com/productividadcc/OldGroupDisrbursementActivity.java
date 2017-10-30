@@ -3,13 +3,18 @@ package com.productividadcc;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
@@ -23,8 +28,8 @@ import java.util.Locale;
 public class OldGroupDisrbursementActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
     private Calendar calendar;
-    EditText numGrupo ,montoTxt, integrantesTxt;
-    TextView fechaTxt, horaTxt;
+    EditText editIntegrant,editAmount,editDisbursement;
+    Spinner spnMotiveReprogram,spnCancelMotive;
     String groupID;
     TextView nombreLbl;
     String URL = Globales.URL_REGISTRO_AGENDA;
@@ -45,15 +50,22 @@ public class OldGroupDisrbursementActivity extends AppCompatActivity implements 
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
-        montoTxt = (EditText) findViewById(R.id.montoTxt);
-        integrantesTxt = (EditText) findViewById(R.id.integrantesTxt);
-        fechaTxt = (TextView) findViewById(R.id.fechaTxt);
-        final LinearLayout integrants = (LinearLayout) findViewById(R.id.llIntegrant);
-        final LinearLayout amount = (LinearLayout) findViewById(R.id.llAmount);
+
+        final TextInputLayout integrants = (TextInputLayout) findViewById(R.id.llIntegrant);
+        final TextInputLayout amount = (TextInputLayout) findViewById(R.id.llAmount);
+
         final LinearLayout motiveReprogram = (LinearLayout) findViewById(R.id.llMotiveReprogram);
-        final LinearLayout dateReprogram = (LinearLayout) findViewById(R.id.llDate);
+        final TextInputLayout dateReprogram = (TextInputLayout) findViewById(R.id.llDate);
         final LinearLayout cancelMotive = (LinearLayout) findViewById(R.id.llCancelMotive);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
+
+
+        editAmount = (EditText) findViewById(R.id.editAmount);
+        editIntegrant = (EditText) findViewById(R.id.editIntegrant);
+        editDisbursement= (EditText) findViewById(R.id.editDisbursement);
+        spnCancelMotive=(Spinner) findViewById(R.id.spnCancelMotive);
+        spnMotiveReprogram=(Spinner) findViewById(R.id.spnMotiveReprogram);
+
 
 
         mTitle.setText("Desembolso");
@@ -75,7 +87,7 @@ public class OldGroupDisrbursementActivity extends AppCompatActivity implements 
 
         calendar = Calendar.getInstance();
 
-        findViewById(R.id.fechaTxt).setOnClickListener(new View.OnClickListener() {
+        editDisbursement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog.newInstance(OldGroupDisrbursementActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
@@ -85,10 +97,115 @@ public class OldGroupDisrbursementActivity extends AppCompatActivity implements 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(movement==1)
+                {
+
+                    if(editIntegrant.getText().toString().isEmpty())
+                    {
+                        integrants.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else {
+                        integrants.setError(null);
+                    }
+                    if(editAmount.getText().toString().isEmpty())
+                    {
+                        amount.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else {
+                        amount.setError(null);
+                    }
+
+
+                    Toast.makeText(getApplicationContext(), "Se realizo el desembolso correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupDisrbursementActivity.this, finisholdgroup.class);
+                    startActivity(intent);
+                    finish();
+                }else if(movement==2)
+                {
+                    if (spnMotiveReprogram.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        return;
+                    }
+                    if(editDisbursement.getText().toString().isEmpty())
+                    {
+                        dateReprogram.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else {
+                        dateReprogram.setError(null);
+                    }
+
+                    Toast.makeText(getApplicationContext(), "Se realizo la reprogramación de desembolso correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupDisrbursementActivity.this, OldGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if(movement==3)
+                {
+                    if (spnCancelMotive.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        return;
+                    }
+                    Toast.makeText(getApplicationContext(), "Se realizo la cancelación de  desembolso correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupDisrbursementActivity.this, OldGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+
+        editAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                amount.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editIntegrant.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                integrants.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
 
+        editDisbursement.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                dateReprogram.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +240,7 @@ public class OldGroupDisrbursementActivity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.VISIBLE);
                 dateReprogram.setVisibility(View.VISIBLE);
                 cancelMotive.setVisibility(View.GONE);
-                     movement=2;
+                movement=2;
 
             }
         });
@@ -260,20 +377,19 @@ public class OldGroupDisrbursementActivity extends AppCompatActivity implements 
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         calendar.set(year, monthOfYear, dayOfMonth);
-        fechaTxt.setText(df.format(calendar.getTime()));
+        editDisbursement.setText(df.format(calendar.getTime()));
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
         String time = String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute);
-        horaTxt.setText(time);
+
 
     }
 
     public void clearFields () {
-        montoTxt.setText("");
-        integrantesTxt.setText("");
-        fechaTxt.setText("");
-        horaTxt.setText("");
+        editAmount.setText("");
+        editIntegrant.setText("");
+        editDisbursement.setText("");
     }
 }

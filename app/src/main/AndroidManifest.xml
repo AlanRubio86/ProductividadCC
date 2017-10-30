@@ -91,6 +91,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".finishnewgroup">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GroupDisrbursementActivity" />
+        </activity>
+        <activity android:name=".finisholdgroup">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OldGroupDisrbursementActivity" />
+        </activity>
     </application>
 
 </manifest>

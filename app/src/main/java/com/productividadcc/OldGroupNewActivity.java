@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -33,8 +36,6 @@ import java.util.Map;
 
 public class OldGroupNewActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     String imeiNumber;
-    private Calendar calendar;
-    private Calendar calendar2;
     EditText prospectosTxt;
     TextView fechaTxt, fechaCap1;
 
@@ -68,7 +69,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
             }
         });
 
-        TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        /*TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -79,7 +80,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        imeiNumber = telephonyManager.getDeviceId();
+        imeiNumber = telephonyManager.getDeviceId();*/
 
         if (getIntent().getExtras() != null) {
             eventID = getIntent().getExtras().getString("eventId").replace(" ", "");
@@ -87,26 +88,100 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
             eventID = "0";
         }
 
-        prospectosTxt = (EditText) findViewById(R.id.nombreContactoTxt);
+        final TextInputLayout txtGroupNumber= (TextInputLayout) findViewById(R.id.txtGroupNumber);
+        final TextInputLayout txtGroupName= (TextInputLayout) findViewById(R.id.txtGroupName);
+        final TextInputLayout txtLastCicle= (TextInputLayout) findViewById(R.id.txtLastCicle);
+        final EditText editGroupNumber= (EditText) findViewById(R.id.editGroupNumber);
+        final EditText editGroupName= (EditText) findViewById(R.id.editGroupName);
+        final EditText editLastCicle= (EditText) findViewById(R.id.editLastCicle);
 
         findViewById(R.id.guardarGpoBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(editGroupNumber.getText().toString().isEmpty())
+                {
+                    txtGroupNumber.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
+                } else {
+                    txtGroupNumber.setError(null);
+                }
 
+                if(editGroupName.getText().toString().isEmpty())
+                {
+                    txtGroupName.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
+                } else {
+                    txtGroupName.setError(null);
+                }
+                if(editLastCicle.getText().toString().isEmpty())
+                {
+                    txtLastCicle.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
+                } else {
+                    txtLastCicle.setError(null);
+                }
+                Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(OldGroupNewActivity.this, OldGroupsActivity.class);
                 startActivity(intent);
                 finish();
-                /*if (!prospectosTxt.getText().toString().equals("") && !fechaTxt.getText().toString().equals("")) {
-                    if (Utils.isNetworkAvailable(OldGroupNewActivity.this)) {
-                        //sendEventInfo();
-                    } else {
-                        //saveEventInfo();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Faltan datos por capturar", Toast.LENGTH_LONG).show();
-                }*/
+
             }
         });
+        editGroupNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtGroupNumber.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        editGroupName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtGroupName.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        editLastCicle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtLastCicle.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
     }
 
     public void sendEventInfo() {
@@ -227,13 +302,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Log.d("Log Pruebas", String.valueOf(idFechaDesembolso));
-        if(idFechaDesembolso == R.id.dateDisbursement){
-            calendar.set(year, monthOfYear, dayOfMonth);
-            fechaTxt.setText(df.format(calendar.getTime()));
-        }else{
-            calendar2.set(year, monthOfYear, dayOfMonth);
-            fechaCap1.setText(df.format(calendar2.getTime()));
-        }
+
     }
 
     public void clearFields () {

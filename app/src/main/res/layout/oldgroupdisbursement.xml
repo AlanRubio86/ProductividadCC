@@ -31,19 +31,35 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/done_text_color_dark_normal"
-        android:paddingBottom="10dp">
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/nombreLabel"
             android:layout_width="fill_parent"
-            android:layout_height="46dp"
-            android:gravity="center"
+            android:layout_height="26dp"
+            android:gravity="left"
             android:text="Bienvenido "
-            android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="@color/colorTitleLabel"
-            android:textSize="18dp" />
+            android:textColor="#00508C"
+            android:textSize="14dp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="26dp"
+            android:gravity="left"
+            android:text="Ciclo:2 "
+            android:textAllCaps="false"
+            android:textColor="#00508C"
+            android:textSize="14dp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="26dp"
+            android:gravity="left"
+            android:text="Semana:15"
+            android:textAllCaps="false"
+            android:textColor="#00508C"
+            android:textSize="14dp" />
     </LinearLayout>
 
 
@@ -90,74 +106,65 @@
             android:textSize="17dp" />
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/llIntegrant"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
-        android:hint="Cantidad de Integrantes"
+        android:hint="Total de Integrantes"
         android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:text="Total de integrantes:"
-            android:paddingTop="17dp"
-            android:textColor="#00508C"
-            />
+        android:textColorHint="#00508C"
+        android:visibility="invisible"
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
 
         <EditText
-            android:id="@+id/integrantesTxt"
-            android:layout_width="60dp"
+            android:id="@+id/editIntegrant"
+            android:layout_width="200dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:ems="2"
-            android:hint="0"
             android:imeOptions="actionNext"
-            android:textColorHint="#00508C"
             android:inputType="number"
+            android:singleLine="true"
             android:textAlignment="center"
-            android:singleLine="true" />
+            android:textColorHint="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
 
 
-
-    </LinearLayout>
-    <LinearLayout
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:orientation="horizontal"
-        android:hint="Monto Autorizado"
+        android:hint="Monto grupal a otorgar"
         android:paddingTop="10dp"
         android:id="@+id/llAmount"
-        android:visibility="invisible">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:paddingTop="17dp"
-            android:text="Monto grupal a otorgar:"
-            android:textColor="#00508C" />
+        android:visibility="invisible"
+        android:textColorHint="#00508C"
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">>
 
         <EditText
-            android:id="@+id/montoTxt"
-            android:layout_width="100dp"
+            android:id="@+id/editAmount"
+            android:layout_width="200dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:hint="0.00"
             android:textColorHint="#00508C"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:textAlignment="center"
-            android:singleLine="true" />
-    </LinearLayout>
+            android:singleLine="true"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
+    </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
+        android:layout_height="109dp"
+        android:orientation="vertical"
         android:visibility="invisible"
         android:id="@+id/llMotiveReprogram"
         >
@@ -165,6 +172,7 @@
         <TextView
             android:layout_width="70dp"
             android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
             android:paddingTop="17dp"
             android:text="Motivo:"
             android:textColor="#00508C" />
@@ -172,38 +180,35 @@
         <Spinner
             android:id="@+id/spnMotiveReprogram"
             style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:layout_width="280dp"
+            android:layout_width="289dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:entries="@array/oldGroupReprogramItemsDisbursement"
             android:textAlignment="center"
+            android:spinnerMode="dialog"
             android:textColorHint="#00508C" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/llDate"
         android:layout_width="fill_parent"
         android:layout_height="73dp"
         android:orientation="horizontal"
+        android:hint="Fecha de reprogramacion de desembolso:"
         android:paddingTop="10dp"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:textColorHint="#00508C"
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">>
 
-        <TextView
-            android:layout_width="172dp"
-            android:layout_height="50dp"
-            android:paddingTop="17dp"
-            android:singleLine="false"
-            android:text="Fecha de reprogramacion de desembolso:"
-            android:textColor="#00508C"
-            android:textSize="13dp" />
 
-        <TextView
-            android:id="@+id/fechaTxt"
-            android:layout_width="120dp"
+        <EditText
+            android:id="@+id/editDisbursement"
+            android:layout_width="289dp"
             android:layout_height="51dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
@@ -211,14 +216,15 @@
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="#00508C"
+            android:focusable="false"
             android:textColorHint="#00508C" />
 
-    </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
+        android:layout_height="109dp"
+        android:orientation="vertical"
         android:visibility="invisible"
         android:id="@+id/llCancelMotive"
         >
@@ -232,7 +238,7 @@
             />
         <Spinner
             android:id="@+id/spnCancelMotive"
-            android:layout_width="280dp"
+            android:layout_width="289dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:entries="@array/cancelMotiveItems"

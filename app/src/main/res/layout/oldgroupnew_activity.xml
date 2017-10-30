@@ -55,10 +55,12 @@
         android:hint="Numero de grupo"
         android:textColorHint="#00508C"
         android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        android:id="@+id/txtGroupNumber">
 
         <EditText
-            android:id="@+id/nombreContactoTxt"
+            android:id="@+id/editGroupNumber"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -67,7 +69,10 @@
             android:layout_weight="0.00"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
-            android:inputType="text" />
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -77,10 +82,12 @@
         android:textColorHint="#00508C"
         android:hint="Nombre del grupo"
         android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext"
+        android:id="@+id/txtGroupName">
 
         <EditText
-            android:id="@+id/telContactoTxt"
+            android:id="@+id/editGroupName"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -89,7 +96,10 @@
             android:layout_weight="0.00"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
-            android:inputType="number" />
+            android:inputType="text"
+            android:maxLength="20"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -99,10 +109,12 @@
         android:textColorHint="#00508C"
         android:hint="Ciclo anterior"
         android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext"
+        android:id="@+id/txtLastCicle">
 
         <EditText
-            android:id="@+id/refContactoTxt"
+            android:id="@+id/editLastCicle"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
@@ -111,7 +123,10 @@
             android:layout_weight="0.00"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
-            android:inputType="text" />
+            android:inputType="number"
+            android:maxLength="2"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
 
 

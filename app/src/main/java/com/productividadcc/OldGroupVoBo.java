@@ -3,13 +3,18 @@ package com.productividadcc;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
@@ -22,9 +27,10 @@ import java.util.Locale;
 
 public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
-    private Calendar calendar;
-    EditText numGrupo ,montoTxt, integrantesTxt;
-    TextView fechaTxt, horaTxt;
+    private Calendar calendar,calendar2;
+    EditText numGrupo ,montoTxt, editIntegrants;
+    EditText editEstimated, horaTxt,editAmount,editReprogram;
+    Spinner spnDispersion,spnMotiveReprogram,spnCancelMotive;
     String groupID;
     TextView nombreLbl;
     String URL = Globales.URL_REGISTRO_AGENDA;
@@ -41,23 +47,26 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
-
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
-        montoTxt = (EditText) findViewById(R.id.montoTxt);
-        integrantesTxt = (EditText) findViewById(R.id.integrantesTxt);
-        fechaTxt = (TextView) findViewById(R.id.fechaTxt);
+       /* montoTxt = (EditText) findViewById(R.id.montoTxt);*/
 
-        final LinearLayout integrants = (LinearLayout) findViewById(R.id.llIntegrant);
-        final LinearLayout amount = (LinearLayout) findViewById(R.id.llAmount);
+        final TextInputLayout integrants = (TextInputLayout) findViewById(R.id.llIntegrant);
+        final TextInputLayout date = (TextInputLayout) findViewById(R.id.llDate);
+        final TextInputLayout amount = (TextInputLayout) findViewById(R.id.llAmount);
         final LinearLayout dispersion = (LinearLayout) findViewById(R.id.lldispersion);
-        final LinearLayout dateDisbursement = (LinearLayout) findViewById(R.id.llDateDisbursement);
+        final TextInputLayout reprogram = (TextInputLayout) findViewById(R.id.llDateReprogram);
         final LinearLayout reprogrammotive = (LinearLayout) findViewById(R.id.llmotive);
-        final LinearLayout dateReprogram = (LinearLayout) findViewById(R.id.llDateReprogram);
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
+        editIntegrants = (EditText) findViewById(R.id.editIntegrantes);
+        editAmount = (EditText) findViewById(R.id.editAmount);
+        editEstimated = (EditText) findViewById(R.id.editEstimated);
+        spnDispersion=(Spinner) findViewById(R.id.spnDispersion);
+        spnMotiveReprogram=(Spinner)findViewById(R.id.spnMotiveReprogram);
+        spnCancelMotive=(Spinner)findViewById(R.id.spnCancelMotive);
 
+        editReprogram = (EditText) findViewById(R.id.editReprogram);
 
         mTitle.setText("Visto Bueno");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -75,19 +84,166 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
             groupID = "0";
         }
 
-
         calendar = Calendar.getInstance();
-
-        findViewById(R.id.fechaTxt).setOnClickListener(new View.OnClickListener() {
+        editEstimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog.newInstance(OldGroupVoBo.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
+
+        calendar2=Calendar.getInstance();
+        editReprogram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog.newInstance(OldGroupVoBo.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+            }
+        });
+
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(movement==1)
+                {
+                    if(editIntegrants.getText().toString().isEmpty())
+                    {
+                        integrants.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else {
+                        integrants.setError(null);
+                    }
+                    if(editAmount.getText().toString().isEmpty())
+                    {
+                        amount.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else {
+                        amount.setError(null);
+                    }
+                    if(editEstimated.getText().toString().isEmpty())
+                    {
+                        date.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else {
+                        amount.setError(null);
+                    }
+
+                    if (spnDispersion.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un tipo de dispersión", Toast.LENGTH_LONG).show();;
+                        return;
+                    }
+                    Toast.makeText(getApplicationContext(), "Se realizo el visto bueno correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else if(movement==2)
+                {
+                    if(editReprogram.getText().toString().isEmpty())
+                    {
+                        reprogram.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else {
+                        reprogram.setError(null);
+                    }
+
+                    if (spnMotiveReprogram.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        return;
+                    }
+                    Toast.makeText(getApplicationContext(), "Se realizo la reprogramacion del visto bueno correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else if(movement==3)
+                {
+
+                    if (spnCancelMotive.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        return;
+                    }
+                    Toast.makeText(getApplicationContext(), "Se realizo la cancelación del visto bueno correctamente", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+        });
+
+        editReprogram.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                reprogram.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        editEstimated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                date.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        editIntegrants.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                integrants.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        editAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                amount.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -106,12 +262,12 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onClick(View view) {
                 integrants.setVisibility(View.VISIBLE);
-                dateDisbursement.setVisibility(View.VISIBLE);
+                date.setVisibility(View.VISIBLE);
                 amount.setVisibility(View.VISIBLE);
                 btnsave.setVisibility(View.VISIBLE);
                 dispersion.setVisibility(View.VISIBLE);
                 reprogrammotive.setVisibility(View.GONE);
-                dateReprogram.setVisibility(View.GONE);
+                reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
                 movement=1;
 
@@ -122,15 +278,15 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onClick(View view) {
 
-                    integrants.setVisibility(View.GONE);
-                    dateDisbursement.setVisibility(View.GONE);
-                    amount.setVisibility(View.GONE);
-                    btnsave.setVisibility(View.VISIBLE);
-                    dispersion.setVisibility(View.GONE);
-                    reprogrammotive.setVisibility(View.VISIBLE);
-                    dateReprogram.setVisibility(View.VISIBLE);
-                    cancelmotive.setVisibility(View.GONE);
-                     movement=2;
+                integrants.setVisibility(View.GONE);
+                date.setVisibility(View.GONE);
+                amount.setVisibility(View.GONE);
+                btnsave.setVisibility(View.VISIBLE);
+                dispersion.setVisibility(View.GONE);
+                reprogrammotive.setVisibility(View.VISIBLE);
+                reprogram.setVisibility(View.VISIBLE);
+                cancelmotive.setVisibility(View.GONE);
+                movement=2;
 
             }
         });
@@ -139,12 +295,12 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onClick(View view) {
                 integrants.setVisibility(View.GONE);
-                dateDisbursement.setVisibility(View.GONE);
+                date.setVisibility(View.GONE);
                 amount.setVisibility(View.GONE);
                 btnsave.setVisibility(View.VISIBLE);
                 dispersion.setVisibility(View.GONE);
                 reprogrammotive.setVisibility(View.GONE);
-                dateReprogram.setVisibility(View.GONE);
+                reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
                 movement=3;
             }
@@ -269,7 +425,9 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         calendar.set(year, monthOfYear, dayOfMonth);
-        fechaTxt.setText(df.format(calendar.getTime()));
+        editEstimated.setText(df.format(calendar.getTime()));
+        calendar2.set(year, monthOfYear, dayOfMonth);
+        editReprogram.setText(df.format(calendar2.getTime()));
     }
 
     @Override
@@ -281,8 +439,8 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
 
     public void clearFields () {
         montoTxt.setText("");
-        integrantesTxt.setText("");
-        fechaTxt.setText("");
+        editIntegrants.setText("");
+        editEstimated.setText("");
         horaTxt.setText("");
     }
 }

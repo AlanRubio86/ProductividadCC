@@ -73,15 +73,13 @@ public class NewGroupsActivity extends AppCompatActivity {
 
     public void LoadNewGroups()
     {
-        GroupModel arrayObjetos[]=new GroupModel[6];
+        GroupModel arrayObjetos[]=new GroupModel[4];
 
         //Creamos objetos en cada posicion
         arrayObjetos[0]=new GroupModel("11-09-2017", "Grupo 23776", "1","1", "","new","25.7081288,-100.31593951");
         arrayObjetos[1]=new GroupModel("13-09-2017", "Grupo 21345", "2","2", "","new","25.7083839,-100.31657691");
-        arrayObjetos[2]=new GroupModel("14-09-2017", "Grupo 23776", "2","3","","new","25.7080813,-100.31587884");
-        arrayObjetos[3]=new GroupModel("15-09-2017", "Grupo 23776", "3","4","","new","25.7082823,-100.31601878");
-        arrayObjetos[4]=new GroupModel("14-09-2017", "Grupo 19556", "4","5","","new","25.70821548,-100.31595457");
-        arrayObjetos[5]=new GroupModel("14-09-2017", "Grupo 23776", "2","6","","new","25.70827793,-100.31601517");
+        arrayObjetos[2]=new GroupModel("15-09-2017", "Grupo 23776", "3","4","","new","25.7082823,-100.31601878");
+        arrayObjetos[3]=new GroupModel("14-09-2017", "Grupo 19556", "4","5","","new","25.70821548,-100.31595457");
 
         ArrayList<ListCell> items = new ArrayList<ListCell>();
         for (int i=0; i<arrayObjetos.length; i++)

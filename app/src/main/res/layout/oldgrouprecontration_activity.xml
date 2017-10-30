@@ -31,19 +31,35 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/done_text_color_dark_normal"
-        android:paddingBottom="10dp">
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/nombreLabel"
             android:layout_width="fill_parent"
-            android:layout_height="46dp"
-            android:gravity="center"
+            android:layout_height="26dp"
+            android:gravity="left"
             android:text="Bienvenido "
-            android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="@color/colorTitleLabel"
-            android:textSize="18dp" />
+            android:textColor="#00508C"
+            android:textSize="14dp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="26dp"
+            android:gravity="left"
+            android:text="Ciclo:2 "
+            android:textAllCaps="false"
+            android:textColor="#00508C"
+            android:textSize="14dp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="26dp"
+            android:gravity="left"
+            android:text="Semana:15"
+            android:textAllCaps="false"
+            android:textColor="#00508C"
+            android:textSize="14dp" />
     </LinearLayout>
 
 
@@ -89,187 +105,163 @@
             android:textColor="#FFFFFF"
             android:textSize="17dp" />
     </LinearLayout>
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
     android:id="@+id/llIntegrant"
     android:layout_width="fill_parent"
     android:layout_height="65dp"
-    android:hint="Total de integrantes estimado:"
+    android:hint="Total de integrantes:"
     android:orientation="horizontal"
     android:paddingTop="10dp"
-    android:visibility="invisible">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="240dp"
-        android:layout_height="45dp"
-        android:text="Total de integrantes:"
-        android:paddingTop="17dp"
-        android:textColor="#00508C"
-        />
-
-    <EditText
-        android:id="@+id/integrantesTxt"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:layout_marginLeft="5dp"
-        android:background="@drawable/edittext"
-        android:ems="2"
-        android:hint="0"
-        android:imeOptions="actionNext"
-        android:textColorHint="#00508C"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:singleLine="true" />
-</LinearLayout>
+    android:visibility="invisible"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext">
 
 
-    <LinearLayout
+        <EditText
+            android:id="@+id/editIntegrant"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/edittext"
+            android:ems="2"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textColorHint="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor" />
+</android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/llNews"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
-        android:hint="Total de integrantes estimado:"
+        android:hint="Nuevos:"
         android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/lblNewIntegrants"
-            android:layout_width="240dp"
-            android:layout_height="45dp"
-            android:text="Nuevos:"
-            android:paddingTop="17dp"
-            android:textColor="#00508C"
-            />
+        android:visibility="invisible"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext">
 
         <EditText
-            android:id="@+id/txtNewIntegrants"
+            android:id="@+id/editNewIntegrant"
             android:layout_width="100dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:ems="2"
-            android:hint="0"
             android:imeOptions="actionNext"
             android:textColorHint="#00508C"
             android:inputType="number"
             android:textAlignment="center"
-            android:singleLine="true" />
-    </LinearLayout>
+            android:singleLine="true"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
+    </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/llRecontratation"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
-        android:hint="Total de integrantes estimado:"
+        android:hint="Recontratados:"
         android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/lblRecIntegrants"
-            android:layout_width="240dp"
-            android:layout_height="45dp"
-            android:text="Recontratados:"
-            android:paddingTop="17dp"
-            android:textColor="#00508C"
-            />
+        android:visibility="invisible"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext">
 
         <EditText
-            android:id="@+id/txtRecIntegrants"
+            android:id="@+id/editIntegrantRec"
             android:layout_width="100dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:ems="2"
-            android:hint="0"
             android:imeOptions="actionNext"
             android:textColorHint="#00508C"
             android:inputType="number"
             android:textAlignment="center"
-            android:singleLine="true" />
-    </LinearLayout>
-    <LinearLayout
+            android:singleLine="true"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/llAmount"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:hint="Monto grupal solicitado"
         android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:visibility="invisible">
-
-        <TextView
-            android:layout_width="240dp"
-            android:layout_height="45dp"
-            android:paddingTop="18dp"
-            android:text="Monto grupal solicitado:"
-            android:textColor="#00508C" />
+        android:visibility="invisible"
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
 
         <EditText
-            android:id="@+id/montoTxt"
-            android:layout_width="100dp"
+            android:id="@+id/editAmount"
+            android:layout_width="200dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:hint="0.00"
+            android:focusable="false"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:textAlignment="center"
-            android:textColorHint="#00508C" />
-    </LinearLayout>
+            android:textColorHint="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
+    </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:paddingTop="10dp"
         android:orientation="horizontal"
         android:id="@+id/llDate"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:hint="Fecha estimada de Visto Bueno:"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext">
 
-        <TextView
-            android:layout_width="230dp"
-            android:layout_height="45dp"
-            android:text="Fecha estimada de Visto Bueno:"
-            android:paddingTop="17dp"
-            android:textColor="#00508C"
-            />
 
-        <TextView
-            android:id="@+id/fechaTxt"
-            android:layout_width="113dp"
+        <EditText
+            android:id="@+id/editDateEstimated"
+            android:layout_width="200dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="#00508C"
-            android:textColorHint="#00508C" />
+            android:textColorHint="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"
+            android:focusable="false"/>
 
-    </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/llDateReprogram"
         android:layout_width="fill_parent"
         android:layout_height="126dp"
         android:orientation="vertical"
         android:paddingTop="10dp"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:hint="Fecha de reprogramacion de Inicio de Recontratación:"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext"    >
 
-        <TextView
-            android:layout_width="348dp"
-            android:layout_height="65dp"
-            android:paddingTop="17dp"
-            android:text="Fecha de reprogramacion de Inicio de Recontratación:"
-            android:textColor="#00508C" />
-
-        <TextView
-            android:id="@+id/fechaReprogram"
-            android:layout_width="120dp"
+        <EditText
+            android:id="@+id/editDateReprogram"
+            android:layout_width="200dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
@@ -277,33 +269,37 @@
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="#00508C"
-            android:textColorHint="#00508C" />
+            android:textColorHint="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
 
-    </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
+        android:layout_height="109dp"
+        android:orientation="vertical"
         android:visibility="invisible"
         android:id="@+id/llmotivecancel"
         >
 
         <TextView
             android:layout_width="70dp"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
             android:text="Motivo:"
             android:paddingTop="17dp"
             android:textColor="#00508C"
             />
         <Spinner
-            android:id="@+id/spinnermotivecancel"
-            android:layout_width="280dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
+            android:id="@+id/spnCancelMotive"
+            android:layout_width="289dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
             android:entries="@array/recontratationCancelItems"
             android:textColorHint="#00508C"
             android:textAlignment="center"
+            android:spinnerMode="dialog"
             android:background="@drawable/edittext"
             style="@style/Widget.AppCompat.Spinner.Underlined"/>
 
