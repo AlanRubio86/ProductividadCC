@@ -27,6 +27,7 @@ import com.productividadcc.utilerias.Globales;
 import com.productividadcc.utilerias.Utilerias;
 
 
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.HashMap;
@@ -104,7 +105,9 @@ public class Login extends AppCompatActivity implements LocationListener {
         final EditText numTxt = (EditText) findViewById(R.id.numTxt);
         final String strNumeroEmpleado = numTxt.getText().toString();
 
-        final String tokenId = DigestUtils.sha256Hex(strNumeroEmpleado);
+        //final String tokenId = DigestUtils.sha256Hex(strNumeroEmpleado);
+
+        String s = new String(Hex.encodeHex(DigestUtils.sha256(strNumeroEmpleado)));
 
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         URL = Globales.URL_CONSULTA_EMPLEADO;
