@@ -26,8 +26,12 @@ import com.android.volley.toolbox.Volley;
 import com.productividadcc.utilerias.Globales;
 import com.productividadcc.utilerias.Utilerias;
 
+
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class Login extends AppCompatActivity implements LocationListener {
     LocationManager locationManager;
@@ -100,9 +104,11 @@ public class Login extends AppCompatActivity implements LocationListener {
         final EditText numTxt = (EditText) findViewById(R.id.numTxt);
         final String strNumeroEmpleado = numTxt.getText().toString();
 
+        final String tokenId = DigestUtils.sha256Hex(strNumeroEmpleado);
+
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         URL = Globales.URL_CONSULTA_EMPLEADO;
-        URL +=  strNumeroEmpleado;
+        URL +=  strNumeroEmpleado;// + "&TokenId="+tokenId;
         Log.d("WS Login:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
