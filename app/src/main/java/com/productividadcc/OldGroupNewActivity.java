@@ -37,7 +37,8 @@ import java.util.Map;
 public class OldGroupNewActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     String imeiNumber;
     EditText prospectosTxt;
-    TextView fechaTxt, fechaCap1;
+    EditText fechaTxt, fechaCap1;
+    private Calendar calendar,calendar2;
 
     String eventID;
     int idFechaDesembolso = 0;
@@ -89,15 +90,59 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
         }
 
         final TextInputLayout txtGroupNumber= (TextInputLayout) findViewById(R.id.txtGroupNumber);
-        final TextInputLayout txtGroupName= (TextInputLayout) findViewById(R.id.txtGroupName);
-        final TextInputLayout txtLastCicle= (TextInputLayout) findViewById(R.id.txtLastCicle);
+        final TextInputLayout txtDisbursement = (TextInputLayout) findViewById(R.id.txtDisbursement);
+        final TextInputLayout txtContact= (TextInputLayout) findViewById(R.id.txtContact);
+        final TextInputLayout txtContactPhone = (TextInputLayout) findViewById(R.id.txtContactPhone);
+        final TextInputLayout txtCap1 = (TextInputLayout) findViewById(R.id.txtCap1);
         final EditText editGroupNumber= (EditText) findViewById(R.id.editGroupNumber);
-        final EditText editGroupName= (EditText) findViewById(R.id.editGroupName);
-        final EditText editLastCicle= (EditText) findViewById(R.id.editLastCicle);
+        EditText editContact = (EditText) findViewById(R.id.editContact);
+        EditText editContactPhone = (EditText) findViewById(R.id.editContactPhone);
+        fechaCap1 = (EditText) findViewById(R.id.dateCap1);
+        fechaTxt = (EditText) findViewById(R.id.dateDisbursement);
+
+        calendar = Calendar.getInstance();
+        fechaTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final View vv = view;
+                idFechaDesembolso = view.getId();
+                /*Log.d("Log fechaDesembolso", String.valueOf(view.getId()));
+                Log.d("Log R.fechaDesembolso", String.valueOf(R.id.fechaDesembolso));*/
+                DatePickerDialog.newInstance(OldGroupNewActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+            }
+        });
+
+        calendar2 = Calendar.getInstance();
+        fechaCap1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                idFechaDesembolso = 0;
+                DatePickerDialog.newInstance(OldGroupNewActivity.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+            }
+        });
 
         findViewById(R.id.guardarGpoBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(txtContact.getEditText().getText().toString().isEmpty())
+                {
+                    txtContact.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
+                } else {
+                    txtContact.setError(null);
+                }
+
+                if(txtContactPhone.getEditText().getText().toString().isEmpty())
+                {
+                    txtContactPhone.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    return;
+                } else {
+                    txtContactPhone.setError(null);
+                }
+
                 if(editGroupNumber.getText().toString().isEmpty())
                 {
                     txtGroupNumber.setError("This field can not be blank");
@@ -107,29 +152,65 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
                     txtGroupNumber.setError(null);
                 }
 
-                if(editGroupName.getText().toString().isEmpty())
+                if(fechaTxt.getText().toString().isEmpty())
                 {
-                    txtGroupName.setError("This field can not be blank");
+                    txtDisbursement.setError("This field can not be blank");
                     Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                     return;
                 } else {
-                    txtGroupName.setError(null);
+                    txtDisbursement.setError(null);
                 }
-                if(editLastCicle.getText().toString().isEmpty())
+
+                if(fechaCap1.getText().toString().isEmpty())
                 {
-                    txtLastCicle.setError("This field can not be blank");
-                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    txtCap1.setError("This field can not be blank");
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                     return;
                 } else {
-                    txtLastCicle.setError(null);
+                    txtCap1.setError(null);
                 }
-                Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo de recontración correctamente", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(OldGroupNewActivity.this, OldGroupsActivity.class);
                 startActivity(intent);
                 finish();
 
             }
         });
+
+        editContact.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtContact.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editContactPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                txtContactPhone.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         editGroupNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -146,41 +227,35 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
 
             }
         });
-
-        editGroupName.addTextChangedListener(new TextWatcher() {
+        fechaTxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                txtGroupName.setError(null);
+                txtDisbursement.setError(null);
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
 
-        editLastCicle.addTextChangedListener(new TextWatcher() {
+        fechaCap1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                txtLastCicle.setError(null);
+                txtCap1.setError(null);
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
-
 
     }
 
@@ -302,7 +377,13 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Log.d("Log Pruebas", String.valueOf(idFechaDesembolso));
-
+        if(idFechaDesembolso == R.id.dateDisbursement){
+            calendar.set(year, monthOfYear, dayOfMonth);
+            fechaTxt.setText(df.format(calendar.getTime()));
+        }else{
+            calendar2.set(year, monthOfYear, dayOfMonth);
+            fechaCap1.setText(df.format(calendar2.getTime()));
+        }
     }
 
     public void clearFields () {

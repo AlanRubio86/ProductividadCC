@@ -113,6 +113,8 @@
             android:inputType="number"
             android:singleLine="true"
             android:textAlignment="center"
+            android:text="0"
+            android:textColor="#00508C"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor"/>
@@ -142,6 +144,8 @@
             android:inputType="numberDecimal"
             android:textAlignment="center"
             android:singleLine="true"
+            android:text="0.0"
+            android:textColor="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
@@ -157,20 +161,20 @@
             android:layout_width="150dp"
             android:layout_height="45dp"
             android:paddingTop="10dp"
-            android:text="Tipo de grupo:"
+            android:text="Tipo de grupo"
             android:textColor="#00508C"
             android:layout_marginLeft="10dp"/>
 
         <Spinner
             android:id="@+id/spnGroupType"
             style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:layout_width="289dp"
+            android:layout_width="329dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:entries="@array/groupTypeItems"
-            android:textAlignment="center"
             android:spinnerMode="dialog"
+            android:textAlignment="center"
             android:textColorHint="#00508C" />
 
     </LinearLayout>
@@ -193,13 +197,13 @@
         <Spinner
             android:id="@+id/spnMotiveReprogram"
             style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:layout_width="289dp"
+            android:layout_width="328dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:entries="@array/reprogramItemsDisbursement"
-            android:textAlignment="center"
             android:spinnerMode="dialog"
+            android:textAlignment="center"
             android:textColorHint="#00508C" />
 
     </LinearLayout>
@@ -209,7 +213,7 @@
         android:layout_width="fill_parent"
         android:layout_height="73dp"
         android:orientation="horizontal"
-        android:hint="Fecha de reprogramacion de desembolso:"
+        android:hint="Fecha de reprogramacion de desembolso"
         android:paddingTop="10dp"
         android:visibility="invisible"
         android:textColorHint="#00508C"
@@ -219,7 +223,7 @@
 
         <EditText
             android:id="@+id/editDisbursement"
-            android:layout_width="289dp"
+            android:layout_width="328dp"
             android:layout_height="51dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
@@ -245,13 +249,13 @@
         <TextView
             android:layout_width="70dp"
             android:layout_height="45dp"
-            android:text="Motivo:"
+            android:text="Motivo"
             android:paddingTop="17dp"
             android:textColor="#00508C"
             />
         <Spinner
             android:id="@+id/spnCancelMotive"
-            android:layout_width="289dp"
+            android:layout_width="328dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:entries="@array/cancelMotiveItems"

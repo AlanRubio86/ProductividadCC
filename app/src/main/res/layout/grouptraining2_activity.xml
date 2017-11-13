@@ -109,6 +109,7 @@
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
             android:singleLine="true"
+            android:textColor="#00508C"
             android:textAlignment="center"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
@@ -137,6 +138,8 @@
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:singleLine="true"
+            android:textColor="#00508C"
+            android:text="0.00"
             android:textAlignment="center"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
@@ -147,7 +150,7 @@
         android:id="@+id/llIntegrant"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
-        android:hint="Total de integrantes estimado:"
+        android:hint="Total de integrantes estimado"
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:visibility="invisible"
@@ -166,12 +169,42 @@
             android:imeOptions="actionNext"
             android:inputType="number"
             android:singleLine="true"
+            android:textColor="#00508C"
+            android:text="0"
             android:textAlignment="center"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor" />
     </android.support.design.widget.TextInputLayout>
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:paddingTop="10dp"
+        android:orientation="horizontal"
+        android:id="@+id/llDateDisbursement"
+        android:hint="Fecha estimada de desemholso"
+        android:visibility="invisible"
+        android:textColorHint="#00508C"
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+
+        <EditText
+            android:id="@+id/editDateDisbursement"
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/edittext"
+            android:focusable="false"
+            android:imeOptions="actionNext"
+            android:paddingTop="17dp"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textColor="#00508C"
+            android:textColorHint="#00508C" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
@@ -179,25 +212,26 @@
         android:paddingTop="10dp"
         android:orientation="horizontal"
         android:id="@+id/llDate"
-        android:hint="Fecha estimada de Visto Bueno:"
+        android:hint="Fecha estimada de VoBo"
         android:visibility="invisible"
         android:textColorHint="#00508C"
         app:errorTextAppearance="@drawable/edittext"
         app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+
         <EditText
             android:id="@+id/editDateEstimated"
-            android:layout_width="249dp"
+            android:layout_width="333dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:paddingTop="17dp"
             android:background="@drawable/edittext"
-            android:singleLine="true"
-            android:textColor="#00508C"
-            android:textColorHint="#00508C"
+            android:focusable="false"
             android:imeOptions="actionNext"
+            android:paddingTop="17dp"
+            android:singleLine="true"
             android:textAlignment="center"
-            android:focusable="false"/>
+            android:textColor="#00508C"
+            android:textColorHint="#00508C" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -207,7 +241,7 @@
         android:paddingTop="10dp"
         android:orientation="horizontal"
         android:id="@+id/llDateReprogram"
-        android:hint="Fecha de reprogramacion de Cap. 2:"
+        android:hint="Fecha de reprogramacion de Cap. 2"
         android:textColorHint="#00508C"
         android:visibility="invisible"
         app:errorTextAppearance="@drawable/edittext"
@@ -215,18 +249,18 @@
 
         <EditText
             android:id="@+id/editDateReprogram"
-            android:layout_width="249dp"
+            android:layout_width="333dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:paddingTop="17dp"
             android:background="@drawable/edittext"
-            android:singleLine="true"
-            android:textColor="#00508C"
-            android:textColorHint="#00508C"
+            android:focusable="false"
             android:imeOptions="actionNext"
+            android:paddingTop="17dp"
+            android:singleLine="true"
             android:textAlignment="center"
-            android:focusable="false"/>
+            android:textColor="#00508C"
+            android:textColorHint="#00508C" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -246,17 +280,18 @@
             android:paddingTop="17dp"
             android:textColor="#00508C"
             />
+
         <Spinner
             android:id="@+id/spnMotiveCancel"
-            android:layout_width="249dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="330dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:entries="@array/training2CancelItems"
-            android:textColorHint="#00508C"
-            android:textAlignment="center"
-            android:spinnerMode="dialog"
             android:background="@drawable/edittext"
-            style="@style/Widget.AppCompat.Spinner.Underlined"/>
+            android:entries="@array/training2CancelItems"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            android:textColorHint="#00508C" />
 
     </LinearLayout>
 

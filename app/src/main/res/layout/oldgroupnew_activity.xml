@@ -28,24 +28,61 @@
             />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtContact"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right">
+        android:layout_height="65dp"
+        android:background="#FFFFFF"
+        android:hint="Nombre del Contacto"
+        android:paddingTop="10dp"
+        android:textColorHint="#00508C"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext">
 
-        <ImageView
-            android:id="@+id/guardarGpoBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:scaleType="centerCrop"
-            android:text="Guardar"
-            android:background="#FFFFFF"
-            android:src="@drawable/iconsave" />
+        <EditText
+            android:id="@+id/editContact"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.00"
+            android:background="@drawable/edittext"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textColor="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
+    </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtContactPhone"
+        android:layout_width="fill_parent"
+        android:layout_height="62dp"
+        android:background="#FFFFFF"
+        android:textColorHint="#00508C"
+        android:hint="Telefono del Contacto"
+        android:paddingTop="10dp"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        app:errorTextAppearance="@drawable/edittext">
+
+        <EditText
+            android:id="@+id/editContactPhone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.00"
+            android:background="@drawable/edittext"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:textColor="#00508C"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
+    </android.support.design.widget.TextInputLayout>
 
 
     <android.support.design.widget.TextInputLayout
@@ -69,65 +106,81 @@
             android:layout_weight="0.00"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
+            android:textColor="#00508C"
             android:inputType="number"
             android:maxLength="10"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor" />
     </android.support.design.widget.TextInputLayout>
-
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtDisbursement"
         android:layout_width="fill_parent"
         android:layout_height="62dp"
         android:background="#FFFFFF"
-        android:textColorHint="#00508C"
-        android:hint="Nombre del grupo"
         android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        android:textColorHint="#00508C"
         app:errorTextAppearance="@drawable/edittext"
-        android:id="@+id/txtGroupName">
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
 
         <EditText
-            android:id="@+id/editGroupName"
+            android:id="@+id/dateDisbursement"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_weight="0.00"
             android:background="@drawable/edittext"
+            android:focusable="false"
+            android:hint="Fecha Estimada de Desembolso"
             android:imeOptions="actionNext"
-            android:inputType="text"
-            android:maxLength="20"
-            android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor"/>
+            android:textColor="#00508C"
+            android:textColorHint="#00508C" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/txtCap1"
         android:layout_width="fill_parent"
-        android:layout_height="68dp"
+        android:layout_height="64dp"
         android:background="#FFFFFF"
-        android:textColorHint="#00508C"
-        android:hint="Ciclo anterior"
         android:paddingTop="10dp"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        android:textColorHint="#00508C"
         app:errorTextAppearance="@drawable/edittext"
-        android:id="@+id/txtLastCicle">
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
 
         <EditText
-            android:id="@+id/editLastCicle"
+            android:id="@+id/dateCap1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_weight="0.00"
             android:background="@drawable/edittext"
+            android:focusable="false"
+            android:hint="Fecha de inicio de recontratación"
             android:imeOptions="actionNext"
-            android:inputType="number"
-            android:maxLength="2"
-            android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor"/>
+            android:textColor="#00508C"
+            android:textColorHint="#00508C" />
     </android.support.design.widget.TextInputLayout>
 
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/guardarGpoBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:scaleType="centerCrop"
+            android:text="Guardar"
+            android:background="#FFFFFF"
+            android:src="@drawable/iconsave" />
+
+    </LinearLayout>
 
 </LinearLayout>

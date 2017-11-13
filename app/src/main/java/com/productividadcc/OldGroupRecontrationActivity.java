@@ -113,40 +113,66 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
                     if (editIntegrant.getText().toString().isEmpty()) {
                         integrants.setError("This field can not be blank");
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
-                        ;
                         return;
                     } else {
-                        integrants.setError(null);
+                        if(Integer.parseInt(editIntegrant.getText().toString())<=0)
+                        {
+                            integrants.setError("El total de integrantes tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El total de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
+                            return;
+                        }else
+                            {
+                                integrants.setError(null);
+                            }
+
                     }
                     if (editNewIntegrant.getText().toString().isEmpty()) {
                         llnews.setError("This field can not be blank");
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
-                        ;
                         return;
                     } else {
-                        llnews.setError(null);
+                        if(Integer.parseInt(editNewIntegrant.getText().toString())<=0)
+                        {
+                            llnews.setError("Nuevos tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "Nuevos tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
+                            return;
+                        }else
+                        {
+                            llnews.setError(null);
+                        }
                     }
                     if (editIntegrantRec.getText().toString().isEmpty()) {
                         llrecontratation.setError("This field can not be blank");
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
-                        ;
                         return;
                     } else {
-                        llrecontratation.setError(null);
+                        if(Integer.parseInt(editIntegrantRec.getText().toString())<=0)
+                        {
+                            llrecontratation.setError("Recontratados tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "Recontratados tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
+                            return;
+                        }else
+                        {
+                            llrecontratation.setError(null);
+                        }
                     }
                     if (editAmount.getText().toString().isEmpty()) {
                         amount.setError("This field can not be blank");
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
-                        ;
                         return;
                     } else {
-                        amount.setError(null);
+                        if(Double.parseDouble(editAmount.getText().toString())<=0){
+                            amount.setError("El monto tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            return;
+                        }else{
+                            amount.setError(null);
+                        }
                     }
 
                     if (editDateEstimated.getText().toString().isEmpty()) {
                         date.setError("This field can not be blank");
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
-                        ;
                         return;
                     } else {
                         date.setError(null);

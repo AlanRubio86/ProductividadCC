@@ -106,7 +106,14 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                         return;
                     } else {
+                        if(Integer.parseInt(editIntegrant.getText().toString())<=0)
+                        {
+                            integrants.setError("El total de integrantes tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El total de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            return;
+                        }else{
                         integrants.setError(null);
+                        }
                     }
                     if(editAmount.getText().toString().isEmpty())
                     {
@@ -114,7 +121,15 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                         return;
                     } else {
+                        if(Double.parseDouble(editAmount.getText().toString())<=0)
+                        {
+                            amount.setError("El monto tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            return;
+
+                        }else{
                         amount.setError(null);
+                        }
                     }
                     if (spnGroupType.getSelectedItem().toString().trim().equals("(Seleccionar)"))
                     {

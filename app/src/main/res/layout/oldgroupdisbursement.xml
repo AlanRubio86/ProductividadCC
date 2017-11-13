@@ -129,6 +129,8 @@
             android:inputType="number"
             android:singleLine="true"
             android:textAlignment="center"
+            android:textColor="#00508C"
+            android:text="0"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor"/>
@@ -158,16 +160,18 @@
             android:inputType="numberDecimal"
             android:textAlignment="center"
             android:singleLine="true"
+            android:textColor="#00508C"
+            android:text="0.0"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
+
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="109dp"
-        android:orientation="vertical"
-        android:visibility="invisible"
         android:id="@+id/llMotiveReprogram"
-        >
+        android:layout_width="fill_parent"
+        android:layout_height="105dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
 
         <TextView
             android:layout_width="70dp"
@@ -180,13 +184,13 @@
         <Spinner
             android:id="@+id/spnMotiveReprogram"
             style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:layout_width="289dp"
+            android:layout_width="331dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:entries="@array/oldGroupReprogramItemsDisbursement"
-            android:textAlignment="center"
             android:spinnerMode="dialog"
+            android:textAlignment="center"
             android:textColorHint="#00508C" />
 
     </LinearLayout>
@@ -194,29 +198,29 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/llDate"
         android:layout_width="fill_parent"
-        android:layout_height="73dp"
-        android:orientation="horizontal"
+        android:layout_height="65dp"
         android:hint="Fecha de reprogramacion de desembolso:"
+        android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:visibility="invisible"
         android:textColorHint="#00508C"
+        android:visibility="invisible"
         app:errorTextAppearance="@drawable/edittext"
         app:hintTextAppearance="@style/AppTheme.TextInputLayout">>
 
 
         <EditText
             android:id="@+id/editDisbursement"
-            android:layout_width="289dp"
-            android:layout_height="51dp"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
+            android:focusable="false"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="#00508C"
-            android:focusable="false"
             android:textColorHint="#00508C" />
 
     </android.support.design.widget.TextInputLayout>
