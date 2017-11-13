@@ -28,24 +28,7 @@
             />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right">
 
-        <ImageButton
-            android:id="@+id/btnSaveGroup"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:scaleType="centerCrop"
-            android:text="Guardar"
-            android:background="#FFFFFF"
-            android:src="@drawable/iconsave" />
-
-    </LinearLayout>
 
 
     <android.support.design.widget.TextInputLayout
@@ -108,7 +91,7 @@
         android:layout_height="68dp"
         android:background="#FFFFFF"
         android:textColorHint="#00508C"
-        android:hint="Referencia del Contacto"
+        android:hint="Referencia del Grupo"
         android:paddingTop="10dp"
         app:hintTextAppearance="@style/AppTheme.TextInputLayout"
         app:errorTextAppearance="@drawable/edittext"
@@ -124,7 +107,8 @@
             android:layout_weight="0.00"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
-            android:inputType="phone"
+            android:inputType="text"
+            android:maxLength="20"
             android:textColor="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor"/>
@@ -179,5 +163,24 @@
             android:textColor="#00508C"
             android:textColorHint="#00508C" />
     </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/btnSaveGroup"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:scaleType="centerCrop"
+            android:text="Guardar"
+            android:background="#FFFFFF"
+            android:src="@drawable/iconsave" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -106,7 +106,15 @@ public class OldGroupDisrbursementActivity extends AppCompatActivity implements 
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                         return;
                     } else {
-                        integrants.setError(null);
+                        if(Integer.parseInt(editIntegrant.getText().toString())<=0)
+                        {
+                            integrants.setError("Cantidad de integrantes tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "Catnidad de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
+                            return;
+                        }else
+                        {
+                            integrants.setError(null);
+                        }
                     }
                     if(editAmount.getText().toString().isEmpty())
                     {
@@ -114,7 +122,13 @@ public class OldGroupDisrbursementActivity extends AppCompatActivity implements 
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                         return;
                     } else {
-                        amount.setError(null);
+                        if(Double.parseDouble(editAmount.getText().toString())<=0){
+                            amount.setError("El monto tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            return;
+                        }else{
+                            amount.setError(null);
+                        }
                     }
 
 

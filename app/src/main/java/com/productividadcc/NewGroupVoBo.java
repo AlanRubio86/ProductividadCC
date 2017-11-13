@@ -115,6 +115,21 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                     } else {
                         integrants.setError(null);
                     }
+                    if(!editIntegrants.getText().toString().isEmpty())
+                    {
+                        int num= Integer.parseInt( editIntegrants.getText().toString());
+                        if(num<=0)
+                        {
+                            integrants.setError("El número de integrantes tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El número de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                    } else {
+                        integrants.setError(null);
+                    }
+
+
                     if(editAmount.getText().toString().isEmpty())
                     {
                         amount.setError("This field can not be blank");
@@ -123,6 +138,23 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                     } else {
                         amount.setError(null);
                     }
+
+                    if(!editAmount.getText().toString().isEmpty())
+                    {
+
+                        Double money= Double.parseDouble( editAmount.getText().toString());
+                        if(money<=0)
+                        {
+                            amount.setError("El monto autorizado tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El monto autorizado tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            return;
+                        }
+
+                    } else {
+                        amount.setError(null);
+                    }
+
+
                     if(editEstimated.getText().toString().isEmpty())
                     {
                         date.setError("This field can not be blank");

@@ -27,13 +27,14 @@ import java.util.Locale;
 
 public class GroupTraining2Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
-    private Calendar calendar,calendar2;
-    EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram,editGroupName;
+    private Calendar calendar,calendar2,calendar3;
+    EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram,editGroupName,editDateDisbursement;
     Spinner spnMotiveCancel;
     String groupID;
     TextView nombreLbl;
     String URL = Globales.URL_REGISTRO_AGENDA;
     private int movement=0;
+    int idFechaDesembolso = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
         final TextInputLayout integrants = (TextInputLayout) findViewById(R.id.llIntegrant);
         final TextInputLayout date = (TextInputLayout) findViewById(R.id.llDate);
+        final TextInputLayout llDateDisbursement = (TextInputLayout) findViewById(R.id.llDateDisbursement);
         final TextInputLayout amount = (TextInputLayout) findViewById(R.id.llAmount);
         final TextInputLayout reprogram = (TextInputLayout) findViewById(R.id.llDateReprogram);
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
@@ -61,6 +63,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
         editAmount = (EditText) findViewById(R.id.editAmount);
         editIntegrant = (EditText) findViewById(R.id.editIntegrant);
         editDateEstimated= (EditText) findViewById(R.id.editDateEstimated);
+        editDateDisbursement= (EditText) findViewById(R.id.editDateDisbursement);
         editDateReprogram= (EditText) findViewById(R.id.editDateReprogram);
         spnMotiveCancel=(Spinner) findViewById(R.id.spnMotiveCancel);
 
@@ -85,6 +88,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
         editDateEstimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                idFechaDesembolso = 2;
                 DatePickerDialog.newInstance(GroupTraining2Activity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
@@ -93,7 +97,17 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
         editDateReprogram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog.newInstance(GroupTraining2Activity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+                idFechaDesembolso =3;
+                DatePickerDialog.newInstance(GroupTraining2Activity.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+            }
+        });
+
+        calendar3 = Calendar.getInstance();
+        editDateDisbursement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                idFechaDesembolso = 1;
+                DatePickerDialog.newInstance(GroupTraining2Activity.this, calendar3.get(Calendar.YEAR), calendar3.get(Calendar.MONTH), calendar3.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
@@ -117,7 +131,13 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                         return;
                     } else {
+                        if(Double.parseDouble(editAmount.getText().toString())<=0){
+                            amount.setError("El monto tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            return;
+                        }else{
                         amount.setError(null);
+                        }
                     }
                     if(editIntegrant.getText().toString().isEmpty())
                     {
@@ -125,7 +145,22 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                         return;
                     } else {
-                        integrants.setError(null);
+                        if(Integer.parseInt(editIntegrant.getText().toString())<=0)
+                        {
+                            integrants.setError("El total de integrantes tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El total de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            return;
+                        }else{
+                            integrants.setError(null);
+                        }
+                    }
+                    if(editDateDisbursement.getText().toString().isEmpty())
+                    {
+                        llDateDisbursement.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else {
+                        llDateDisbursement.setError(null);
                     }
                     if(editDateEstimated.getText().toString().isEmpty())
                     {
@@ -135,6 +170,9 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                     } else {
                         date.setError(null);
                     }
+
+
+
                     Toast.makeText(getApplicationContext(), "Se realizo la capacitacion 2 correctamente", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsActivity.class);
                     startActivity(intent);
@@ -234,6 +272,24 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
 
             }
         });
+
+        editDateDisbursement.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                llDateDisbursement.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         editDateReprogram.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -266,6 +322,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                 groupNameLayout.setVisibility(View.VISIBLE);
                 integrants.setVisibility(View.VISIBLE);
                 date.setVisibility(View.VISIBLE);
+                llDateDisbursement.setVisibility(View.VISIBLE);
                 amount.setVisibility(View.VISIBLE);
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
@@ -280,6 +337,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                 groupNameLayout.setVisibility(View.GONE);
                     integrants.setVisibility(View.GONE);
                     date.setVisibility(View.GONE);
+                    llDateDisbursement.setVisibility(View.GONE);
                     amount.setVisibility(View.GONE);
                     btnsave.setVisibility(View.VISIBLE);
                     reprogram.setVisibility(View.VISIBLE);
@@ -295,6 +353,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                 groupNameLayout.setVisibility(View.GONE);
                 integrants.setVisibility(View.GONE);
                 date.setVisibility(View.GONE);
+                llDateDisbursement.setVisibility(View.GONE);
                 amount.setVisibility(View.GONE);
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
@@ -421,10 +480,21 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        calendar.set(year, monthOfYear, dayOfMonth);
-        editDateEstimated.setText(df.format(calendar.getTime()));
-        calendar2.set(year, monthOfYear, dayOfMonth);
-        editDateReprogram.setText(df.format(calendar2.getTime()));
+        if(idFechaDesembolso == 1){
+            calendar3.set(year, monthOfYear, dayOfMonth);
+            editDateDisbursement.setText(df.format(calendar3.getTime()));
+        }
+        if(idFechaDesembolso == 2)
+            {
+                calendar.set(year, monthOfYear, dayOfMonth);
+                editDateEstimated.setText(df.format(calendar.getTime()));
+            }
+        if(idFechaDesembolso == 3)
+        {
+                calendar2.set(year, monthOfYear, dayOfMonth);
+                editDateReprogram.setText(df.format(calendar2.getTime()));
+        }
+
     }
 
     @Override

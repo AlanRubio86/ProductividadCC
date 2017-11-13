@@ -109,7 +109,7 @@
     android:id="@+id/llIntegrant"
     android:layout_width="fill_parent"
     android:layout_height="65dp"
-    android:hint="Total de integrantes:"
+    android:hint="Total de integrantes"
     android:orientation="horizontal"
     android:paddingTop="10dp"
     android:visibility="invisible"
@@ -119,7 +119,7 @@
 
         <EditText
             android:id="@+id/editIntegrant"
-            android:layout_width="100dp"
+            android:layout_width="201dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
@@ -128,6 +128,8 @@
             android:inputType="number"
             android:singleLine="true"
             android:textAlignment="center"
+            android:textColor="#00508C"
+            android:text="0"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor" />
@@ -138,7 +140,7 @@
         android:id="@+id/llNews"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
-        android:hint="Nuevos:"
+        android:hint="Nuevos"
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:visibility="invisible"
@@ -147,18 +149,20 @@
 
         <EditText
             android:id="@+id/editNewIntegrant"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:ems="2"
             android:imeOptions="actionNext"
-            android:textColorHint="#00508C"
             android:inputType="number"
-            android:textAlignment="center"
             android:singleLine="true"
+            android:textAlignment="center"
+            android:textColor="#00508C"
+            android:text="0"
+            android:textColorHint="#00508C"
             android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor"/>
+            android:textCursorDrawable="@drawable/edittextcursor" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -174,18 +178,20 @@
 
         <EditText
             android:id="@+id/editIntegrantRec"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:ems="2"
             android:imeOptions="actionNext"
-            android:textColorHint="#00508C"
             android:inputType="number"
-            android:textAlignment="center"
             android:singleLine="true"
+            android:textAlignment="center"
+            android:textColor="#00508C"
+            android:text="0"
+            android:textColorHint="#00508C"
             android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor"/>
+            android:textCursorDrawable="@drawable/edittextcursor" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -205,35 +211,36 @@
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:focusable="false"
-            android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:textAlignment="center"
+            android:textColor="#00508C"
+            android:text="0.0"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:paddingTop="10dp"
-        android:orientation="horizontal"
         android:id="@+id/llDate"
+        android:layout_width="fill_parent"
+        android:layout_height="57dp"
+        android:hint="Fecha estimada de VoBo"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
         android:visibility="invisible"
-        android:hint="Fecha estimada de Visto Bueno:"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
-        app:errorTextAppearance="@drawable/edittext">
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
 
 
         <EditText
             android:id="@+id/editDateEstimated"
-            android:layout_width="200dp"
+            android:layout_width="331dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/edittext"
+            android:focusable="false"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
             android:singleLine="true"
@@ -241,8 +248,7 @@
             android:textColor="#00508C"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor"
-            android:focusable="false"/>
+            android:textCursorDrawable="@drawable/edittextcursor" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -253,16 +259,17 @@
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:visibility="invisible"
-        android:hint="Fecha de reprogramacion de Inicio de Recontratación:"
+        android:hint="Fecha de reprogramación de Inicio de Recontratación"
         app:hintTextAppearance="@style/AppTheme.TextInputLayout"
         app:errorTextAppearance="@drawable/edittext"    >
 
         <EditText
             android:id="@+id/editDateReprogram"
-            android:layout_width="200dp"
+            android:layout_width="330dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
+            android:focusable="false"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
@@ -271,7 +278,7 @@
             android:textColor="#00508C"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor"/>
+            android:textCursorDrawable="@drawable/edittextcursor" />
 
     </android.support.design.widget.TextInputLayout>
 
