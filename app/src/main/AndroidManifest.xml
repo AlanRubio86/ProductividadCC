@@ -31,7 +31,7 @@
                 android:value="com.productividadcc.SplashScreen" />
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".NewGroupsActivity">
+        <activity android:name=".NewGroupsListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -39,17 +39,17 @@
         <activity android:name=".GroupTrainingActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsActivity" />
+                android:value=".NewGroupsListActivity" />
         </activity>
         <activity android:name=".GroupTraining2Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsActivity" />
+                android:value=".NewGroupsListActivity" />
         </activity>
         <activity android:name=".GroupDisrbursementActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsActivity" />
+                android:value=".NewGroupsListActivity" />
         </activity>
         <activity android:name=".OldGroupVoBo">
             <meta-data
@@ -74,7 +74,7 @@
         <activity android:name=".NewGroupVoBo">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsActivity" />
+                android:value=".NewGroupsListActivity" />
         </activity>
         <activity android:name=".GrupoNuevo">
             <meta-data

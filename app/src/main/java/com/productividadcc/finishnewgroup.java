@@ -22,7 +22,7 @@ public class finishnewgroup  extends AppCompatActivity {
         findViewById(R.id.btnNewGroups).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(finishnewgroup.this, NewGroupsActivity.class);
+                Intent intent = new Intent(finishnewgroup.this, NewGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }

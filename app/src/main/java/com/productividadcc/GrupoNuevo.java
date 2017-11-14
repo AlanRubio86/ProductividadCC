@@ -70,7 +70,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GrupoNuevo.this, NewGroupsActivity.class);
+                Intent intent = new Intent(GrupoNuevo.this, NewGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -172,7 +172,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
                     txtCap1.setError(null);
                 }
                 Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(GrupoNuevo.this, NewGroupsActivity.class);
+                Intent intent = new Intent(GrupoNuevo.this, NewGroupsListActivity.class);
                 startActivity(intent);
                 finish();
 

@@ -148,7 +148,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                         date.setError(null);
                     }
                     Toast.makeText(getApplicationContext(), "Se realizo la capacitacion 1 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsActivity.class);
+                    Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 }else if(movement==2)
@@ -162,7 +162,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                         reprogram.setError(null);
                     }
                     Toast.makeText(getApplicationContext(), "Se realizo la reprogramación de capacitacion 1 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsActivity.class);
+                    Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsListActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -174,7 +174,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                     }
 
                     Toast.makeText(getApplicationContext(), "Se realizo la cancelacion de capacitacion 1 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsActivity.class);
+                    Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -251,7 +251,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsActivity.class);
+                Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -107,11 +107,16 @@ public class Login extends AppCompatActivity implements LocationListener {
 
         //final String tokenId = DigestUtils.sha256Hex(strNumeroEmpleado);
 
-        String s = new String(Hex.encodeHex(DigestUtils.sha256(strNumeroEmpleado)));
+        final String tokenId = new String(Hex.encodeHex(DigestUtils.sha256(strNumeroEmpleado)));
 
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putString("numEmployee", String.valueOf(strNumeroEmpleado));
+        editor.putString("tokenId", String.valueOf(tokenId));
+        editor.commit();
+
         URL = Globales.URL_CONSULTA_EMPLEADO;
-        URL +=  strNumeroEmpleado;// + "&TokenId="+tokenId;
+        URL +=  strNumeroEmpleado + "&TokenId="+tokenId;
         Log.d("WS Login:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -126,10 +131,8 @@ public class Login extends AppCompatActivity implements LocationListener {
                                 String[] appointmentArray = consultaArray[i].split(", ");
                                 strNombreEmpleado = appointmentArray[1];
                             }
-
                             Log.d("WS Login Emplea:", strNombreEmpleado);
                             Intent intent = new Intent(Login.this, MainActivity.class);
-                            //intent.putExtra("nombreEmpleado",getIntent().getExtras().getString("eventId"));
                             intent.putExtra("nombreEmpleado", strNombreEmpleado);
                             startActivity(intent);
                             finish();

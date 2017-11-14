@@ -171,10 +171,8 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                         date.setError(null);
                     }
 
-
-
                     Toast.makeText(getApplicationContext(), "Se realizo la capacitacion 2 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsActivity.class);
+                    Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 }else if(movement==2)
@@ -188,7 +186,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                         reprogram.setError(null);
                     }
                     Toast.makeText(getApplicationContext(), "Se realizo la reprogramación de capacitacion 2 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsActivity.class);
+                    Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsListActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -200,7 +198,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                     }
 
                     Toast.makeText(getApplicationContext(), "Se realizo la cancelacion de capacitacion 2 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsActivity.class);
+                    Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -310,7 +308,7 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsActivity.class);
+                Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }
