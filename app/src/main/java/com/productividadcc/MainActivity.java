@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.productividadcc.database.DatabaseHelper;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.agregarEventoBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, OldGroupsActivity.class);
+                Intent intent = new Intent(MainActivity.this, OldGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -54,22 +54,22 @@
         <activity android:name=".OldGroupVoBo">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsActivity" />
+                android:value=".OldGroupsListActivity" />
         </activity>
         <activity android:name=".OldGroupRecontrationActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsActivity" />
+                android:value=".OldGroupsListActivity" />
         </activity>
         <activity android:name=".OldGroupDisrbursementActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsActivity" />
+                android:value=".OldGroupsListActivity" />
         </activity>
         <activity android:name=".OldGroupNewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsActivity" />
+                android:value=".OldGroupsListActivity" />
         </activity>
         <activity android:name=".NewGroupVoBo">
             <meta-data
@@ -81,7 +81,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".OldGroupsActivity">
+        <activity android:name=".OldGroupsListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

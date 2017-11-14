@@ -20,7 +20,7 @@ public class finisholdgroup extends AppCompatActivity {
         findViewById(R.id.btnNewGroups).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(finisholdgroup.this, OldGroupsActivity.class);
+                Intent intent = new Intent(finisholdgroup.this, OldGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -1,35 +1,42 @@
 package com.productividadcc;
 
-import java.util.Date;
-
-/**
- * Created by cesarrdz on 9/9/16.
- */
 public class ListCell implements Comparable<ListCell>{
 
-    private String name;
+    private String groupId;
+    private String employeeId;
+    private String typeReg;
+    private String groupNumber;
+    private String groupName;
+    private String cicle;
+    private String week;
+    private String latitude;
+    private String longitude;
+    private String refCon;
     private String statusId;
-    private String id;
+    private String statusName;
     private String date;
-    private String category;
     private boolean isSectionHeader;
-    private String parent;
-    private String ubication;
 
-    public ListCell(String name, String statusId, String id, String date, String category,String parent,String ubication  )
+
+    public ListCell(String _groupId, String _employeeId, String _typeReg, String _groupNumber, String _groupName, String _cicle, String _week, String _latitude, String _longitude, String _refCon, String _statusId,String _date ,String _statusName)
     {
-        this.name = name;
-        this.statusId = statusId;
-        this.id = id;
-        this.date=date;
-        this.category=category;
+        this.groupId = _groupId.trim();
+        this.employeeId = _employeeId.trim();
+        this.typeReg = _typeReg.trim();
+        this.groupNumber=_groupNumber.trim();
+        this.groupName=_groupName.trim();
         isSectionHeader=false;
-        this.parent=parent;
-        this.ubication=ubication;
-
+        this.cicle=_cicle.trim();
+        this.week=_week.trim();
+        this.latitude=_latitude.trim();
+        this.longitude=_longitude.trim();
+        this.refCon=_refCon.trim();
+        this.statusId=_statusId.trim();
+        this.date=_date.trim();
+        this.statusName = _statusName.trim();
     }
 
-    public String getUbication() {return ubication;}
+    public String getGroupId() {return groupId;}
 
     public void setToSectionHeader() {
         isSectionHeader=true;
@@ -39,18 +46,48 @@ public class ListCell implements Comparable<ListCell>{
         return isSectionHeader;
     }
 
-    public String getCategory() {
-        return category;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public String getParent()
+    public String getTypeReg()
     {
-        return parent;
+        return typeReg;
     }
 
-    public String getName()
+    public String getGroupNumber()
     {
-        return name;
+        return groupNumber;
+    }
+
+    public String getGroupName()
+    {
+        return groupName;
+    }
+
+    public String getCicle()
+    {
+        return cicle;
+    }
+
+    public String getWeek()
+    {
+        return week;
+    }
+
+    public String getLatitute()
+    {
+        return latitude;
+    }
+
+    public String getLongitude()
+    {
+        return longitude;
+    }
+
+    public String getRefCon()
+    {
+        return refCon;
     }
 
     public String getStatusId()
@@ -58,18 +95,18 @@ public class ListCell implements Comparable<ListCell>{
         return statusId;
     }
 
-    public String getId()
-    {
-        return id;
-    }
-
     public String getDate()
     {
         return date;
     }
 
+    public String getStatusName()
+    {
+        return statusName;
+    }
+
     public int compareTo(ListCell other) {
-        return this.category.compareTo(other.category);
+        return this.statusId.compareTo(other.statusId);
     }
 
 }

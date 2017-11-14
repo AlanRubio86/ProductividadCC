@@ -3,46 +3,76 @@ package com.productividadcc.utilerias;
 
 public class GroupModel {
 
-    private String _date,_name;
-    private String _statusId;
-    private String _id;
-    private String _category;
-    private String _parent;
-    private String _ubication;
+    private String groupId,  employeeId,  typeReg,  groupNumber,  groupName,  cicle,  week,  latitude,  longitude,  refCon, statusId, date;
 
-    public GroupModel(String date,String name, String statusId, String id, String category,String parent,String ubication) {
-        _date = date;
-        _name=name;
-        _statusId=statusId;
-        _id=id;
-        _category=category;
-        _parent=parent;
-        _ubication=ubication;
-
-    }
-    public String get_Parent() {return _parent;}
-
-    public String get_Ubication() {return _parent;}
-
-    public String get_date ()
+    public GroupModel(String _groupId, String _employeeId, String _typeReg, String _groupNumber, String _groupName, String _cicle, String _week, String _latitude, String _longitude, String _refCon, String _statusId,String _date )
     {
-        return _date;
+        this.groupId = _groupId;
+        this.employeeId = _employeeId;
+        this.typeReg = _typeReg;
+        this.groupNumber=_groupNumber;
+        this.groupName=_groupName;
+        this.cicle=_cicle;
+        this.week=_week;
+        this.latitude=_latitude;
+        this.longitude=_longitude;
+        this.refCon=_refCon;
+        this.statusId=_statusId;
+        this.date=_date;
+    }
+    public String getGroupId() {return groupId;}
+
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public String get_name()
+    public String getTypeReg()
     {
-        return _name;
+        return typeReg;
     }
 
-    public String get_statusId()
+    public String getGroupNumber()
     {
-        return _statusId;
+        return groupNumber;
     }
 
-    public String get_Id()
+    public String getGroupName()
     {
-        return _id;
+        return groupName;
     }
 
-    public String getCategory() { return _category; }
+    public String getCicle()
+    {
+        return cicle;
+    }
+
+    public String getWeek()
+    {
+        return week;
+    }
+
+    public String getLatitute()
+    {
+        return latitude;
+    }
+
+    public String getLongitude()
+    {
+        return longitude;
+    }
+
+    public String getRefCon()
+    {
+        return refCon;
+    }
+
+    public String getStatusId()
+    {
+        return statusId;
+    }
+
+    public String getDate()
+    {
+        return date;
+    }
 }

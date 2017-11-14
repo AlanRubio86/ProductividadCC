@@ -1,16 +1,11 @@
 package com.productividadcc;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -64,7 +59,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OldGroupNewActivity.this, OldGroupsActivity.class);
+                Intent intent = new Intent(OldGroupNewActivity.this, OldGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -171,7 +166,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
                 }
 
                 Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo de recontración correctamente", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(OldGroupNewActivity.this, OldGroupsActivity.class);
+                Intent intent = new Intent(OldGroupNewActivity.this, OldGroupsListActivity.class);
                 startActivity(intent);
                 finish();
 

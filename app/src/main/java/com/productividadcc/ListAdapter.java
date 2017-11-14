@@ -43,7 +43,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
             v.setClickable(false);
 
             TextView header = (TextView) v.findViewById(R.id.section_header);
-            header.setText(cell.getName());
+            header.setText(cell.getDate()+" "+cell.getGroupName()+" "+cell.getStatusName());
             header.setGravity(Gravity.RIGHT);
             header.setTypeface(null, Typeface.BOLD);
         }
@@ -56,16 +56,17 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
                 @Override
                 public void onClick(View view) {
 
-                    if(cell.getParent().toString().equalsIgnoreCase("new")){
-                        String url = "http://maps.google.com/maps?daddr=" + cell.getUbication().toString();
+
+                    if(Integer.parseInt(cell.getStatusId().toString())<=4){
+                        String url = "http://maps.google.com/maps?daddr=" + cell.getLongitude()+","+cell.getLatitute();
                         Intent goZe = new Intent(Intent.ACTION_VIEW);
                         goZe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         goZe.setData(Uri.parse(url));
                         context.startActivity(goZe);
                     }
 
-                    if(cell.getParent().toString().equalsIgnoreCase("old")){
-                        String url = "http://maps.google.com/maps?daddr=" + cell.getUbication().toString();
+                    if(Integer.parseInt(cell.getStatusId().toString())>4){
+                        String url = "http://maps.google.com/maps?daddr=" + cell.getLongitude()+","+cell.getLatitute();
                         Intent goZe = new Intent(Intent.ACTION_VIEW);
                         goZe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         goZe.setData(Uri.parse(url));
@@ -76,7 +77,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
                 }
             });
 
-            name.setText(cell.getName());
+            name.setText(cell.getDate()+" "+cell.getGroupName()+" "+cell.getStatusName());
             id.setText(cell.getStatusId().toString());
         }
         return v;

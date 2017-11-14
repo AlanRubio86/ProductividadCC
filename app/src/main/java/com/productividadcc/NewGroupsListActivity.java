@@ -24,7 +24,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.productividadcc.utilerias.GroupModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,92 +82,8 @@ public class NewGroupsListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
         mprogressBar = (ProgressBar) findViewById(R.id.progressBar);
         seeScheule();
-        LoadNewGroups();
-    }
-
-    public void LoadNewGroups()
-    {
-        GroupModel arrayObjetos[]=new GroupModel[4];
-
-        //Creamos objetos en cada posicion
-        arrayObjetos[0]=new GroupModel("11-09-2017", "Grupo 23776", "1","1", "","new","25.7081288,-100.31593951");
-        arrayObjetos[1]=new GroupModel("13-09-2017", "Grupo 21345", "2","2", "","new","25.7083839,-100.31657691");
-        arrayObjetos[2]=new GroupModel("15-09-2017", "Grupo 23776", "3","4","","new","25.7082823,-100.31601878");
-        arrayObjetos[3]=new GroupModel("14-09-2017", "Grupo 19556", "4","5","","new","25.70821548,-100.31595457");
-
-        ArrayList<ListCell> items = new ArrayList<ListCell>();
-        for (int i=0; i<arrayObjetos.length; i++)
-        {
-            String statusName = "";
-            switch (arrayObjetos[i].get_statusId()) {
-                case "1":
-                    statusName = "Visto Bueno";
-                    break;
-                case "2":
-                    statusName = "Capacitacion 1";
-                    break;
-                case "3":
-                    statusName = "Capacitacion 2";
-                    break;
-                case "4":
-                    statusName = "Desembolso";
-                    break;
-
-            }
-
-            items.add(new ListCell(arrayObjetos[i].get_date()+" "+ arrayObjetos[i].get_name() +" "+statusName,arrayObjetos[i].get_statusId(),arrayObjetos[i].get_Id(),arrayObjetos[i].get_date(), "", arrayObjetos[i].get_Parent(), arrayObjetos[i].get_Ubication()));
-        }
-
-        final ListView list = (ListView) findViewById(R.id.groupsListView);
-
-        //items = sortAndAddSections(items);
-
-        ListAdapter adapter = new ListAdapter(getContext(), items);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new OnItemClickListener()
-        {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO Auto-generated method stub
-                    TextView textView = (TextView) view.findViewById(R.id.name);
-                    TextView idTextView = (TextView) view.findViewById(R.id.ID);
-                    if (!idTextView.getText().toString().equals("")) {
-                                 Intent intent=null;
-                                switch(idTextView.getText().toString())
-                                {
-                                    case "1":
-                                        intent = new Intent(NewGroupsListActivity.this, NewGroupVoBo.class);
-                                        break;
-                                    case "2":
-                                        intent = new Intent(NewGroupsListActivity.this, GroupTrainingActivity.class);
-                                        break;
-                                    case "3":
-                                        intent = new Intent(NewGroupsListActivity.this, GroupTraining2Activity.class);
-                                        break;
-                                    case "4":
-                                        intent = new Intent(NewGroupsListActivity.this, GroupDisrbursementActivity.class);
-                                        break;
-
-                                }
-                                intent.putExtra("groupName",textView.getText());
-                                intent.putExtra("groupId",idTextView.getText());
-                                startActivity(intent);
-                                finish();
-
-                    }
-
-            }
-        });
-
-        mprogressBar.setVisibility(View.GONE);
-
     }
 
     // Menu icons are inflated just as they were with actionbar
@@ -182,7 +101,7 @@ public class NewGroupsListActivity extends AppCompatActivity {
         String tokenId = shared.getString("tokenId", "0");
         Log.d("WS Login:", "http://asistente.crediclub.com/2.0/consultaAgenda.php?TipCon=1&empleadoID="+employeeID+"&tokenID="+tokenId);
 
-
+        final ArrayList<ListCell> items = new ArrayList<ListCell>();
 
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET,
                 "http://asistente.crediclub.com/2.0/consultaAgenda.php?TipCon=1&empleadoID="+employeeID+"&tokenID="+tokenId,
@@ -194,10 +113,89 @@ public class NewGroupsListActivity extends AppCompatActivity {
                         Log.d("Schedule", "response: " + response);
                         if (!response.equals("") && response != null) {
                             agendaArray = response.split("<br>");
-                            //String[] newAgendaArray;
 
+                            for(int i=0;i<agendaArray.length;i++)
+                            {
+                                String[] appointmentArray = agendaArray[i].split(", ");
+                                Date date = null;
+                                try {
+                                    date = new SimpleDateFormat("yyyy-MM-dd").parse(appointmentArray[11]);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
 
-                            // ListView on item selected listener.
+                                String statusName = "";
+                                String  input = appointmentArray[10].trim();
+                                switch (input) {
+                                    case "1":
+                                        statusName = "Capacitacion 1";
+                                        break;
+                                    case "2":
+                                        statusName = "Capacitacion 2";
+                                        break;
+                                    case "3":
+                                        statusName = "VoBo";
+                                        break;
+                                    case "4":
+                                        statusName = "Desembolso";
+                                        break;
+                                    case "5":
+                                        statusName = "Recontratacion";
+                                        break;
+                                    case "6":
+                                        statusName = "VoBo Renovacion";
+                                        break;
+                                    case "7":
+                                        statusName = "Cancelacion";
+                                        break;
+                                    case "8":
+                                        statusName = "Reagendar";
+                                        break;
+
+                                }
+                                items.add(new ListCell(appointmentArray[0],appointmentArray[1],appointmentArray[2],appointmentArray[3],appointmentArray[4],appointmentArray[5],appointmentArray[6],appointmentArray[7],appointmentArray[8],appointmentArray[9],appointmentArray[10],date.toLocaleString(),statusName));
+                            }
+                            final ListView list = (ListView) findViewById(R.id.groupsListView);
+
+                            ListAdapter adapter = new ListAdapter(getContext(), items);
+                            list.setAdapter(adapter);
+                            list.setOnItemClickListener(new OnItemClickListener()
+                            {
+
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    // TODO Auto-generated method stub
+                                    TextView textView = (TextView) view.findViewById(R.id.name);
+                                    TextView idTextView = (TextView) view.findViewById(R.id.ID);
+                                    if (!idTextView.getText().toString().equals("")) {
+                                        Intent intent=null;
+                                        switch(idTextView.getText().toString().trim())
+                                        {
+                                            case "3":
+                                                intent = new Intent(NewGroupsListActivity.this, NewGroupVoBo.class);
+                                                break;
+                                            case "1":
+                                                intent = new Intent(NewGroupsListActivity.this, GroupTrainingActivity.class);
+                                                break;
+                                            case "2":
+                                                intent = new Intent(NewGroupsListActivity.this, GroupTraining2Activity.class);
+                                                break;
+                                            case "4":
+                                                intent = new Intent(NewGroupsListActivity.this, GroupDisrbursementActivity.class);
+                                                break;
+
+                                        }
+                                        intent.putExtra("groupName",textView.getText());
+                                        intent.putExtra("groupId",idTextView.getText());
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+
+                                }
+                            });
+
+                            mprogressBar.setVisibility(View.GONE);
 
                         } else {
                             Toast.makeText(getApplicationContext(), "No hay eventos que mostrar", Toast.LENGTH_LONG).show();

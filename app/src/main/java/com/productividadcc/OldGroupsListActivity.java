@@ -1,56 +1,23 @@
 package com.productividadcc;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.widget.TextView;
 import android.content.Intent;
 import android.view.View;
-import android.net.Uri;
-import android.widget.TableRow;
-import android.widget.TableLayout;
-import android.widget.LinearLayout;
-import android.support.v7.widget.Toolbar.LayoutParams;
-import android.graphics.Color;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.view.ViewGroup;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.content.res.Configuration;
 
-import java.lang.reflect.Array;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.ArrayList;
-import java.util.Collections;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.productividadcc.utilerias.Globales;
 import com.productividadcc.utilerias.GroupModel;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
-
-public class OldGroupsActivity extends AppCompatActivity {
+public class OldGroupsListActivity extends AppCompatActivity {
 
     ListView listView;
     String[] agendaArray;
@@ -83,7 +50,7 @@ public class OldGroupsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OldGroupsActivity.this, MainActivity.class);
+                Intent intent = new Intent(OldGroupsListActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -92,7 +59,7 @@ public class OldGroupsActivity extends AppCompatActivity {
         findViewById(R.id.agregaGrupoBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OldGroupsActivity.this, OldGroupNewActivity.class);
+                Intent intent = new Intent(OldGroupsListActivity.this, OldGroupNewActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -112,7 +79,7 @@ public class OldGroupsActivity extends AppCompatActivity {
         });*/
     }
 
-   private ArrayList<ListCell> sortAndAddSections(ArrayList<ListCell> itemList)
+   /*private ArrayList<ListCell> sortAndAddSections(ArrayList<ListCell> itemList)
     {
 
         ArrayList<ListCell> tempList = new ArrayList<ListCell>();
@@ -124,12 +91,12 @@ public class OldGroupsActivity extends AppCompatActivity {
         for(int i = 0; i < itemList.size(); i++)
         {
             //If it is the start of a new section we create a new listcell and add it to our array
-            if(!header.equalsIgnoreCase(itemList.get(i).getCategory())){
-                ListCell sectionCell = new ListCell(itemList.get(i).getName(), itemList.get(i).getStatusId(),
-                        itemList.get(i).getId(), itemList.get(i).getDate() , itemList.get(i).getCategory(),itemList.get(i).getParent(),itemList.get(i).getUbication());
+            if(!header.equalsIgnoreCase(itemList.get(i).getStatusId())){
+                //ListCell sectionCell = new ListCell(itemList.get(i).getGroupName(), itemList.get(i).getStatusId(),
+                        itemList.get(i).getGroupId(), itemList.get(i).getDate() , itemList.get(i).getStatusId(),itemList.get(i).getStatusId(),itemList.get(i).getLatitute());
                 sectionCell.setToSectionHeader();
                 tempList.add(sectionCell);
-                header = itemList.get(i).getCategory();
+                header = itemList.get(i).getStatusId();
             }
 
             //if(!itemList.get(i).getParent())
@@ -137,20 +104,20 @@ public class OldGroupsActivity extends AppCompatActivity {
         }
 
         return tempList;
-    }
+    }*/
 
     public void loadOldGroups() {
         GroupModel arrayObjetos[] = new GroupModel[3];
 
         //Creamos objetos en cada posicion
-        arrayObjetos[0] = new GroupModel("11-09-2017", "Grupo 23776", "1", "1", "1","old","25.7081288,-100.31593951");
+      /*  arrayObjetos[0] = new GroupModel("11-09-2017", "Grupo 23776", "1", "1", "1","old","25.7081288,-100.31593951");
         arrayObjetos[1] = new GroupModel("13-09-2017", "Grupo 21345", "2", "2", "2","old","25.7083839,-100.31657691");
         arrayObjetos[2] = new GroupModel("14-09-2017", "Grupo 23776", "3", "3", "1","old","25.7080813,-100.31587884");
-
+    */
 
         for (int i = 0; i < arrayObjetos.length; i++) {
             String statusName = "",categoryName="";
-            switch (arrayObjetos[i].get_statusId()) {
+            switch (arrayObjetos[i].getStatusId()) {
                 case "1":
                     statusName = "Inicio Recontratación";
                     break;
@@ -162,7 +129,7 @@ public class OldGroupsActivity extends AppCompatActivity {
                     break;
             }
 
-            switch (arrayObjetos[i].getCategory()) {
+            switch (arrayObjetos[i].getStatusId()) {
                 case "1":
                     categoryName = "En gestión";
                     break;
@@ -172,7 +139,7 @@ public class OldGroupsActivity extends AppCompatActivity {
             }
 
 
-            items.add(new ListCell(arrayObjetos[i].get_date() + " " + arrayObjetos[i].get_name() + " " + statusName, arrayObjetos[i].get_statusId(), arrayObjetos[i].get_Id(), arrayObjetos[i].get_date(), arrayObjetos[i].getCategory(), arrayObjetos[i].get_Parent(),arrayObjetos[i].get_Ubication()));
+           // items.add(new ListCell(arrayObjetos[i].get_date() + " " + arrayObjetos[i].get_name() + " " + statusName, arrayObjetos[i].get_statusId(), arrayObjetos[i].get_Id(), arrayObjetos[i].get_date(), arrayObjetos[i].getCategory(), arrayObjetos[i].get_Parent(),arrayObjetos[i].get_Ubication()));
             //items.add(new ListCell(categoryName,"","","",arrayObjetos[i].getCategory(),true));
 
         }
@@ -194,20 +161,20 @@ public class OldGroupsActivity extends AppCompatActivity {
                     TextView idTextView = (TextView) view.findViewById(R.id.ID);
                         for (int i=0; i<items.size(); i++) {
                             String  itemId = idTextView.getText().toString();
-                            if (items.get(i).getId().equals(itemId))
+                            if (items.get(i).getGroupId().equals(itemId))
                             {
                                     if (!idTextView.getText().toString().equals(""))
                                     {
                                         Intent intent = null;
                                         switch (items.get(i).getStatusId()) {
                                             case "2":
-                                                intent = new Intent(OldGroupsActivity.this,OldGroupVoBo.class);
+                                                intent = new Intent(OldGroupsListActivity.this,OldGroupVoBo.class);
                                                 break;
                                             case "3":
-                                                intent = new Intent(OldGroupsActivity.this, OldGroupDisrbursementActivity.class);
+                                                intent = new Intent(OldGroupsListActivity.this, OldGroupDisrbursementActivity.class);
                                                 break;
                                             case "1":
-                                                intent = new Intent(OldGroupsActivity.this, OldGroupRecontrationActivity.class);
+                                                intent = new Intent(OldGroupsListActivity.this, OldGroupRecontrationActivity.class);
                                                 break;
                                         }
                                         intent.putExtra("groupName", textView.getText());

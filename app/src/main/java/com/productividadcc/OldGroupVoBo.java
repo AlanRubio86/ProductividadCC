@@ -152,7 +152,7 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                         return;
                     }
                     Toast.makeText(getApplicationContext(), "Se realizo el visto bueno correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsActivity.class);
+                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 } else if(movement==2)
@@ -172,7 +172,7 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                         return;
                     }
                     Toast.makeText(getApplicationContext(), "Se realizo la reprogramacion del visto bueno correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsActivity.class);
+                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 } else if(movement==3)
@@ -184,7 +184,7 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                         return;
                     }
                     Toast.makeText(getApplicationContext(), "Se realizo la cancelación del visto bueno correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsActivity.class);
+                    Intent intent = new Intent(OldGroupVoBo.this, OldGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -266,7 +266,7 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OldGroupVoBo.this, OldGroupsActivity.class);
+                Intent intent = new Intent(OldGroupVoBo.this, OldGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }

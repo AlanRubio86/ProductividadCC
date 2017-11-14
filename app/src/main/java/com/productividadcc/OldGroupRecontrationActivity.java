@@ -178,7 +178,7 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
                         date.setError(null);
                     }
                     Toast.makeText(getApplicationContext(), "Se realizo el inicio de recontratación correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsActivity.class);
+                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 }else if(movement==2)
@@ -193,7 +193,7 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
                     }
 
                     Toast.makeText(getApplicationContext(), "Se realizo la reprogramación correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsActivity.class);
+                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsListActivity.class);
                     startActivity(intent);
                     finish();
                 }else if(movement==3) {
@@ -203,7 +203,7 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
                         return;
                     }
                     Toast.makeText(getApplicationContext(), "Se realizo la cancelación del visto bueno correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsActivity.class);
+                    Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsListActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -271,7 +271,7 @@ public class OldGroupRecontrationActivity extends AppCompatActivity implements D
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsActivity.class);
+                Intent intent = new Intent(OldGroupRecontrationActivity.this, OldGroupsListActivity.class);
                 startActivity(intent);
                 finish();
             }
