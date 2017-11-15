@@ -153,7 +153,19 @@ public class NewGroupsListActivity extends AppCompatActivity {
                                         break;
 
                                 }
-                                items.add(new ListCell(appointmentArray[0],appointmentArray[1],appointmentArray[2],appointmentArray[3],appointmentArray[4],appointmentArray[5],appointmentArray[6],appointmentArray[7],appointmentArray[8],appointmentArray[9],appointmentArray[10],date.toLocaleString(),statusName));
+                                items.add(new ListCell(appointmentArray[0],
+                                                       appointmentArray[1],
+                                                        appointmentArray[2],
+                                                        appointmentArray[3],
+                                                        appointmentArray[4],
+                                                        appointmentArray[5],
+                                                        appointmentArray[6],
+                                                        appointmentArray[7],
+                                                        appointmentArray[8],
+                                                        appointmentArray[9],
+                                                        appointmentArray[10],
+                                                        new SimpleDateFormat("yyyy-MM-dd").format(date),
+                                                        statusName));
                             }
                             final ListView list = (ListView) findViewById(R.id.groupsListView);
 
