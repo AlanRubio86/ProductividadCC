@@ -80,6 +80,7 @@
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
             android:inputType="phone"
+            android:maxLength="10"
             android:textColor="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor"/>
