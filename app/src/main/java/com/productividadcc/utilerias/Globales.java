@@ -26,7 +26,7 @@ public class Globales {
     public final static String STR_CERO = "0";
     public final static String STR_FECVAC = "1901-01-01";
 
-    public final static String URL_REGISTRO_GRUPO =         "http://asistente.crediclub.com/2.0/altaGrupo.php?";
+    public final static String URL_REGISTRO_GRUPO =         "http://asistente.crediclub.com/2.0/altaGrupo.php?tokenID=%s&empleadoID=%s&nomContacto=%s&telcontacto=%s&refcontacto=%s&fechaEstDes=%s&fecCapac=%s&latitu=%s&longit=%s";                                                   ;
     public final static String URL_CONSULTA_GRUPOS =        "http://asistente.crediclub.com/2.0/consultaGrupos.php?empleadoID=";
     public final static String URL_CONSULTA_RENOVACION =    "http://asistente.crediclub.com/2.0/consultaRenovaciones.php?empleadoID=";
 

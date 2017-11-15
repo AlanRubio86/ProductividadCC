@@ -39,7 +39,7 @@ public class OldGroupsListActivity extends AppCompatActivity {
     private static Context context;
     ProgressBar mprogressBar;
     String weekDay;
-    ArrayList<ListCell> items = new ArrayList<ListCell>();
+    final ArrayList<ListCell> itemsFinal = new ArrayList<ListCell>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +101,7 @@ public class OldGroupsListActivity extends AppCompatActivity {
                         Log.d("Schedule", "response: " + response);
                         if (!response.equals("") && response != null) {
                             agendaArray = response.split("<br>");
-
+                             final ArrayList<ListCell> items = new ArrayList<ListCell>();
                             for(int i=0;i<agendaArray.length;i++)
                             {
                                 String[] appointmentArray = agendaArray[i].split(", ");
@@ -141,23 +141,24 @@ public class OldGroupsListActivity extends AppCompatActivity {
                                         break;
 
                                 }
-                                items.add(new ListCell(appointmentArray[0],
-                                        appointmentArray[1],
-                                        appointmentArray[2],
-                                        appointmentArray[3],
-                                        appointmentArray[4],
-                                        appointmentArray[5],
-                                        appointmentArray[6],
-                                        appointmentArray[7],
-                                        appointmentArray[8],
-                                        appointmentArray[9],
-                                        appointmentArray[10],
+                                items.add(new ListCell(appointmentArray[0].toString(),
+                                        appointmentArray[1].toString(),
+                                        appointmentArray[2].toString(),
+                                        appointmentArray[3].toString(),
+                                        appointmentArray[4].toString(),
+                                        appointmentArray[5].toString(),
+                                        appointmentArray[6].toString(),
+                                        appointmentArray[7].toString(),
+                                        appointmentArray[8].toString(),
+                                        appointmentArray[9].toString(),
+                                        appointmentArray[10].toString(),
                                         new SimpleDateFormat("yyyy-MM-dd").format(date),
                                         statusName));
                             }
                             final ListView list = (ListView) findViewById(R.id.oldGroupsListView);
 
                             ListAdapter adapter = new ListAdapter(getContext(), items);
+
                             list.setAdapter(adapter);
                             list.setOnItemClickListener(new OnItemClickListener()
                             {
@@ -168,37 +169,35 @@ public class OldGroupsListActivity extends AppCompatActivity {
                                     TextView textView = (TextView) view.findViewById(R.id.name);
                                     TextView idTextView = (TextView) view.findViewById(R.id.ID);
                                     if (!idTextView.getText().toString().equals("")) {
-                                        Intent intent=null;
-                                        switch(idTextView.getText().toString().trim())
-                                        {
-                                            case "6":
-                                                intent = new Intent(OldGroupsListActivity.this, OldGroupVoBo.class);
-                                                break;
-                                            case "5":
-                                                intent = new Intent(OldGroupsListActivity.this, OldGroupRecontrationActivity.class);
-                                                break;
-                                            case "4":
-                                                intent = new Intent(OldGroupsListActivity.this, OldGroupDisrbursementActivity.class);
-                                                break;
-
-                                        }
 
                                         for(int x=0; x<items.size();x++)
                                         {
-                                            if( items.get(x).getGroupId().equals(idTextView.getText()))
+                                            if( items.get(x).getGroupId().equals(idTextView.getText().toString()))
                                             {
+                                                    Intent intent=null;
+                                                    switch(items.get(x).getStatusId())
+                                                    {
+                                                        case "6":
+                                                            intent = new Intent(OldGroupsListActivity.this, OldGroupVoBo.class);
+                                                            break;
+                                                        case "5":
+                                                            intent = new Intent(OldGroupsListActivity.this, OldGroupRecontrationActivity.class);
+                                                            break;
+                                                        case "4":
+                                                            intent = new Intent(OldGroupsListActivity.this, OldGroupDisrbursementActivity.class);
+                                                            break;
+                                                    }
+
                                                 intent.putExtra("cicle",items.get(x).getCicle());
                                                 intent.putExtra("week",items.get(x).getWeek());
+                                                intent.putExtra("groupName",items.get(x).getGroupNumber()+"-"+items.get(x).getGroupName());
+                                                intent.putExtra("groupId",items.get(x).getGroupId());
+                                                startActivity(intent);
+                                                finish();
+                                                break;
                                             }
                                         }
-
-
-                                        intent.putExtra("groupName",textView.getText());
-                                        intent.putExtra("groupId",idTextView.getText());
-                                        startActivity(intent);
-                                        finish();
                                     }
-
                                 }
                             });
 

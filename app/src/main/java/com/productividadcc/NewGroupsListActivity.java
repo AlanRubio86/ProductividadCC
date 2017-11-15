@@ -101,7 +101,7 @@ public class NewGroupsListActivity extends AppCompatActivity {
         String tokenId = shared.getString("tokenId", "0");
         Log.d("WS Login:", "http://asistente.crediclub.com/2.0/consultaAgenda.php?TipCon=1&empleadoID="+employeeID+"&tokenID="+tokenId);
 
-        final ArrayList<ListCell> items = new ArrayList<ListCell>();
+
 
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET,
                 "http://asistente.crediclub.com/2.0/consultaAgenda.php?TipCon=1&empleadoID="+employeeID+"&tokenID="+tokenId,
@@ -113,7 +113,7 @@ public class NewGroupsListActivity extends AppCompatActivity {
                         Log.d("Schedule", "response: " + response);
                         if (!response.equals("") && response != null) {
                             agendaArray = response.split("<br>");
-
+                            final ArrayList<ListCell> items = new ArrayList<ListCell>();
                             for(int i=0;i<agendaArray.length;i++)
                             {
                                 String[] appointmentArray = agendaArray[i].split(", ");
@@ -177,36 +177,38 @@ public class NewGroupsListActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     // TODO Auto-generated method stub
-                                    TextView textView = (TextView) view.findViewById(R.id.name);
                                     TextView idTextView = (TextView) view.findViewById(R.id.ID);
                                     if (!idTextView.getText().toString().equals("")) {
-                                        Intent intent=null;
-                                        switch(idTextView.getText().toString().trim())
+                                        for(int x=0; x<items.size();x++)
                                         {
-                                            case "3":
-                                                intent = new Intent(NewGroupsListActivity.this, NewGroupVoBo.class);
+                                            if( items.get(x).getGroupId().equals(idTextView.getText().toString()))
+                                            {
+                                                Intent intent = null;
+                                                switch (items.get(x).getStatusId())
+                                                {
+                                                    case "3":
+                                                        intent = new Intent(NewGroupsListActivity.this, NewGroupVoBo.class);
+                                                        break;
+                                                    case "1":
+                                                        intent = new Intent(NewGroupsListActivity.this, GroupTrainingActivity.class);
+                                                        break;
+                                                    case "2":
+                                                        intent = new Intent(NewGroupsListActivity.this, GroupTraining2Activity.class);
+                                                        break;
+                                                    case "4":
+                                                        intent = new Intent(NewGroupsListActivity.this, GroupDisrbursementActivity.class);
+                                                        break;
+                                                }
+                                                intent.putExtra("groupName", items.get(x).getGroupNumber()+"-"+items.get(x).getGroupName());
+                                                intent.putExtra("groupId", items.get(x).getGroupId());
+                                                startActivity(intent);
+                                                finish();
                                                 break;
-                                            case "1":
-                                                intent = new Intent(NewGroupsListActivity.this, GroupTrainingActivity.class);
-                                                break;
-                                            case "2":
-                                                intent = new Intent(NewGroupsListActivity.this, GroupTraining2Activity.class);
-                                                break;
-                                            case "4":
-                                                intent = new Intent(NewGroupsListActivity.this, GroupDisrbursementActivity.class);
-                                                break;
-
+                                            }
                                         }
-                                        intent.putExtra("groupName",textView.getText());
-                                        intent.putExtra("groupId",idTextView.getText());
-                                        startActivity(intent);
-                                        finish();
-
                                     }
-
                                 }
                             });
-
                             mprogressBar.setVisibility(View.GONE);
 
                         } else {

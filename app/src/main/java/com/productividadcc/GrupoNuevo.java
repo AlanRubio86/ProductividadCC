@@ -45,9 +45,9 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
     private Calendar calendar;
     private Calendar calendar2;
     EditText fechaTxt, fechaCap1;
-
     String eventID;
     int idFechaDesembolso = 0;
+    String tokenId,employeeId;
 
     String URL = Globales.URL_REGISTRO_GRUPO;
 
@@ -60,13 +60,35 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // ...
+
+        //region Controls
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        fechaTxt = (EditText) findViewById(R.id.dateDisbursement);
+        final TextInputLayout txtContact= (TextInputLayout) findViewById(R.id.txtContact);
+        final TextInputLayout txtContactPhone = (TextInputLayout) findViewById(R.id.txtContactPhone);
+        final TextInputLayout txtContactPhoneRef = (TextInputLayout) findViewById(R.id.txtContactPhoneRef);
+        final TextInputLayout txtDisbursement = (TextInputLayout) findViewById(R.id.txtDisbursement);
+        final TextInputLayout txtCap1 = (TextInputLayout) findViewById(R.id.txtCap1);
+        fechaCap1 = (EditText) findViewById(R.id.dateCap1);
+        EditText editContact = (EditText) findViewById(R.id.editContact);
+        EditText editContactPhone = (EditText) findViewById(R.id.editContactPhone);
+        EditText editContactPhoneRef = (EditText) findViewById(R.id.editContactPhoneRef);
+
+        //endregion
+
+
         // Remove default title text
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Get access to the custom title view
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+
         mTitle.setText("Registro de Grupo Nuevo");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        tokenId = shared.getString("tokenId", "0");
+        employeeId=shared.getString("numEmployee", "0");
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,22 +117,15 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
             eventID = "0";
         }
         //Get All Controls
-        fechaTxt = (EditText) findViewById(R.id.dateDisbursement);
-        final TextInputLayout txtContact= (TextInputLayout) findViewById(R.id.txtContact);
-        final TextInputLayout txtContactPhone = (TextInputLayout) findViewById(R.id.txtContactPhone);
-        final TextInputLayout txtContactPhoneRef = (TextInputLayout) findViewById(R.id.txtContactPhoneRef);
-        final TextInputLayout txtDisbursement = (TextInputLayout) findViewById(R.id.txtDisbursement);
-        final TextInputLayout txtCap1 = (TextInputLayout) findViewById(R.id.txtCap1);
-        fechaCap1 = (EditText) findViewById(R.id.dateCap1);
 
+
+        //region Listeners
         calendar = Calendar.getInstance();
         fechaTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final View vv = view;
                 idFechaDesembolso = view.getId();
-                /*Log.d("Log fechaDesembolso", String.valueOf(view.getId()));
-                Log.d("Log R.fechaDesembolso", String.valueOf(R.id.fechaDesembolso));*/
                 DatePickerDialog.newInstance(GrupoNuevo.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
@@ -123,6 +138,9 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
                 DatePickerDialog.newInstance(GrupoNuevo.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
+
+
+
 
         findViewById(R.id.btnSaveGroup).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,16 +189,16 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
                 } else {
                     txtCap1.setError(null);
                 }
-                Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(GrupoNuevo.this, NewGroupsListActivity.class);
-                startActivity(intent);
-                finish();
 
+                sendSaveGroup(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),
+                        txtContactPhoneRef.getEditText().getText().toString(),fechaTxt.getText().toString(),fechaCap1.getText().toString());
 
             }
         });
 
-        EditText editContact = (EditText) findViewById(R.id.editContact);
+
+
+
         editContact.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -198,7 +216,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
             }
         });
 
-        EditText editContactPhone = (EditText) findViewById(R.id.editContactPhone);
+
         editContactPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -216,7 +234,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
             }
         });
 
-        EditText editContactPhoneRef = (EditText) findViewById(R.id.editContactPhoneRef);
+
         editContactPhoneRef.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -263,44 +281,27 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
 
             }
         });
+
+        //endregion
     }
 
-    public void sendEventInfo() {
+
+    //region Public Methods
+    public void sendSaveGroup (String nomContacto,String telContacto,String refContacto, String dateDisbursement, String dateTraining) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         final String selectedStringDate = fechaTxt.getText().toString();
-        final String prospectos = "";//prospectosTxt.getText().toString();
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-
-        URL +=  "fecha=" + selectedStringDate +
-                "&hora=" + fechaCap1.getText().toString() +
-                "&tipEve=" + Globales.STR_VACIO +
-                "&emplea=" + shared.getString("userNumber", "0") +
-                "&tipgru=" + Globales.STR_VACIO +
-                "&grupo=" + Globales.STR_VACIO +
-                "&ciclo=" + Globales.STR_VACIO +
-                "&latitu=" + shared.getString("latitude", "0") +
-                "&longit=" + shared.getString("longitude", "0") +
-                "&nuAgSe=" + eventID +
-                "&imei=" + imeiNumber +
-                "&stamp=" + (System.currentTimeMillis()/1000) +
-                "&monGru=" + Globales.STR_CERO +
-                "&integr=" + prospectos +
-                "&semRen=" + Globales.STR_CERO +
-                "&coment=" + Globales.STR_CERO;
+        URL= String.format(URL,tokenId,employeeId,nomContacto,telContacto,refContacto,dateDisbursement,dateTraining,shared.getString("latitude", "0"),shared.getString("longitude", "0")  );
 
         Log.d("WS Prom:", URL);
-
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //This code is executed if the server responds, whether or not the response contains data.
-                        //The String 'response' contains the server's response.
                         clearFields();
-                        Toast.makeText(getApplicationContext(), "Evento guardado correctamente " + response, Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(GrupoNuevo.this, MainActivity.class);
+                        Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(GrupoNuevo.this, NewGroupsListActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -331,7 +332,6 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
                 params.put("integr", "0");
                 params.put("semRen", "0");
                 params.put("coment", "");
-
                 return params;
             }
         };
@@ -339,31 +339,11 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
         MyRequestQueue.add(MyStringRequest);
     }
 
-    public void saveEventInfo() {
+    public void saveGroupOffline(String nomContacto,String telContacto,String refContacto, String dateDisbursement, String dateTraining) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        final String selectedStringDate = fechaTxt.getText().toString();
-        final String prospectos = "";//prospectosTxt.getText().toString();
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-
-        URL +=  "fecha=" + selectedStringDate +
-                "&hora=" + fechaCap1.getText().toString() +
-                "&tipEve=" + Globales.STR_VACIO +
-                "&emplea=" + shared.getString("userNumber", "0") +
-                "&tipgru=" + Globales.STR_VACIO +
-                "&grupo=" + Globales.STR_VACIO +
-                "&ciclo=" + Globales.STR_VACIO +
-                "&latitu=" + shared.getString("latitude", "0") +
-                "&longit=" + shared.getString("longitude", "0") +
-                "&nuAgSe=" + eventID +
-                "&imei=" + imeiNumber +
-                "&stamp=" + (System.currentTimeMillis()/1000) +
-                "&monGru=" + Globales.STR_CERO +
-                "&integr=" + prospectos +
-                "&semRen=" + Globales.STR_CERO +
-                "&coment=" + Globales.STR_CERO;
-
+        URL= String.format(URL,tokenId,employeeId,nomContacto,telContacto,refContacto,dateDisbursement,dateTraining,shared.getString("latitude", "0"),shared.getString("longitude", "0")  );
         Log.d("DB Prom:", URL);
-
         MainActivity.event = new Event();
         MainActivity.event.setUrlWS(URL);
         MainActivity.event.setStatus(0);
@@ -372,17 +352,16 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
         clearFields();
         Toast.makeText(getApplicationContext(), "Los datos han sido guardados de manera offline", Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(GrupoNuevo.this, MainActivity.class);
+        Intent intent = new Intent(GrupoNuevo.this, NewGroupsListActivity.class);
         startActivity(intent);
         finish();
-
     }
+    //endregion
 
 
    @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Log.d("Log Pruebas", String.valueOf(idFechaDesembolso));
         if(idFechaDesembolso == R.id.dateDisbursement){
             calendar.set(year, monthOfYear, dayOfMonth);
             fechaTxt.setText(df.format(calendar.getTime()));
@@ -391,9 +370,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
             fechaCap1.setText(df.format(calendar2.getTime()));
         }
     }
-
     public void clearFields () {
-        //prospectosTxt.setText("");
         fechaTxt.setText("");
         fechaCap1.setText("");
     }

@@ -45,6 +45,7 @@
             android:textColor="#00508C"
             android:textSize="14dp" />
         <TextView
+            android:id="@+id/cicleLbl"
             android:layout_width="fill_parent"
             android:layout_height="26dp"
             android:gravity="left"
@@ -53,6 +54,7 @@
             android:textColor="#00508C"
             android:textSize="14dp" />
         <TextView
+            android:id="@+id/weekLbl"
             android:layout_width="fill_parent"
             android:layout_height="26dp"
             android:gravity="left"

@@ -17,9 +17,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by cesarrdz on 9/9/16.
- */
 public class ListAdapter extends ArrayAdapter<ListCell> {
 
     LayoutInflater inflater;
@@ -58,7 +55,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
 
 
                     if(Integer.parseInt(cell.getStatusId().toString())<=4){
-                        String url = "http://maps.google.com/maps?daddr=" + cell.getLongitude()+","+cell.getLatitute();
+                        String url = "http://maps.google.com/maps?daddr=" + cell.getLatitute()+","+cell.getLongitude();
                         Intent goZe = new Intent(Intent.ACTION_VIEW);
                         goZe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         goZe.setData(Uri.parse(url));
@@ -66,7 +63,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
                     }
 
                     if(Integer.parseInt(cell.getStatusId().toString())>4){
-                        String url = "http://maps.google.com/maps?daddr=" + cell.getLongitude()+","+cell.getLatitute();
+                        String url = "http://maps.google.com/maps?daddr=" + cell.getLatitute()+","+cell.getLongitude();
                         Intent goZe = new Intent(Intent.ACTION_VIEW);
                         goZe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         goZe.setData(Uri.parse(url));
@@ -78,7 +75,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
             });
 
             name.setText(cell.getDate()+","+cell.getGroupNumber()+"-"+cell.getGroupName()+","+cell.getStatusName());
-            id.setText(cell.getStatusId().toString());
+            id.setText(cell.getGroupId().toString());
         }
         return v;
     }

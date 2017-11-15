@@ -32,7 +32,7 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
     EditText editEstimated, horaTxt,editAmount,editReprogram;
     Spinner spnDispersion,spnMotiveReprogram,spnCancelMotive;
     String groupID;
-    TextView nombreLbl;
+    TextView nombreLbl,cicleLbl,weekLbl;
     String URL = Globales.URL_REGISTRO_AGENDA;
     private int movement=0;
 
@@ -49,7 +49,9 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
-       /* montoTxt = (EditText) findViewById(R.id.montoTxt);*/
+        cicleLbl=  (TextView) findViewById(R.id.cicleLbl);
+        weekLbl=  (TextView) findViewById(R.id.weekLbl);
+
 
         final TextInputLayout integrants = (TextInputLayout) findViewById(R.id.llIntegrant);
         final TextInputLayout date = (TextInputLayout) findViewById(R.id.llDate);
@@ -79,6 +81,8 @@ public class OldGroupVoBo extends AppCompatActivity implements DatePickerDialog.
         if (getIntent().getExtras() != null) {
             String groupName = getIntent().getExtras().getString("groupName");
             nombreLbl.setText(groupName);
+            cicleLbl.setText("Ciclo:"+getIntent().getExtras().getString("cicle"));
+            weekLbl.setText("Semana:"+ getIntent().getExtras().getString("week"));
             groupID = getIntent().getExtras().getString("groupID");
         } else {
             groupID = "0";
