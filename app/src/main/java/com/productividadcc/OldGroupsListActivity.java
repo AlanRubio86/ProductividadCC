@@ -33,13 +33,9 @@ import com.android.volley.toolbox.Volley;
 
 public class OldGroupsListActivity extends AppCompatActivity {
 
-    ListView listView;
     String[] agendaArray;
-    String[] idArray;
     private static Context context;
     ProgressBar mprogressBar;
-    String weekDay;
-    final ArrayList<ListCell> itemsFinal = new ArrayList<ListCell>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

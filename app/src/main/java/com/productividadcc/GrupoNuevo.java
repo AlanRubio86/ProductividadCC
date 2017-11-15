@@ -98,18 +98,6 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
             }
         });
 
-        //TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-        /*if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        imeiNumber = telephonyManager.getDeviceId();*/
 
         if (getIntent().getExtras() != null) {
             eventID = getIntent().getExtras().getString("eventId").replace(" ", "");
@@ -313,7 +301,10 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
                 Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
                 //mprogressBar.setVisibility(View.GONE);
             }
-        }) {
+        });
+
+
+        /*{
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -334,7 +325,7 @@ public class GrupoNuevo extends AppCompatActivity implements DatePickerDialog.On
                 params.put("coment", "");
                 return params;
             }
-        };
+        };*/
 
         MyRequestQueue.add(MyStringRequest);
     }

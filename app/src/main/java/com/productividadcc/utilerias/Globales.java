@@ -26,7 +26,10 @@ public class Globales {
     public final static String STR_CERO = "0";
     public final static String STR_FECVAC = "1901-01-01";
 
-    public final static String URL_REGISTRO_GRUPO =         "http://asistente.crediclub.com/2.0/altaGrupo.php?tokenID=%s&empleadoID=%s&nomContacto=%s&telcontacto=%s&refcontacto=%s&fechaEstDes=%s&fecCapac=%s&latitu=%s&longit=%s";                                                   ;
+    public final static String URL_REGISTRO_GRUPO =         "http://asistente.crediclub.com/2.0/altaGrupo.php?tokenID=%s&empleadoID=%s&nomContacto=%s&telcontacto=%s&refcontacto=%s&fechaEstDes=%s&fecCapac=%s&latitu=%s&longit=%s";
+    public final static String URL_REGISTRO_RECONTRATACION  ="http://asistente.crediclub.com/2.0/recontratacion.php?tokenID=%s&empleadoID=%s&grupo=%s&nomContacto=%s&telcontacto=%s&fechaEstDes=%s&fecRecontra=%s&latitu=%s&longit=%s";
+    public final static String URL_ACTUALIZAR_ETAPA         ="http://asistente.crediclub.com/2.0/actualizaEtapa.php?tokenID=%s&empleadoID=%s&idAgenda=%s&etapa=%s&nombreGrupo=%s&monto=%s&integrantes=%s&intnuevos=%s&intrenova=%s&fecha=%s&fechaestimada=%s&tipodispersion=%s&tipogrupo=%s&latitu=%s&longit=%s";
+
     public final static String URL_CONSULTA_GRUPOS =        "http://asistente.crediclub.com/2.0/consultaGrupos.php?empleadoID=";
     public final static String URL_CONSULTA_RENOVACION =    "http://asistente.crediclub.com/2.0/consultaRenovaciones.php?empleadoID=";
 
@@ -38,73 +41,6 @@ public class Globales {
     public final static String URL_REGISTRO_VISITA =        "http://asistente.crediclub.com/2.0/logVisita.php?";
     public final static String URL_REGISTRO_EVALUACION =    "http://asistente.crediclub.com/2.0/logEvaluacion.php?";
 
-    public final static String AGENDAR_CAPACITACION = "1";
-    public final static String AGENDAR_VOBORENOVAC = "2";
-    public final static String AGENDAR_COBRANZATEMP = "3";
-    public final static String CAPACITACION_1 = "4";
-    public final static String CAPACITACION_2 = "5";
-    public final static String VOBO = "6";
-    public final static String VOBO_RENOVACION = "7";
-    public final static String DESEMBOLSO = "8";
-    public final static String EVALUACION_SEMANAL = "9";
-    public final static String VERIFICACION = "10";
-    public final static String PROMOCION = "11";
-    public final static String LLAMADA_GESTION = "12";
-    public final static String AGENDAR_CAPACITACION2 = "13";
-    public final static String AGENDAR_VOBO = "14";
-    public final static String AGENDAR_PROMO = "15";
-
-    public final static String CANCELA_CAP1 = "80";
-    public final static String CANCELA_CAP2 = "81";
-    public final static String CANCELA_VOBO = "82";
-    public final static String CANCELA_DESE = "83";
-
-    public final static String REAGENDAR_EVENTO = "99";
-
-    public final static String DDMMMMYYYY 	= "dd '-' MMMMM '-' yyyy";
-
-    public static final int TIPO_NUEVO 		= 0;
-    public static final int TIPO_ESTRELLA 	= 1;
-    public static final int TIPO_SUPEREST 	= 2;
-
-    public static final int GESTION_SI 		= 0;
-    public static final int GESTION_NO 	= 1;
-
-    public static final int MC_CAP1_NOREUNIERON 	= 0;
-    public static final int MC_CAP1_NOINTERESO 	    = 1;
-    public static final int MC_CAP1_FALTAGENTE 	    = 2;
-
-    public static final String STR_CAP1_NOREUNIERON 	= "1";
-    public static final String STR_CAP1_NOINTERESO 	    = "2";
-    public static final String STR_CAP1_FALTAGENTE      = "3";
-
-    public static final int MC_CAP2_NOREUNIERON 	= 0;
-    public static final int MC_CAP2_FALTAPAPELE 	= 1;
-
-    public static final String STR_CAP2_NOREUNIERON 	= "4";
-    public static final String STR_CAP2_FALTAPAPELE	    = "5";
-
-    public static final int MC_VOBO_ANALISISRECHAZA 	= 0;
-    public static final int MC_VOBO_GERENTERECHAZA	    = 1;
-    public static final int MC_VOBO_GRUPOINCOMPLETO	    = 2;
-    public static final int MC_VOBO_CLIENTENOPRESE	    = 3;
-    public static final int MC_VOBO_FALTAINE	        = 4;
-    public static final int MC_VOBO_LISTANEGRA	        = 5;
-
-    public static final String STR_VOBO_ANALISISRECHAZA = "6";
-    public static final String STR_VOBO_GERENTERECHAZA 	= "7";
-    public static final String STR_VOBO_GRUPOINCOMPLETO = "8";
-    public static final String STR_VOBO_CLIENTENOPRESE  = "9";
-    public static final String STR_VOBO_FALTAINE        = "10";
-    public static final String STR_VOBO_LISTANEGRA      = "11";
-
-    public static final int MC_DESE_CLIENTENOPRE 	= 0;
-    public static final int MC_DESE_FALTAINE	    = 1;
-    public static final int MC_DESE_GERENTERECHAZA	= 2;
-
-    public static final String STR_DESE_CLIENTENOPRE 	= "12";
-    public static final String STR_DESE_FALTAINE 	    = "13";
-    public static final String STR_DESE_GERENTERECHAZA  = "14";
 
     public static void log(String tag, String msg)
     {

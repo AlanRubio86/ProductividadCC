@@ -1,7 +1,11 @@
 package com.productividadcc;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,6 +15,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -45,27 +50,40 @@ public class Login extends AppCompatActivity implements LocationListener {
 
     String URL = Globales.URL_CONSULTA_EMPLEADO;
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        mprovider = locationManager.getBestProvider(criteria, false);
-        if (mprovider != null && !mprovider.equals("")) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            Location location = locationManager.getLastKnownLocation(mprovider);
-            locationManager.requestLocationUpdates(mprovider, 15000, 1, this);
 
-            if (location != null)
-                onLocationChanged(location);
-            else
-                Toast.makeText(getBaseContext(), "No se ha podido obtener tu localización, asegurate de tener activado el gps", Toast.LENGTH_SHORT).show();
+
+        boolean isGPSEnabled = locationManager
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        Criteria criteria = new Criteria();
+        mprovider = locationManager.GPS_PROVIDER.toString();
+
+        if (mprovider != null && !mprovider.equals("")) {
+            try
+            {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},0);
+                }
+                Location location = locationManager.getLastKnownLocation(mprovider);
+                locationManager.requestLocationUpdates(mprovider, 15000, 1, this);
+
+                if (location != null)
+                    onLocationChanged(location);
+                else
+                    Toast.makeText(getBaseContext(), "No se ha podido obtener tu localización, asegurate de tener activado el gps", Toast.LENGTH_SHORT).show();
+            }catch (Exception exc)
+            {
+                String x= exc.toString();
+            }
+
         }
 
         final EditText numTxt = (EditText) findViewById(R.id.numTxt);
@@ -96,8 +114,25 @@ public class Login extends AppCompatActivity implements LocationListener {
                 }
             }
         });
+    }
 
-
+    public static void solicitarPermiso(final String permiso, String justificacion,
+                                        final int requestCode, final Activity actividad) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(actividad,
+                permiso)){
+            new AlertDialog.Builder(actividad)
+                    .setTitle("Solicitud de permiso")
+                    .setMessage(justificacion)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            ActivityCompat.requestPermissions(actividad,
+                                    new String[]{permiso}, requestCode);
+                        }})
+                    .show();
+        } else {
+            ActivityCompat.requestPermissions(actividad,
+                    new String[]{permiso}, requestCode);
+        }
     }
 
 
@@ -165,7 +200,6 @@ public class Login extends AppCompatActivity implements LocationListener {
                 return params;
             }
         };
-
         MyRequestQueue.add(MyStringRequest);
     }
 

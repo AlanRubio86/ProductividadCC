@@ -2,6 +2,7 @@ package com.productividadcc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,11 +21,21 @@ import android.widget.Toast;
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.productividadcc.utilerias.Globales;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class GroupTrainingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
@@ -32,9 +44,9 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
     Spinner spnMotiveCancel;
     TextView fechaTxt, horaTxt;
 
-    String groupID;
+    String groupID,tokenId,employeeId;
     TextView nombreLbl;
-    String URL = Globales.URL_REGISTRO_AGENDA;
+    String URL = Globales.URL_ACTUALIZAR_ETAPA;
     private int movement=0;
 
     @Override
@@ -48,7 +60,9 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
+        SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        tokenId = shared.getString("tokenId", "0");
+        employeeId=shared.getString("numEmployee", "0");
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
@@ -108,11 +122,12 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                 if(movement==1)
                 {
                     if(editAmount.getText().toString().isEmpty())
-                {
-                    amount.setError("This field can not be blank");
-                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
-                    return;
-                } else {
+                    {
+                        amount.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else
+                    {
                         if(Double.parseDouble(editAmount.getText().toString())<=0)
                         {
                             amount.setError("El monto tiene que ser mayor que 0");
@@ -121,7 +136,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                         }else {
                             amount.setError(null);
                         }
-                }
+                     }
 
                     if(editIntegrant.getText().toString().isEmpty())
                     {
@@ -147,10 +162,12 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                     } else {
                         date.setError(null);
                     }
-                    Toast.makeText(getApplicationContext(), "Se realizo la capacitacion 1 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsListActivity.class);
-                    startActivity(intent);
-                    finish();
+
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*100000;
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+                    updateGroup("1","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0");
+
                 }else if(movement==2)
                 {
                     if(editDateReprogram.getText().toString().isEmpty())
@@ -298,28 +315,11 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
             }
         });
     }
-/*
-    public void sendEventInfo() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        final String selectedStringDate = fechaTxt.getText().toString();
-        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
 
-        URL +=  "fecha=" + selectedStringDate +
-                "&hora=" + horaTxt.getText().toString() +
-                "&tipEve=" + Globales.VOBO +
-                "&emplea=" + shared.getString("userNumber", "0") +
-                "&tipgru=" + Globales.STR_VACIO +
-                "&grupo=" + numGrupo.getText().toString() +
-                "&ciclo=" + Globales.STR_VACIO +
-                "&latitu=" + shared.getString("latitude", "0") +
-                "&longit=" + shared.getString("longitude", "0") +
-                "&nuAgSe=" + eventID +
-                "&imei=" + imeiNumber +
-                "&stamp=" + (System.currentTimeMillis()/1000) +
-                "&monGru=" + montoTxt.getText().toString() +
-                "&integr=" + integrantesTxt.getText().toString() +
-                "&semRen=" + Globales.STR_CERO +
-                "&coment=" + Globales.STR_VACIO;
+    public void updateGroup(String statusID,String groupName,String amount,String integrants,String newIntegrants, String renewIntegrants,String actualDate,String disbursementDate,String dispersionType,String groupType) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        URL=String.format(URL,tokenId,employeeId,groupID,statusID ,groupName,amount,integrants,newIntegrants,renewIntegrants,actualDate,disbursementDate,dispersionType,groupType,shared.getString("latitude", "0"),shared.getString("longitude", "0") );
 
         Log.d("WS NewGroupVoBo:", URL);
 
@@ -328,12 +328,11 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //This code is executed if the server responds, whether or not the response contains data.
-                        //The String 'response' contains the server's response.
                         clearFields();
-                        Toast.makeText(getApplicationContext(), "Evento guardado correctamente " + response, Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(NewGroupVoBo.this, MainActivity.class);
+
+                        Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsListActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -345,7 +344,10 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                 Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
                 //mprogressBar.setVisibility(View.GONE);
             }
-        }) {
+        });
+
+
+        /*{
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -367,13 +369,13 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
 
                 return params;
             }
-        };
+        };*/
 
         MyRequestQueue.add(MyStringRequest);
     }
 
 
-    public void saveEventInfo() {
+    /*public void saveEventInfo() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         final String selectedStringDate = fechaTxt.getText().toString();
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
@@ -409,9 +411,9 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
         startActivity(intent);
         finish();
 
-    }
+    }*/
 
-    */
+
 
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
@@ -430,9 +432,9 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
     }
 
     public void clearFields () {
-        editAmount.setText("");
+       /* editAmount.setText("");
         editIntegrant.setText("");
         fechaTxt.setText("");
-        horaTxt.setText("");
+        horaTxt.setText("");*/
     }
 }
