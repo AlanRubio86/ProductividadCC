@@ -148,9 +148,9 @@
 
     <string-array name="dispersionItems">
         <item name="none">(Seleccionar)</item>
-        <item name="spei">SPEI</item>
-        <item name="odpsantander">ODP,Santader $20.00</item>
-        <item name="odpscotiabank">ODP,Scotiabank $15.00</item>
+        <item name="1">SPEI</item>
+        <item name="2">ODP,Santader $20.00</item>
+        <item name="3">ODP,Scotiabank $15.00</item>
     </string-array>
     <string-array name="reprogramItems">
         <item name="none">(Seleccionar)</item>

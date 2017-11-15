@@ -46,7 +46,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
 
     String groupID,tokenId,employeeId;
     TextView nombreLbl;
-    String URL = Globales.URL_ACTUALIZAR_ETAPA;
+    String URL = "";
     private int movement=0;
 
     @Override
@@ -119,6 +119,8 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
                 if(movement==1)
                 {
                     if(editAmount.getText().toString().isEmpty())
@@ -163,10 +165,11 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                         date.setError(null);
                     }
 
-                    Double amount=Double.parseDouble(editAmount.getText().toString())*100000;
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*100;
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
-                    updateGroup("1","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0");
+                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"1","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0",shared.getString("latitude", "0"),shared.getString("longitude", "0"));
+                    updateGroup(URL);
 
                 }else if(movement==2)
                 {
@@ -178,10 +181,9 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                     } else {
                         reprogram.setError(null);
                     }
-                    Toast.makeText(getApplicationContext(), "Se realizo la reprogramación de capacitacion 1 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsListActivity.class);
-                    startActivity(intent);
-                    finish();
+                    URL=String.format(Globales.URL_REPROGRAMAR_ETAPA,tokenId,employeeId,groupID,"1",editDateReprogram.getText().toString(),"0",shared.getString("latitude", "0"),shared.getString("longitude", "0") );
+                    updateGroup(URL);
+
 
                 }else if(movement==3){
                     if (spnMotiveCancel.getSelectedItem().toString().trim().equals("(Seleccionar)"))
@@ -189,6 +191,9 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
                         Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
                         return;
                     }
+
+
+
 
                     Toast.makeText(getApplicationContext(), "Se realizo la cancelacion de capacitacion 1 correctamente", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(GroupTrainingActivity.this, NewGroupsListActivity.class);
@@ -316,11 +321,7 @@ public class GroupTrainingActivity extends AppCompatActivity implements DatePick
         });
     }
 
-    public void updateGroup(String statusID,String groupName,String amount,String integrants,String newIntegrants, String renewIntegrants,String actualDate,String disbursementDate,String dispersionType,String groupType) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-        URL=String.format(URL,tokenId,employeeId,groupID,statusID ,groupName,amount,integrants,newIntegrants,renewIntegrants,actualDate,disbursementDate,dispersionType,groupType,shared.getString("latitude", "0"),shared.getString("longitude", "0") );
-
+    public void updateGroup(String URL) {
         Log.d("WS NewGroupVoBo:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);

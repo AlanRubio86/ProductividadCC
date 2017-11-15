@@ -29,17 +29,11 @@ public class Globales {
     public final static String URL_REGISTRO_GRUPO =         "http://asistente.crediclub.com/2.0/altaGrupo.php?tokenID=%s&empleadoID=%s&nomContacto=%s&telcontacto=%s&refcontacto=%s&fechaEstDes=%s&fecCapac=%s&latitu=%s&longit=%s";
     public final static String URL_REGISTRO_RECONTRATACION  ="http://asistente.crediclub.com/2.0/recontratacion.php?tokenID=%s&empleadoID=%s&grupo=%s&nomContacto=%s&telcontacto=%s&fechaEstDes=%s&fecRecontra=%s&latitu=%s&longit=%s";
     public final static String URL_ACTUALIZAR_ETAPA         ="http://asistente.crediclub.com/2.0/actualizaEtapa.php?tokenID=%s&empleadoID=%s&idAgenda=%s&etapa=%s&nombreGrupo=%s&monto=%s&integrantes=%s&intnuevos=%s&intrenova=%s&fecha=%s&fechaestimada=%s&tipodispersion=%s&tipogrupo=%s&latitu=%s&longit=%s";
-
-    public final static String URL_CONSULTA_GRUPOS =        "http://asistente.crediclub.com/2.0/consultaGrupos.php?empleadoID=";
-    public final static String URL_CONSULTA_RENOVACION =    "http://asistente.crediclub.com/2.0/consultaRenovaciones.php?empleadoID=";
-
+    public final static String URL_REPROGRAMAR_ETAPA        ="http://asistente.crediclub.com/2.0/reprogramacion.php?tokenID=%s&empleadoID=%s&idAgenda=%s&etapa=%s&fechaRep=%s&motivoRep=%s&latitu=%s&longit=%s";
 
     public final static String URL_REGISTRO_AGENDA =        "http://asistente.crediclub.com/2.0/altaAgenda.php?";
-    public final static String URL_CONSULTA_AGENDA =        "http://asistente.crediclub.com/2.0/consultaAgenda.php?empleadoID=";
     public final static String URL_CONSULTA_EMPLEADO =      "http://asistente.crediclub.com/2.0/consultaEmpleado.php?empleadoID=";
-    public final static String URL_CONSULTA_BITACORA =      "http://asistente.crediclub.com/2.0/consultaBitacora.php?empleadoID=";
-    public final static String URL_REGISTRO_VISITA =        "http://asistente.crediclub.com/2.0/logVisita.php?";
-    public final static String URL_REGISTRO_EVALUACION =    "http://asistente.crediclub.com/2.0/logEvaluacion.php?";
+
 
 
     public static void log(String tag, String msg)

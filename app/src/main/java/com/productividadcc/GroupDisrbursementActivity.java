@@ -2,6 +2,7 @@ package com.productividadcc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,10 +21,18 @@ import android.widget.Toast;
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.productividadcc.utilerias.Globales;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class GroupDisrbursementActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
@@ -30,9 +40,9 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
     private Calendar calendar;
     EditText editIntegrant,editAmount,editDisbursement;
     Spinner spnGroupType,spnMotiveReprogram,spnCancelMotive;
-    String groupID;
+    String groupID,tokenId,employeeId;;
     TextView nombreLbl;
-    String URL = Globales.URL_REGISTRO_AGENDA;
+    String URL = Globales.URL_ACTUALIZAR_ETAPA;
     private int movement=0;
 
     @Override
@@ -45,6 +55,9 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        tokenId = shared.getString("tokenId", "0");
+        employeeId=shared.getString("numEmployee", "0");
 
 
 
@@ -137,10 +150,32 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
                         return;
                     }
 
-                    Toast.makeText(getApplicationContext(), "Se realizo el desembolso correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupDisrbursementActivity.this, finishnewgroup.class);
-                    startActivity(intent);
-                    finish();
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*1000;
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+
+                    String groupType="";
+                    switch(spnGroupType.getSelectedItem().toString())
+                    {
+                        case "Super Estrella (27.32% -$70.00)":
+                            groupType="1";
+                            break;
+                        case "Super Estrella (43.35% -$72.00)":
+                            groupType="2";
+                            break;
+                        case "Super Estrella (55.22% -$73.50)":
+                            groupType="3";
+                            break;
+                        case "Super Estrella (59.13% -$74.00)":
+                            groupType="4";
+                            break;
+                    }
+                    updateGroup(movement,"4","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),"", "0",groupType);
+
+
+
+
+
                 }else if(movement==2)
                 {
                     if (spnMotiveReprogram.getSelectedItem().toString().trim().equals("(Seleccionar)"))
@@ -280,44 +315,33 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
             }
         });
     }
-/*
-    public void sendEventInfo() {
+    public void updateGroup(final int movement, String statusID, String groupName, String amount, final String integrants, String newIntegrants, String renewIntegrants, String actualDate, String disbursementDate, String dispersionType, String groupType) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        final String selectedStringDate = fechaTxt.getText().toString();
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        URL=String.format(URL,tokenId,employeeId,groupID,statusID ,groupName,amount,integrants,newIntegrants,renewIntegrants,actualDate,disbursementDate,dispersionType,groupType,shared.getString("latitude", "0"),shared.getString("longitude", "0") );
 
-        URL +=  "fecha=" + selectedStringDate +
-                "&hora=" + horaTxt.getText().toString() +
-                "&tipEve=" + Globales.VOBO +
-                "&emplea=" + shared.getString("userNumber", "0") +
-                "&tipgru=" + Globales.STR_VACIO +
-                "&grupo=" + numGrupo.getText().toString() +
-                "&ciclo=" + Globales.STR_VACIO +
-                "&latitu=" + shared.getString("latitude", "0") +
-                "&longit=" + shared.getString("longitude", "0") +
-                "&nuAgSe=" + eventID +
-                "&imei=" + imeiNumber +
-                "&stamp=" + (System.currentTimeMillis()/1000) +
-                "&monGru=" + montoTxt.getText().toString() +
-                "&integr=" + integrantesTxt.getText().toString() +
-                "&semRen=" + Globales.STR_CERO +
-                "&coment=" + Globales.STR_VACIO;
-
-        Log.d("WS NewGroupVoBo:", URL);
+        Log.d("WS VoBoNewGroup:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //This code is executed if the server responds, whether or not the response contains data.
-                        //The String 'response' contains the server's response.
                         clearFields();
-                        Toast.makeText(getApplicationContext(), "Evento guardado correctamente " + response, Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(NewGroupVoBo.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        if(movement==1)
+                        {
+                            Toast.makeText(getApplicationContext(), "Se realizo el desembolso correctamente", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(GroupDisrbursementActivity.this, finishnewgroup.class);
+                            intent.putExtra("integrants",integrants);
+                            startActivity(intent);
+                            finish();
+                        }else
+                        {
+                            Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(GroupDisrbursementActivity.this, NewGroupsListActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
@@ -327,7 +351,10 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
                 Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
                 //mprogressBar.setVisibility(View.GONE);
             }
-        }) {
+        });
+
+
+        /*{
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -349,51 +376,10 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
 
                 return params;
             }
-        };
+        };*/
 
         MyRequestQueue.add(MyStringRequest);
     }
-
-
-    public void saveEventInfo() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        final String selectedStringDate = fechaTxt.getText().toString();
-        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-
-        URL +=  "fecha=" + selectedStringDate +
-                "&hora=" + horaTxt.getText().toString() +
-                "&tipEve=" + Globales.VOBO +
-                "&emplea=" + shared.getString("userNumber", "0") +
-                "&tipgru=" + Globales.STR_VACIO +
-                "&grupo=" + numGrupo.getText().toString() +
-                "&ciclo=" + Globales.STR_VACIO +
-                "&latitu=" + shared.getString("latitude", "0") +
-                "&longit=" + shared.getString("longitude", "0") +
-                "&nuAgSe=" + eventID +
-                "&imei=" + imeiNumber +
-                "&stamp=" + (System.currentTimeMillis()/1000) +
-                "&monGru=" + montoTxt.getText().toString() +
-                "&integr=" + integrantesTxt.getText().toString() +
-                "&semRen=" + Globales.STR_CERO +
-                "&coment=" + Globales.STR_VACIO;
-
-        Log.d("DB NewGroupVoBo:", URL);
-
-        MainActivity.event = new Event();
-        MainActivity.event.setUrlWS(URL);
-        MainActivity.event.setStatus(0);
-        MainActivity.event.insert();
-
-        clearFields();
-        Toast.makeText(getApplicationContext(), "Los datos han sido guardados de manera offline", Toast.LENGTH_LONG).show();
-
-        Intent intent = new Intent(NewGroupVoBo.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
-
-    */
 
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {

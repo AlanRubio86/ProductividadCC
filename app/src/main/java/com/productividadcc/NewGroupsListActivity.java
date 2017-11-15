@@ -200,7 +200,7 @@ public class NewGroupsListActivity extends AppCompatActivity {
                                                         break;
                                                 }
                                                 intent.putExtra("groupName", items.get(x).getGroupNumber()+"-"+items.get(x).getGroupName());
-                                                intent.putExtra("groupId", items.get(x).getGroupId());
+                                                intent.putExtra("groupID", items.get(x).getGroupId());
                                                 startActivity(intent);
                                                 finish();
                                                 break;

@@ -2,6 +2,7 @@ package com.productividadcc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,10 +21,18 @@ import android.widget.Toast;
 import com.android.datetimepicker.date.DatePickerDialog;
 import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.productividadcc.utilerias.Globales;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class GroupTraining2Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
@@ -30,9 +40,9 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
     private Calendar calendar,calendar2,calendar3;
     EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram,editGroupName,editDateDisbursement;
     Spinner spnMotiveCancel;
-    String groupID;
+    String groupID,tokenId,employeeId;
     TextView nombreLbl;
-    String URL = Globales.URL_REGISTRO_AGENDA;
+    String URL = Globales.URL_ACTUALIZAR_ETAPA;
     private int movement=0;
     int idFechaDesembolso = 0;
 
@@ -46,6 +56,10 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        tokenId = shared.getString("tokenId", "0");
+        employeeId=shared.getString("numEmployee", "0");
 
 
 
@@ -171,10 +185,11 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                         date.setError(null);
                     }
 
-                    Toast.makeText(getApplicationContext(), "Se realizo la capacitacion 2 correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsListActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*1000;
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+                    updateGroup("2",editGroupName.getText().toString(),amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0");
+
                 }else if(movement==2)
                 {
                     if(editDateReprogram.getText().toString().isEmpty())
@@ -204,6 +219,9 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
                 }
             }
         });
+
+
+
 
         editGroupName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -360,6 +378,69 @@ public class GroupTraining2Activity extends AppCompatActivity implements DatePic
             }
         });
     }
+
+    public void updateGroup(String statusID,String groupName,String amount,String integrants,String newIntegrants, String renewIntegrants,String actualDate,String disbursementDate,String dispersionType,String groupType) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        URL=String.format(URL,tokenId,employeeId,groupID,statusID ,groupName,amount,integrants,newIntegrants,renewIntegrants,actualDate,disbursementDate,dispersionType,groupType,shared.getString("latitude", "0"),shared.getString("longitude", "0") );
+
+        Log.d("WS Trainin2NewGroup:", URL);
+
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        clearFields();
+
+
+                        Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(GroupTraining2Activity.this, NewGroupsListActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+                Log.d("Send Event info", "response error" + error.toString());
+                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
+                //mprogressBar.setVisibility(View.GONE);
+            }
+        });
+
+
+        /*{
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("fecha", selectedStringDate);
+                params.put("hora", horaTxt.getText().toString());
+                params.put("tipEve", "6");
+                params.put("emplea", shared.getString("userNumber", "0"));
+                params.put("grupo", numGrupo.getText().toString());
+                params.put("ciclo", "%20");
+                params.put("latitu", shared.getString("latitude", "0"));
+                params.put("longit", shared.getString("longitude", "0"));
+                params.put("nuAgSe", eventID);
+                params.put("imei", imeiNumber);
+                params.put("stamp", String.valueOf(System.currentTimeMillis()/1000));
+                params.put("monGru", montoTxt.getText().toString());
+                params.put("integr", integrantesTxt.getText().toString());
+                params.put("semRen", "0");
+                params.put("coment", "%20");
+
+                return params;
+            }
+        };*/
+
+        MyRequestQueue.add(MyStringRequest);
+    }
+
+
+
+
+
 /*
     public void sendEventInfo() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
