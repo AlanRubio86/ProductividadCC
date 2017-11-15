@@ -109,7 +109,7 @@ public class OldGroupDisrbursementActivity extends AppCompatActivity implements 
                         if(Integer.parseInt(editIntegrant.getText().toString())<=0)
                         {
                             integrants.setError("Cantidad de integrantes tiene que ser mayor que 0");
-                            Toast.makeText(getApplicationContext(), "Catnidad de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Cantidad de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
                             return;
                         }else
                         {
