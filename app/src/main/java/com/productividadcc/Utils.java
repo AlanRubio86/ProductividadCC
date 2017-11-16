@@ -2,6 +2,7 @@ package com.productividadcc;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.productividadcc.database.Event;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,9 +30,10 @@ import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by cesarrdz on 11/18/16.
- */
+import static android.content.Context.MODE_PRIVATE;
+import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+
+
 public class Utils {
 
     ProgressDialog progressDialog;
@@ -52,4 +55,6 @@ public class Utils {
         }
         return false;
     }
+
+
 }

@@ -31,35 +31,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@android:color/darker_gray"
-        android:paddingBottom="10dp"
-        android:orientation="vertical">
+        android:background="@color/done_text_color_dark_normal"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/nombreLabel"
             android:layout_width="fill_parent"
-            android:layout_height="26dp"
-            android:gravity="left"
+            android:layout_height="46dp"
+            android:gravity="center"
             android:text="Bienvenido "
+            android:textAlignment="center"
             android:textAllCaps="false"
-            android:textColor="#00508C"
-            android:textSize="14dp" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="26dp"
-            android:gravity="left"
-            android:text="Ciclo:2 "
-            android:textAllCaps="false"
-            android:textColor="#00508C"
-            android:textSize="14dp" />
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="26dp"
-            android:gravity="left"
-            android:text="Semana:15"
-            android:textAllCaps="false"
-            android:textColor="#00508C"
-            android:textSize="14dp" />
+            android:textColor="@color/colorTitleLabel"
+            android:textSize="18dp" />
     </LinearLayout>
 
 
@@ -80,10 +64,10 @@
             android:textColor="#FFFFFF"
             android:textSize="17dp" />
 
-
+        <!--
         <Button
             android:id="@+id/reprogBtn"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_weight="0.2"
@@ -91,7 +75,9 @@
             android:gravity="center"
             android:text="Reprogramar"
             android:textColor="#FFFFFF"
-            android:textSize="17dp" />
+            android:textSize="17dp"
+            android:visibility="invisible"/>
+        -->
 
         <Button
             android:id="@+id/cancelBtn"
@@ -105,100 +91,13 @@
             android:textColor="#FFFFFF"
             android:textSize="17dp" />
     </LinearLayout>
-    <android.support.design.widget.TextInputLayout
-    android:id="@+id/llIntegrant"
-    android:layout_width="fill_parent"
-    android:layout_height="65dp"
-    android:hint="Total de integrantes"
-    android:orientation="horizontal"
-    android:paddingTop="10dp"
-    android:visibility="invisible"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
-        app:errorTextAppearance="@drawable/edittext">
-
-
-        <EditText
-            android:id="@+id/editIntegrant"
-            android:layout_width="201dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/edittext"
-            android:ems="2"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:textColor="#00508C"
-            android:text="0"
-            android:textColorHint="#00508C"
-            android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor" />
-</android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/llNews"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:hint="Nuevos"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:visibility="invisible"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
-        app:errorTextAppearance="@drawable/edittext">
-
-        <EditText
-            android:id="@+id/editNewIntegrant"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/edittext"
-            android:ems="2"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:textColor="#00508C"
-            android:text="0"
-            android:textColorHint="#00508C"
-            android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/llRecontratation"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:hint="Recontratados:"
-        android:orientation="horizontal"
-        android:paddingTop="10dp"
-        android:visibility="invisible"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
-        app:errorTextAppearance="@drawable/edittext">
-
-        <EditText
-            android:id="@+id/editIntegrantRec"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/edittext"
-            android:ems="2"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:textColor="#00508C"
-            android:text="0"
-            android:textColorHint="#00508C"
-            android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor" />
-    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/llAmount"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
-        android:hint="Monto grupal solicitado"
+        android:hint="Monto grupal estimado"
+        android:textColorHint="#00508C"
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:visibility="invisible"
@@ -207,38 +106,70 @@
 
         <EditText
             android:id="@+id/editAmount"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
+            android:layout_width="249dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
+            android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:singleLine="true"
-            android:textAlignment="center"
+            android:text="0.00"
             android:textColor="#00508C"
-            android:text="0.0"
+            android:textAlignment="center"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/llDate"
+        android:id="@+id/llIntegrant"
         android:layout_width="fill_parent"
-        android:layout_height="57dp"
-        android:hint="Fecha estimada de VoBo"
+        android:layout_height="65dp"
+        android:hint="Total de integrantes estimado"
+        android:textColorHint="#00508C"
         android:orientation="horizontal"
-        android:paddingTop="5dp"
+        android:paddingTop="10dp"
         android:visibility="invisible"
         app:errorTextAppearance="@drawable/edittext"
         app:hintTextAppearance="@style/AppTheme.TextInputLayout">
 
 
         <EditText
-            android:id="@+id/editDateEstimated"
-            android:layout_width="331dp"
+            android:id="@+id/editIntegrant"
+            android:layout_width="249dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext"
+            android:ems="2"
+            android:text="0"
+            android:textColor="#00508C"
+            android:textColorHint="#00508C"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:singleLine="true"
+            android:textColorLink="#00508C"
+            android:textCursorDrawable="@drawable/edittextcursor"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:paddingTop="10dp"
+        android:orientation="horizontal"
+        android:hint="Fecha estimada de Capacitación 2"
+        android:textColorHint="#00508C"
+        android:id="@+id/llDate"
+        android:visibility="invisible"
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+
+        <EditText
+            android:id="@+id/editDateEstimated"
+            android:layout_width="340dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
             android:focusable="false"
             android:imeOptions="actionNext"
@@ -246,39 +177,36 @@
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="#00508C"
-            android:textColorHint="#00508C"
-            android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor" />
+            android:textColorHint="#00508C" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/llDateReprogram"
         android:layout_width="fill_parent"
-        android:layout_height="126dp"
-        android:orientation="vertical"
+        android:layout_height="65dp"
         android:paddingTop="10dp"
+        android:orientation="horizontal"
+        android:hint="Fecha de reprogramacion de Cap. 1"
+        android:id="@+id/llDateReprogram"
+        android:textColorHint="#00508C"
         android:visibility="invisible"
-        android:hint="Fecha de reprogramación de Inicio de Recontratación"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
-        app:errorTextAppearance="@drawable/edittext"    >
+        app:errorTextAppearance="@drawable/edittext"
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
 
         <EditText
             android:id="@+id/editDateReprogram"
-            android:layout_width="330dp"
+            android:layout_width="343dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:focusable="false"
             android:background="@drawable/edittext"
+            android:focusable="false"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="#00508C"
-            android:textColorHint="#00508C"
-            android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor" />
+            android:textColorHint="#00508C" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -292,23 +220,24 @@
 
         <TextView
             android:layout_width="70dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_height="45dp"
             android:text="Motivo:"
             android:paddingTop="17dp"
+            android:layout_marginLeft="10dp"
             android:textColor="#00508C"
             />
+
         <Spinner
-            android:id="@+id/spnCancelMotive"
-            android:layout_width="289dp"
-            android:layout_height="40dp"
+            android:id="@+id/spnMotiveCancel"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="339dp"
+            android:layout_height="45dp"
             android:layout_marginLeft="10dp"
-            android:entries="@array/recontratationCancelItems"
-            android:textColorHint="#00508C"
-            android:textAlignment="center"
-            android:spinnerMode="dialog"
             android:background="@drawable/edittext"
-            style="@style/Widget.AppCompat.Spinner.Underlined"/>
+            android:entries="@array/trainingCancelItems"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            android:textColorHint="#00508C" />
 
     </LinearLayout>
 

@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.productividadcc.MainActivity;
+import com.productividadcc.Main_Activity;
 
 public class Event extends DatabaseObject {
     public static final String TAG 				= "WSEvent";
@@ -70,12 +70,12 @@ public class Event extends DatabaseObject {
 
     public Cursor load(){
         Log.i(TAG, "Loading table " + DB_TABLE);
-        return MainActivity.db.query(DB_TABLE, columns, null, null, null,  null, "_id ASC");
+        return Main_Activity.db.query(DB_TABLE, columns, null, null, null,  null, "_id ASC");
     }
 
     public boolean delete(long id){
         Log.i(TAG, "Deleting from table " + DB_TABLE + " on id = " + id);
-        boolean ret = MainActivity.db.delete(DB_TABLE, KEY_ID + "=" + id, null) > 0;
+        boolean ret = Main_Activity.db.delete(DB_TABLE, KEY_ID + "=" + id, null) > 0;
         return ret;
     }
 

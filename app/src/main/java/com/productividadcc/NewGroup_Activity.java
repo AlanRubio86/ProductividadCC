@@ -1,5 +1,6 @@
 package com.productividadcc;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,33 +27,49 @@ import com.productividadcc.utilerias.Globales;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
-public class OldGroupNewActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    EditText prospectosTxt;
+public class NewGroup_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+    String imeiNumber="";
+    private Calendar calendar;
+    private Calendar calendar2;
     EditText fechaTxt, fechaCap1;
-    private Calendar calendar,calendar2;
     String eventID;
     int idFechaDesembolso = 0;
     String tokenId,employeeId;
 
-    String URL = Globales.URL_REGISTRO_RECONTRATACION;
+    String URL = Globales.URL_REGISTRO_GRUPO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.oldgroupnew_activity);
+        setContentView(R.layout.newgroup_activity);
 
         // Find the toolbar view and set as ActionBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // ...
+
+        //region Controls
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        fechaTxt = (EditText) findViewById(R.id.dateDisbursement);
+        final TextInputLayout txtContact= (TextInputLayout) findViewById(R.id.txtContact);
+        final TextInputLayout txtContactPhone = (TextInputLayout) findViewById(R.id.txtContactPhone);
+        final TextInputLayout txtContactPhoneRef = (TextInputLayout) findViewById(R.id.txtContactPhoneRef);
+        final TextInputLayout txtDisbursement = (TextInputLayout) findViewById(R.id.txtDisbursement);
+        final TextInputLayout txtCap1 = (TextInputLayout) findViewById(R.id.txtCap1);
+        fechaCap1 = (EditText) findViewById(R.id.dateCap1);
+        EditText editContact = (EditText) findViewById(R.id.editContact);
+        EditText editContactPhone = (EditText) findViewById(R.id.editContactPhone);
+        EditText editContactPhoneRef = (EditText) findViewById(R.id.editContactPhoneRef);
+
+        //endregion
+
+
         // Remove default title text
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Get access to the custom title view
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Registro de Grupo Recontratacion");
+
+        mTitle.setText("Registro de Grupo Nuevo");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -60,14 +77,10 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
         tokenId = shared.getString("tokenId", "0");
         employeeId=shared.getString("numEmployee", "0");
 
-
-
-
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OldGroupNewActivity.this, OldGroupsListActivity.class);
+                Intent intent = new Intent(NewGroup_Activity.this, NewGroupsList_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -79,17 +92,9 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
         } else {
             eventID = "0";
         }
+        //Get All Controls
 
-        final TextInputLayout txtGroupNumber= (TextInputLayout) findViewById(R.id.txtGroupNumber);
-        final TextInputLayout txtDisbursement = (TextInputLayout) findViewById(R.id.txtDisbursement);
-        final TextInputLayout txtContact= (TextInputLayout) findViewById(R.id.txtContact);
-        final TextInputLayout txtContactPhone = (TextInputLayout) findViewById(R.id.txtContactPhone);
-        final TextInputLayout txtCap1 = (TextInputLayout) findViewById(R.id.txtCap1);
-        final EditText editGroupNumber= (EditText) findViewById(R.id.editGroupNumber);
-        EditText editContact = (EditText) findViewById(R.id.editContact);
-        EditText editContactPhone = (EditText) findViewById(R.id.editContactPhone);
-        fechaCap1 = (EditText) findViewById(R.id.dateCap1);
-        fechaTxt = (EditText) findViewById(R.id.dateDisbursement);
+
 
         calendar = Calendar.getInstance();
         fechaTxt.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +102,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
             public void onClick(View view) {
                 final View vv = view;
                 idFechaDesembolso = view.getId();
-                DatePickerDialog.newInstance(OldGroupNewActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+                DatePickerDialog.newInstance(NewGroup_Activity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
@@ -106,14 +111,14 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
             @Override
             public void onClick(View view) {
                 idFechaDesembolso = 0;
-                DatePickerDialog.newInstance(OldGroupNewActivity.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+                DatePickerDialog.newInstance(NewGroup_Activity.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
-        findViewById(R.id.guardarGpoBtn).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.btnSaveGroup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(txtContact.getEditText().getText().toString().isEmpty())
                 {
                     txtContact.setError("This field can not be blank");
@@ -132,13 +137,13 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
                     txtContactPhone.setError(null);
                 }
 
-                if(editGroupNumber.getText().toString().isEmpty())
+                if(txtContactPhoneRef.getEditText().getText().toString().isEmpty())
                 {
-                    txtGroupNumber.setError("This field can not be blank");
+                    txtContactPhoneRef.setError("This field can not be blank");
                     Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                     return;
                 } else {
-                    txtGroupNumber.setError(null);
+                    txtContactPhoneRef.setError(null);
                 }
 
                 if(fechaTxt.getText().toString().isEmpty())
@@ -159,11 +164,18 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
                     txtCap1.setError(null);
                 }
 
-                sendSaveGroup(editGroupNumber.getText().toString(),txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString()
-                        ,fechaTxt.getText().toString(),fechaCap1.getText().toString());
+                if (Utils.isNetworkAvailable(NewGroup_Activity.this)) {
+                    sendSaveGroup(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),
+                            txtContactPhoneRef.getEditText().getText().toString(),fechaTxt.getText().toString(),fechaCap1.getText().toString());
+                } else {
+                    saveOffline(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),
+                            txtContactPhoneRef.getEditText().getText().toString(),fechaTxt.getText().toString(),fechaCap1.getText().toString());
+                }
 
             }
         });
+
+    //region Listeners
 
         editContact.addTextChangedListener(new TextWatcher() {
             @Override
@@ -181,6 +193,8 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
 
             }
         });
+
+
         editContactPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -198,7 +212,8 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
             }
         });
 
-        editGroupNumber.addTextChangedListener(new TextWatcher() {
+
+        editContactPhoneRef.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -206,7 +221,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                txtGroupNumber.setError(null);
+                txtContactPhoneRef.setError(null);
             }
 
             @Override
@@ -214,6 +229,7 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
 
             }
         });
+
         fechaTxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -244,13 +260,14 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
             }
         });
 
+        //endregion
     }
 
-    public void sendSaveGroup (String grupo,String nomContacto,String telContacto, String dateDisbursement, String dateRecontratation) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        final String selectedStringDate = fechaTxt.getText().toString();
+
+    //region Public Methods
+    public void sendSaveGroup (String nomContacto,String telContacto,String refContacto, String dateDisbursement, String dateTraining) {
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-        URL= String.format(URL,tokenId,employeeId,grupo,nomContacto,telContacto,dateDisbursement,dateRecontratation,shared.getString("latitude", "0"),shared.getString("longitude", "0")  );
+        URL= String.format(URL,tokenId,employeeId,nomContacto,telContacto,refContacto,dateDisbursement,dateTraining,shared.getString("latitude", "0"),shared.getString("longitude", "0")  );
 
         Log.d("WS Prom:", URL);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -258,9 +275,8 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        clearFields();
-                        Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo de recontración correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(OldGroupNewActivity.this, OldGroupsListActivity.class);
+                        Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(NewGroup_Activity.this, NewGroupsList_Activity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -274,56 +290,30 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
             }
         });
 
-
-        /*{
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("fecha", selectedStringDate);
-                params.put("hora", fechaCap1.getText().toString());
-                params.put("tipEve", "11");
-                params.put("emplea", shared.getString("userNumber", "0"));
-                params.put("grupo", "%20");
-                params.put("ciclo", "%20");
-                params.put("latitu", shared.getString("latitude", "0"));
-                params.put("longit", shared.getString("longitude", "0"));
-                params.put("nuAgSe", "0");
-                params.put("imei", imeiNumber);
-                params.put("stamp", String.valueOf(System.currentTimeMillis()/1000));
-                params.put("monGru", "0");
-                params.put("integr", "0");
-                params.put("semRen", "0");
-                params.put("coment", "");
-                return params;
-            }
-        };*/
-
-        MyRequestQueue.add(MyStringRequest);
+       MyRequestQueue.add(MyStringRequest);
     }
 
-    public void saveGroupOffline(String nomContacto,String telContacto,String refContacto, String dateDisbursement, String dateTraining) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    public void saveOffline(String nomContacto,String telContacto,String refContacto, String dateDisbursement, String dateTraining) {
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         URL= String.format(URL,tokenId,employeeId,nomContacto,telContacto,refContacto,dateDisbursement,dateTraining,shared.getString("latitude", "0"),shared.getString("longitude", "0")  );
         Log.d("DB Prom:", URL);
-        MainActivity.event = new Event();
-        MainActivity.event.setUrlWS(URL);
-        MainActivity.event.setStatus(0);
-        MainActivity.event.insert();
+        Main_Activity.event = new Event();
+        Main_Activity.event.setUrlWS(URL);
+        Main_Activity.event.setStatus(0);
+        Main_Activity.event.insert();
 
-        clearFields();
         Toast.makeText(getApplicationContext(), "Los datos han sido guardados de manera offline", Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(OldGroupNewActivity.this, NewGroupsListActivity.class);
+        Intent intent = new Intent(NewGroup_Activity.this, NewGroupsList_Activity.class);
         startActivity(intent);
         finish();
     }
+    //endregion
 
 
-    @Override
+   @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Log.d("Log Pruebas", String.valueOf(idFechaDesembolso));
         if(idFechaDesembolso == R.id.dateDisbursement){
             calendar.set(year, monthOfYear, dayOfMonth);
             fechaTxt.setText(df.format(calendar.getTime()));
@@ -333,7 +323,5 @@ public class OldGroupNewActivity extends AppCompatActivity implements DatePicker
         }
     }
 
-    public void clearFields () {
 
-    }
 }

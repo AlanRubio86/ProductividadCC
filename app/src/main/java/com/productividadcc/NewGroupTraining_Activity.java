@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.productividadcc.database.Event;
 import com.productividadcc.utilerias.Globales;
 
 import java.text.DateFormat;
@@ -35,53 +36,52 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class GroupDisrbursementActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class NewGroupTraining_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
-    private Calendar calendar;
-    EditText editIntegrant,editAmount,editDisbursement;
-    Spinner spnGroupType,spnMotiveReprogram,spnCancelMotive;
-    String groupID,tokenId,employeeId;;
+    private Calendar calendar,calendar2;
+    EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram;
+    Spinner spnMotiveCancel;
+    TextView fechaTxt, horaTxt;
+
+    String groupID,tokenId,employeeId;
     TextView nombreLbl;
-    String URL = Globales.URL_ACTUALIZAR_ETAPA;
+    String URL = "";
     private int movement=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.groupdisbursement);
+        setContentView(R.layout.newgrouptraining_activity);
 
         // Find the toolbar view and set as ActionBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         tokenId = shared.getString("tokenId", "0");
         employeeId=shared.getString("numEmployee", "0");
 
-
-
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
 
+        //fechaTxt = (TextView) findViewById(R.id.fechaTxt);
         final TextInputLayout integrants = (TextInputLayout) findViewById(R.id.llIntegrant);
+        final TextInputLayout date = (TextInputLayout) findViewById(R.id.llDate);
         final TextInputLayout amount = (TextInputLayout) findViewById(R.id.llAmount);
-        final LinearLayout groupType = (LinearLayout) findViewById(R.id.llgrouptype);
-        final LinearLayout motiveReprogram = (LinearLayout) findViewById(R.id.llMotiveReprogram);
-        final TextInputLayout dateReprogram = (TextInputLayout) findViewById(R.id.llDate);
-        final LinearLayout cancelMotive = (LinearLayout) findViewById(R.id.llCancelMotive);
+        final TextInputLayout reprogram = (TextInputLayout) findViewById(R.id.llDateReprogram);
+        final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
-
 
         editAmount = (EditText) findViewById(R.id.editAmount);
         editIntegrant = (EditText) findViewById(R.id.editIntegrant);
-        editDisbursement= (EditText) findViewById(R.id.editDisbursement);
-        spnCancelMotive=(Spinner) findViewById(R.id.spnCancelMotive);
-        spnMotiveReprogram=(Spinner) findViewById(R.id.spnMotiveReprogram);
-        spnGroupType=(Spinner) findViewById(R.id.spnGroupType);
+        editDateEstimated= (EditText) findViewById(R.id.editDateEstimated);
+        editDateReprogram= (EditText) findViewById(R.id.editDateReprogram);
+        spnMotiveCancel=(Spinner) findViewById(R.id.spnMotiveCancel);
 
 
-        mTitle.setText("Desembolso");
+        mTitle.setText("Capacitación 1");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -100,18 +100,44 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
 
         calendar = Calendar.getInstance();
 
-        editDisbursement.setOnClickListener(new View.OnClickListener() {
+        editDateEstimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog.newInstance(GroupDisrbursementActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+                DatePickerDialog.newInstance(NewGroupTraining_Activity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+            }
+        });
+
+        calendar2 = Calendar.getInstance();
+        editDateReprogram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog.newInstance(NewGroupTraining_Activity.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
                 if(movement==1)
                 {
+                    if(editAmount.getText().toString().isEmpty())
+                    {
+                        amount.setError("This field can not be blank");
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        return;
+                    } else
+                    {
+                        if(Double.parseDouble(editAmount.getText().toString())<=0)
+                        {
+                            amount.setError("El monto tiene que ser mayor que 0");
+                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            return;
+                        }else {
+                            amount.setError(null);
+                        }
+                     }
 
                     if(editIntegrant.getText().toString().isEmpty())
                     {
@@ -125,88 +151,93 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
                             Toast.makeText(getApplicationContext(), "El total de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
                             return;
                         }else{
-                        integrants.setError(null);
+                            integrants.setError(null);
                         }
                     }
-                    if(editAmount.getText().toString().isEmpty())
+
+                    if(editDateEstimated.getText().toString().isEmpty())
                     {
-                        amount.setError("This field can not be blank");
+                        date.setError("This field can not be blank");
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                         return;
                     } else {
-                        if(Double.parseDouble(editAmount.getText().toString())<=0)
-                        {
-                            amount.setError("El monto tiene que ser mayor que 0");
-                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
-                            return;
-
-                        }else{
-                        amount.setError(null);
-                        }
-                    }
-                    if (spnGroupType.getSelectedItem().toString().trim().equals("(Seleccionar)"))
-                    {
-                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
-                        return;
+                        date.setError(null);
                     }
 
-                    Double amount=Double.parseDouble(editAmount.getText().toString())*1000;
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*100;
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
+                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"1","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0",shared.getString("latitude", "0"),shared.getString("longitude", "0"));
 
-                    String groupType="";
-                    switch(spnGroupType.getSelectedItem().toString())
-                    {
-                        case "Super Estrella (27.32% -$70.00)":
-                            groupType="1";
-                            break;
-                        case "Super Estrella (43.35% -$72.00)":
-                            groupType="2";
-                            break;
-                        case "Super Estrella (55.22% -$73.50)":
-                            groupType="3";
-                            break;
-                        case "Super Estrella (59.13% -$74.00)":
-                            groupType="4";
-                            break;
+                    if (Utils.isNetworkAvailable(NewGroupTraining_Activity.this)) {
+                        updateGroup(URL);
+                    } else {
+                        saveOffline(URL);
                     }
-                    updateGroup(movement,"4","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),"", "0",groupType);
-
-
 
 
 
                 }else if(movement==2)
                 {
-                    if (spnMotiveReprogram.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+                    if(editDateReprogram.getText().toString().isEmpty())
                     {
-                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
-                        return;
-                    }
-                    if(editDisbursement.getText().toString().isEmpty())
-                    {
-                        dateReprogram.setError("This field can not be blank");
+                        reprogram.setError("This field can not be blank");
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
                         return;
                     } else {
-                        dateReprogram.setError(null);
+                        reprogram.setError(null);
+                    }
+                    URL=String.format(Globales.URL_REPROGRAMAR_ETAPA,tokenId,employeeId,groupID,"1",editDateReprogram.getText().toString(),"0",shared.getString("latitude", "0"),shared.getString("longitude", "0") );
+                    if (Utils.isNetworkAvailable(NewGroupTraining_Activity.this)) {
+                        updateGroup(URL);
+                    } else {
+                        saveOffline(URL);
                     }
 
-                    Toast.makeText(getApplicationContext(), "Se realizo la reprogramación de desembolso correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupDisrbursementActivity.this, NewGroupsListActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else if(movement==3)
-                {
-                    if (spnCancelMotive.getSelectedItem().toString().trim().equals("(Seleccionar)"))
+
+                }else if(movement==3){
+                    if (spnMotiveCancel.getSelectedItem().toString().trim().equals("(Seleccionar)"))
                     {
                         Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
                         return;
                     }
-                    Toast.makeText(getApplicationContext(), "Se realizo la cancelación de  desembolso correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(GroupDisrbursementActivity.this, NewGroupsListActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*100;
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+
+
+                    String motive="";
+                    switch(spnMotiveCancel.getSelectedItem().toString())
+                    {
+                        case "Tasa alta":
+                            motive="1";
+                            break;
+                        case "No se completó el grupo":
+                            motive="2";
+                            break;
+                        case "Malas experiencias con competencia":
+                            motive="3";
+                            break;
+                        case "Mala experiencia con Crediclub":
+                            motive="4";
+                            break;
+                        case "No les interesa nuestro producto":
+                            motive="5";
+                            break;
+                        case "Acaban de abrir crédito":
+                            motive="6";
+                            break;
+                        case "No planean dejar a la competencia":
+                            motive="7";
+                            break;
+                    }
+
+                    URL=String.format(Globales.URL_CANCELAR_ETAPA,tokenId,employeeId,groupID,"1",dateFormat.format(date),motive,shared.getString("latitude", "0"),shared.getString("longitude", "0") );
+                    if (Utils.isNetworkAvailable(NewGroupTraining_Activity.this)) {
+                        updateGroup(URL);
+                    } else {
+                        saveOffline(URL);
+                    }
                 }
             }
         });
@@ -244,7 +275,7 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
             }
         });
 
-        editDisbursement.addTextChangedListener(new TextWatcher() {
+        editDateEstimated.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -252,7 +283,23 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                dateReprogram.setError(null);
+                date.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editDateReprogram.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                reprogram.setError(null);
             }
 
             @Override
@@ -261,10 +308,11 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
             }
         });
 
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GroupDisrbursementActivity.this, NewGroupsListActivity.class);
+                Intent intent = new Intent(NewGroupTraining_Activity.this, NewGroupsList_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -274,53 +322,46 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
             @Override
             public void onClick(View view) {
                 integrants.setVisibility(View.VISIBLE);
+                date.setVisibility(View.VISIBLE);
                 amount.setVisibility(View.VISIBLE);
-                groupType.setVisibility(View.VISIBLE);
                 btnsave.setVisibility(View.VISIBLE);
-                motiveReprogram.setVisibility(View.GONE);
-                dateReprogram.setVisibility(View.GONE);
-                cancelMotive.setVisibility(View.GONE);
+                reprogram.setVisibility(View.GONE);
+                cancelmotive.setVisibility(View.GONE);
                 movement=1;
-
             }
         });
-
+/*
         findViewById(R.id.reprogBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                integrants.setVisibility(View.GONE);
-                amount.setVisibility(View.GONE);
-                groupType.setVisibility(View.GONE);
-                btnsave.setVisibility(View.VISIBLE);
-                motiveReprogram.setVisibility(View.VISIBLE);
-                dateReprogram.setVisibility(View.VISIBLE);
-                cancelMotive.setVisibility(View.GONE);
+                    integrants.setVisibility(View.GONE);
+                    date.setVisibility(View.GONE);
+                    amount.setVisibility(View.GONE);
+                    btnsave.setVisibility(View.VISIBLE);
+                    reprogram.setVisibility(View.VISIBLE);
+                    cancelmotive.setVisibility(View.GONE);
                      movement=2;
 
             }
-        });
+        });*/
 
         findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 integrants.setVisibility(View.GONE);
+                date.setVisibility(View.GONE);
                 amount.setVisibility(View.GONE);
-                groupType.setVisibility(View.GONE);
                 btnsave.setVisibility(View.VISIBLE);
-                motiveReprogram.setVisibility(View.GONE);
-                dateReprogram.setVisibility(View.GONE);
-                cancelMotive.setVisibility(View.VISIBLE);
+                reprogram.setVisibility(View.GONE);
+                cancelmotive.setVisibility(View.VISIBLE);
                 movement=3;
             }
         });
     }
-    public void updateGroup(final int movement, String statusID, String groupName, String amount, final String integrants, String newIntegrants, String renewIntegrants, String actualDate, String disbursementDate, String dispersionType, String groupType) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-        URL=String.format(URL,tokenId,employeeId,groupID,statusID ,groupName,amount,integrants,newIntegrants,renewIntegrants,actualDate,disbursementDate,dispersionType,groupType,shared.getString("latitude", "0"),shared.getString("longitude", "0") );
 
-        Log.d("WS VoBoNewGroup:", URL);
+    public void updateGroup(String URL) {
+        Log.d("WS NewGroupTraining:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
@@ -328,20 +369,12 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
                     @Override
                     public void onResponse(String response) {
                         clearFields();
-                        if(movement==1)
-                        {
-                            Toast.makeText(getApplicationContext(), "Se realizo el desembolso correctamente", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(GroupDisrbursementActivity.this, finishnewgroup.class);
-                            intent.putExtra("integrants",integrants);
-                            startActivity(intent);
-                            finish();
-                        }else
-                        {
-                            Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(GroupDisrbursementActivity.this, NewGroupsListActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
+
+
+                        Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(NewGroupTraining_Activity.this, NewGroupsList_Activity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
@@ -352,52 +385,45 @@ public class GroupDisrbursementActivity extends AppCompatActivity implements Dat
                 //mprogressBar.setVisibility(View.GONE);
             }
         });
-
-
-        /*{
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("fecha", selectedStringDate);
-                params.put("hora", horaTxt.getText().toString());
-                params.put("tipEve", "6");
-                params.put("emplea", shared.getString("userNumber", "0"));
-                params.put("grupo", numGrupo.getText().toString());
-                params.put("ciclo", "%20");
-                params.put("latitu", shared.getString("latitude", "0"));
-                params.put("longit", shared.getString("longitude", "0"));
-                params.put("nuAgSe", eventID);
-                params.put("imei", imeiNumber);
-                params.put("stamp", String.valueOf(System.currentTimeMillis()/1000));
-                params.put("monGru", montoTxt.getText().toString());
-                params.put("integr", integrantesTxt.getText().toString());
-                params.put("semRen", "0");
-                params.put("coment", "%20");
-
-                return params;
-            }
-        };*/
-
         MyRequestQueue.add(MyStringRequest);
     }
+
+    public void saveOffline(String URL) {
+        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+         Log.d("DB Prom:", URL);
+        Main_Activity.event = new Event();
+        Main_Activity.event.setUrlWS(URL);
+        Main_Activity.event.setStatus(0);
+        Main_Activity.event.insert();
+
+        Toast.makeText(getApplicationContext(), "Los datos han sido guardados de manera offline", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(NewGroupTraining_Activity.this, NewGroupsList_Activity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         calendar.set(year, monthOfYear, dayOfMonth);
-        editDisbursement.setText(df.format(calendar.getTime()));
+        editDateEstimated.setText(df.format(calendar.getTime()));
+        calendar2.set(year, monthOfYear, dayOfMonth);
+        editDateReprogram.setText(df.format(calendar2.getTime()));
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
         String time = String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute);
-
+        horaTxt.setText(time);
 
     }
 
     public void clearFields () {
-        editAmount.setText("");
+       /* editAmount.setText("");
         editIntegrant.setText("");
-        editDisbursement.setText("");
+        fechaTxt.setText("");
+        horaTxt.setText("");*/
     }
 }

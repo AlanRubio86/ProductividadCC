@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.productividadcc.MainActivity;
+import com.productividadcc.Main_Activity;
 
 abstract class DatabaseObject {
     protected String 	TAG 			= "DatabaseObject";
@@ -44,7 +44,7 @@ abstract class DatabaseObject {
         Cursor mCursor = null;
         try
         {
-            mCursor = MainActivity.db.query(true, DATABASE_TABLE, columns, KEY_ID + "=" + id, null, null, null, null, null);
+            mCursor = Main_Activity.db.query(true, DATABASE_TABLE, columns, KEY_ID + "=" + id, null, null, null, null, null);
             if (mCursor != null)
             {
                 mCursor.moveToFirst();
@@ -66,32 +66,32 @@ abstract class DatabaseObject {
     public Cursor load()
     {
         Log.i(TAG, "Loading table " + DATABASE_TABLE);
-        return MainActivity.db.query(DATABASE_TABLE, columns, null, null, null,  null, null);
+        return Main_Activity.db.query(DATABASE_TABLE, columns, null, null, null,  null, null);
     }
 
     public long insert(){
         Log.i(TAG, "Inserting into table " + DATABASE_TABLE);
-        return MainActivity.db.insert(DATABASE_TABLE, null, getValues());
+        return Main_Activity.db.insert(DATABASE_TABLE, null, getValues());
     }
 
     public boolean update(){
         Log.i(TAG, "Updating table " + DATABASE_TABLE + " on id = " + id);
-        return MainActivity.db.update(DATABASE_TABLE, getValues(),  KEY_ID + "=" + id, null) > 0;
+        return Main_Activity.db.update(DATABASE_TABLE, getValues(),  KEY_ID + "=" + id, null) > 0;
     }
 
     public boolean delete(){
         Log.i(TAG, "Deleting from table " + DATABASE_TABLE + " on id = " + id);
-        return MainActivity.db.delete(DATABASE_TABLE, KEY_ID + "=" + id, null) > 0;
+        return Main_Activity.db.delete(DATABASE_TABLE, KEY_ID + "=" + id, null) > 0;
     }
 
     public boolean delete(long id){
         Log.i(TAG, "Deleting from table " + DATABASE_TABLE + " on id = " + id);
-        return MainActivity.db.delete(DATABASE_TABLE, KEY_ID + "=" + id, null) > 0;
+        return Main_Activity.db.delete(DATABASE_TABLE, KEY_ID + "=" + id, null) > 0;
     }
 
     public boolean deleteAll(){
         Log.i(TAG, "Clearing table " + DATABASE_TABLE);
-        return MainActivity.db.delete(DATABASE_TABLE, null, null) > 0;
+        return Main_Activity.db.delete(DATABASE_TABLE, null, null) > 0;
     }
 
 }

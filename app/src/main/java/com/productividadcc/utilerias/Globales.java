@@ -23,15 +23,11 @@ public class Globales {
     private final static String PREF_LAST_CHECKIN_NOTES	 	= "pref_last_checkin_notes";
 
     public final static String STR_VACIO = "";
-    public final static String STR_CERO = "0";
-    public final static String STR_FECVAC = "1901-01-01";
-
     public final static String URL_REGISTRO_GRUPO =         "http://asistente.crediclub.com/2.0/altaGrupo.php?tokenID=%s&empleadoID=%s&nomContacto=%s&telcontacto=%s&refcontacto=%s&fechaEstDes=%s&fecCapac=%s&latitu=%s&longit=%s";
     public final static String URL_REGISTRO_RECONTRATACION  ="http://asistente.crediclub.com/2.0/recontratacion.php?tokenID=%s&empleadoID=%s&grupo=%s&nomContacto=%s&telcontacto=%s&fechaEstDes=%s&fecRecontra=%s&latitu=%s&longit=%s";
     public final static String URL_ACTUALIZAR_ETAPA         ="http://asistente.crediclub.com/2.0/actualizaEtapa.php?tokenID=%s&empleadoID=%s&idAgenda=%s&etapa=%s&nombreGrupo=%s&monto=%s&integrantes=%s&intnuevos=%s&intrenova=%s&fecha=%s&fechaestimada=%s&tipodispersion=%s&tipogrupo=%s&latitu=%s&longit=%s";
     public final static String URL_REPROGRAMAR_ETAPA        ="http://asistente.crediclub.com/2.0/reprogramacion.php?tokenID=%s&empleadoID=%s&idAgenda=%s&etapa=%s&fechaRep=%s&motivoRep=%s&latitu=%s&longit=%s";
-
-    public final static String URL_REGISTRO_AGENDA =        "http://asistente.crediclub.com/2.0/altaAgenda.php?";
+    public final static String URL_CANCELAR_ETAPA           ="http://asistente.crediclub.com/2.0/cancelacion.php?tokenID=%s&empleadoID=%s&idAgenda=%s&etapa=%s&fecha=%s&motivo=%s&latitu=%s&longit=%s";
     public final static String URL_CONSULTA_EMPLEADO =      "http://asistente.crediclub.com/2.0/consultaEmpleado.php?empleadoID=";
 
 

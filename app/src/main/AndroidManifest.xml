@@ -31,76 +31,76 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.productividadcc.SplashScreen" />
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".NewGroupsListActivity">
+        <activity android:name=".Main_Activity"></activity>
+        <activity android:name=".NewGroupsList_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Main_Activity" />
         </activity>
-        <activity android:name=".GroupTrainingActivity">
+        <activity android:name=".NewGroupTraining_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsListActivity" />
+                android:value=".NewGroupsList_Activity" />
         </activity>
-        <activity android:name=".GroupTraining2Activity">
+        <activity android:name=".NewGroupTrainingTwo_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsListActivity" />
+                android:value=".NewGroupsList_Activity" />
         </activity>
-        <activity android:name=".GroupDisrbursementActivity">
+        <activity android:name=".NewGroupDisbursement_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsListActivity" />
+                android:value=".NewGroupsList_Activity" />
         </activity>
-        <activity android:name=".OldGroupVoBo">
+        <activity android:name=".OldGroupVoBo_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsListActivity" />
+                android:value=".OldGroupsList_Activity" />
         </activity>
-        <activity android:name=".OldGroupRecontrationActivity">
+        <activity android:name=".OldGroupRehire_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsListActivity" />
+                android:value=".OldGroupsList_Activity" />
         </activity>
-        <activity android:name=".OldGroupDisrbursementActivity">
+        <activity android:name=".OldGroupDisbursement_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsListActivity" />
+                android:value=".OldGroupsList_Activity" />
         </activity>
-        <activity android:name=".OldGroupNewActivity">
+        <activity android:name=".OldGroupNew_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupsListActivity" />
+                android:value=".OldGroupsList_Activity" />
         </activity>
-        <activity android:name=".NewGroupVoBo">
+        <activity android:name=".NewGroupVoBo_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NewGroupsListActivity" />
+                android:value=".NewGroupsList_Activity" />
         </activity>
-        <activity android:name=".GrupoNuevo">
+        <activity android:name=".NewGroup_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Main_Activity" />
         </activity>
-        <activity android:name=".OldGroupsListActivity">
+        <activity android:name=".OldGroupsList_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Main_Activity" />
         </activity>
         <activity android:name=".SincAgenda">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Main_Activity" />
         </activity>
-        <activity android:name=".finishnewgroup">
+        <activity android:name=".FinishNewGroup_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GroupDisrbursementActivity" />
+                android:value=".NewGroupDisbursement_Activity" />
         </activity>
-        <activity android:name=".finisholdgroup">
+        <activity android:name=".FinishOldGroup_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".OldGroupDisrbursementActivity" />
+                android:value=".OldGroupDisbursement_Activity" />
         </activity>
     </application>
 

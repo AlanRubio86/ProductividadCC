@@ -2,19 +2,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string name="app_name">Asistente Crediclub 3.0</string>
-    <string name="welcome">Bienvenido</string>
 
-    <string name="checkin">Check In</string>
-    <string name="checkin_ok">Check In Exitoso!</string>
     <string name="checkin_error">Check In No Disponible. Por favor, inténtalo de nuevo!</string>
     <string name="checkin_msg">Checking in... Por favor, espere...</string>
     <string name="checkin_canceled">Check In Cancelado!</string>
-    <string name="checkin_continue">Continuar?</string>
 
-    <string name="checkout">Check Out</string>
-    <string name="checkout_ok">Check Out Exitoso!</string>
-    <string name="checkout_pending">Pendiente Checkout!</string>
-    <string name="checkout_pending_msg">Usted tiene un checkout pendiente,¿desea continuar con el para terminar la visita?</string>
     <string name="checkout_error">Check Out No Disponible. Por favor, inténtalo de nuevo!</string>
     <string name="checkout_msg">Checking out... Por favor, espere...</string>
     <string name="checkout_canceled">Check Out Cancelado!</string>
@@ -22,129 +14,8 @@
     <string name="upload_msg">Subiendo Informacion... Por favor, espere...</string>
     <string name="upload_canceled">Carga Cancelada!</string>
 
-    <string name="employee_title">Digite su numero de empleado:</string>
-    <string name="employee_error">Invalid employee ID</string>
-    <string name="employee_msg">Please enter your 7 digit employee ID</string>
-    <string name="employee_hint">Employee ID</string>
-    <string name="group_title">Grupo:</string>
-    <string name="groupCobranza_title">Digite el número de Grupo en Cobranza (Solo se aceptan numeros):</string>
-    <string name="group_hint">Group ID</string>
-    <string name="group_error">Numero de Grupo Invalido</string>
-    <string name="group_msg">Por Favor capture 4 digitos para el Grupo</string>
-    <string name="ciclo_msg">Por Favor capture 1 digitos para el Ciclo</string>
-    <string name="ciclo_errmsg">Numero de Ciclo Invalido</string>
-    <string name="ceros_errmsg">No puede capturar ceros</string>
-    <string name="semana_msg">Por Favor capture 1 digitos para el Semana</string>
-    <string name="semana_errmsg">Numero de Semana Invalido</string>
-    <string name="semana_errmax">El Numero de Semana no puede ser mayor a 16</string>
-    <string name="integra_msg">Por Favor capture 2 digitos para los Integrantes</string>
-    <string name="integra_errmsg">Numero de Integrantes Invalido</string>
-    <string name="integra_errmin">Los Integrantes no pueden ser menor a 7</string>
-
-    <string name="note_title">Digite una descripción breve: (15 letras máximo)</string>
-    <string name="note_subtitle">Ejemplo: “Capacitacion”, “Nuevo grupo”.</string>
-    <string name="note_hint">Note</string>
-    <string name="start_check_in">Iniciar Check-In</string>
-    <string name="start_check_out">Iniciar Check-Out</string>
-    <string name="select_event">Tipo de Grupo:</string>
-    <string name="select_gestion">Realizo Llamada:</string>
-    <string name="select_cerro">Cerro Ficha:</string>
-    <string name="select_registros">Subieron Registros:</string>
-    <string name="cobranza">Cobranza</string>
-    <string name="select_eventCobranza">Seleccione tipo de Causal:</string>
-    <string name="restart_check_in">Quieres realizar otro Check In?</string>
-    <string name="select_motivo">Motivo de Cancelacion:</string>
-
-    <string name="gps_msg">Por Favor Activa tu GPS!</string>
-    <string name="gps_error">GPS error, Revisa la Configuracion del GPS!</string>
-    <string name="gps_timeout">Localizacion GPS no disponible!</string>
-    <string name="gps_wait">Esperando por Localizacion GPS...</string>
-
-    <string name="data_offline">Eventos Almacenados!</string>
-    <string name="data_offline_msg">There are %1$d offline event%2$s\nDo you want to upload them?</string>
     <string name="data_saved">Eventos Almacenados offline!</string>
     <string name="wifi_error">Wifi No Disponible!</string>
-    <string name="next">Continuar</string>
-    <string name="back">Anterior</string>
-    <string name="retry">Reintentar</string>
-    <string name="finish">Finalizar</string>
-    <string name="upload">Subiendo</string>
-    <string name="close">Cerrar</string>
-    <string name="gps">GPS</string>
-    <string name="yes">Si</string>
-    <string name="no">No</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Cancelar</string>
-
-    <string-array name="tipos">
-        <item name="tip_nuevo">Nuevo</item>
-        <item name="tip_estre">Estrella</item>
-        <item name="tip_supes">Super Estrella</item>
-    </string-array>
-
-    <string-array name="motCap1">
-        <item name="mc1_noreu">No se Reunieron</item>
-        <item name="mc1_noint">No les Intereso</item>
-        <item name="mc1_falge">Falta Gente</item>
-    </string-array>
-
-    <string-array name="motCap2">
-        <item name="mc2_noreu">No se Reunieron</item>
-        <item name="mc2_falpa">Falta Papeleria</item>
-    </string-array>
-
-    <string-array name="motVoBo">
-        <item name="mvb_clinp">Analisis Rechaza Grupo</item>
-        <item name="mvb_decge">Gerente Rechaza Grupo</item>
-        <item name="mvb_falin">Grupo Incompleto</item>
-        <item name="mvb_lisne">Cliente no se presenta</item>
-        <item name="mvb_lisne">Falta INE</item>
-        <item name="mvb_lisne">Lista Negra</item>
-    </string-array>
-
-    <string-array name="motDese">
-        <item name="mdes_clinp">Cliente no se Presenta</item>
-        <item name="mdes_falin">Falta INE</item>
-        <item name="mdes_recge">Rechazo de Gerente</item>
-    </string-array>
-
-    <string-array name="gestionsi">
-        <item name="ges_si">SI</item>
-        <item name="ges_no">NO</item>
-    </string-array>
-
-    <string-array name="eventsCobranza">
-        <item name="event_novisita">Asesor No Visita</item>
-        <item name="event_nosoli">No Quiere hacer Solidario</item>
-        <item name="event_incump">Incumplimiento de Beneficios</item>
-        <item name="event_aclara">Aclaracion de Proceso</item>
-        <item name="event_negati">Negativa de Pago</item>
-        <item name="event_presta">Es Presta Nombre</item>
-        <item name="event_nonego">Quiere Pagar, pero no Puede</item>
-        <item name="event_camdom">Cambio Abandono Domicilio</item>
-    </string-array>
-
-    <string name="ciclo_title">Ciclo</string>
-    <string name="integrante_title">Integrantes</string>
-    <string name="semana_title">Semana</string>
-
-    <string name="grupo_valor">Ciclo</string>
-    <string name="ciclo_valor">Ciclo</string>
-    <string name="integrante_valor">Integrantes</string>
-    <string name="semana_valor">Semana</string>
-    <string name="encabezado_titulo">No\n Asistio</string>
-    <string name="encabezado_titulo2">Asistio | Pago | Ahorro |Solidario</string>
-    <string name="encabezado_NA">No\n Asistio|</string>
-    <string name="encabezado_NP">No\n Pago|</string>
-    <string name="encabezado_NAH">No\n Ahorro|</string>
-    <string name="encabezado_NS">No\n Solidario</string>
-    <string name="vacio"></string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_item_list">Items</string>
-    <string name="title_item_detail">Item Detail</string>
 
     <string-array name="dispersionItems">
         <item name="none">(Seleccionar)</item>
@@ -158,6 +29,7 @@
         <item name="changedate">Cambio de fecha</item>
         <item name="incomplete">No están todas las integrantes presentes</item>
         <item name="changed">Área de Análisis solicita reprogramación</item>
+        <item name="cancelclient">Se cancela una cliente y se descompleta el grupo"></item>
     </string-array>
     <string-array name="cancelItems">
         <item name="none">(Seleccionar)</item>
@@ -165,6 +37,7 @@
         <item name="fake">Información falsa</item>
         <item name="relational">Clientes no se conocen</item>
         <item name="risk">Se detectó algún riesgo</item>
+        <item name="cancel">Se cancelo una cliente y ya no quiere buscar mas</item>
     </string-array>
     <string-array name="trainingCancelItems">
         <item name="none">(Seleccionar)</item>
@@ -185,6 +58,7 @@
         <item name="dontinteresting">No les interesa nuestro producto</item>
         <item name="solidary">No aceptan el solidario</item>
         <item name="specificRisk">Riesgos específicos</item>
+        <item name="specificRisk">Numero de integrantes</item>
     </string-array>
     <string-array name="groupTypeItems">
         <item name="none">(Seleccionar)</item>
@@ -198,12 +72,15 @@
         <item name="superstar">Se detectó algún riesgo</item>
         <item name="start">El grupo ya no desea el crédito</item>
         <item name="consolidated">Mal comportamiento del grupo</item>
+        <item name="consolidated2">Credito vigente con adeudo en la competencia</item>
     </string-array>
     <string-array name="reprogramItemsDisbursement">
         <item name="none">(Seleccionar)</item>
         <item name="notarrive">Clientes no llegan a tiempo</item>
-        <item name="changedate">Grupo menor al mínimo de integrantes requerido</item>
         <item name="incomplete">No están todas las integrantes presentes</item>
+        <item name="erroramount">Error en montos</item>
+        <item name="errorname">Error en nombres</item>
+        <item name="changedate">Cambio de fecha</item>
     </string-array>
     <string-array name="recontratationCancelItems">
         <item name="none">(Seleccionar)</item>

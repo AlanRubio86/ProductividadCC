@@ -1,28 +1,19 @@
 package com.productividadcc;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
+import android.widget.TextView;
+import android.content.Intent;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.productividadcc.utilerias.GroupModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,22 +22,25 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NewGroupsListActivity extends AppCompatActivity {
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-    ListView listView;
+
+
+public class OldGroupsList_Activity extends AppCompatActivity {
+
     String[] agendaArray;
-    String[] idArray;
     private static Context context;
     ProgressBar mprogressBar;
-    String weekDay;
-    String numEmpleado;
-    String tokenId;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.newgroupslist_activity);
+        setContentView(R.layout.oldgroupslist_activity);
         context = getApplicationContext();
 
         // Find the toolbar view and set as ActionBar
@@ -55,20 +49,18 @@ public class NewGroupsListActivity extends AppCompatActivity {
         // ...
         // Display icon in the toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
         // Remove default title text
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Get access to the custom title view
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Nuevos Grupos");
+        mTitle.setText("Grupos de Recontratación");
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewGroupsListActivity.this, MainActivity.class);
+                Intent intent = new Intent(OldGroupsList_Activity.this, Main_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -77,34 +69,26 @@ public class NewGroupsListActivity extends AppCompatActivity {
         findViewById(R.id.agregaGrupoBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NewGroupsListActivity.this, GrupoNuevo.class);
+                Intent intent = new Intent(OldGroupsList_Activity.this, OldGroupNew_Activity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
         mprogressBar = (ProgressBar) findViewById(R.id.progressBar);
-        seeScheule();
+        LoadOldGroups();
+        mprogressBar.setVisibility(View.GONE);
     }
 
-    // Menu icons are inflated just as they were with actionbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    public void seeScheule() {
+    public void LoadOldGroups() {
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         String employeeID = shared.getString("numEmployee", "0");
         String tokenId = shared.getString("tokenId", "0");
-        Log.d("WS Login:", "http://asistente.crediclub.com/2.0/consultaAgenda.php?TipCon=1&empleadoID="+employeeID+"&tokenID="+tokenId);
-
-
+        Log.d("WS Login:", "http://asistente.crediclub.com/2.0/consultaAgenda.php?TipCon=2&empleadoID="+employeeID+"&tokenID="+tokenId);
 
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET,
-                "http://asistente.crediclub.com/2.0/consultaAgenda.php?TipCon=1&empleadoID="+employeeID+"&tokenID="+tokenId,
+                "http://asistente.crediclub.com/2.0/consultaAgenda.php?TipCon=2&empleadoID="+employeeID+"&tokenID="+tokenId,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -113,7 +97,7 @@ public class NewGroupsListActivity extends AppCompatActivity {
                         Log.d("Schedule", "response: " + response);
                         if (!response.equals("") && response != null) {
                             agendaArray = response.split("<br>");
-                            final ArrayList<ListCell> items = new ArrayList<ListCell>();
+                             final ArrayList<ListCell> items = new ArrayList<ListCell>();
                             for(int i=0;i<agendaArray.length;i++)
                             {
                                 String[] appointmentArray = agendaArray[i].split(", ");
@@ -153,23 +137,24 @@ public class NewGroupsListActivity extends AppCompatActivity {
                                         break;
 
                                 }
-                                items.add(new ListCell(appointmentArray[0],
-                                                       appointmentArray[1],
-                                                        appointmentArray[2],
-                                                        appointmentArray[3],
-                                                        appointmentArray[4],
-                                                        appointmentArray[5],
-                                                        appointmentArray[6],
-                                                        appointmentArray[7],
-                                                        appointmentArray[8],
-                                                        appointmentArray[9],
-                                                        appointmentArray[10],
-                                                        new SimpleDateFormat("yyyy-MM-dd").format(date),
-                                                        statusName));
+                                items.add(new ListCell(appointmentArray[0].toString(),
+                                        appointmentArray[1].toString(),
+                                        appointmentArray[2].toString(),
+                                        appointmentArray[3].toString(),
+                                        appointmentArray[4].toString(),
+                                        appointmentArray[5].toString(),
+                                        appointmentArray[6].toString(),
+                                        appointmentArray[7].toString(),
+                                        appointmentArray[8].toString(),
+                                        appointmentArray[9].toString(),
+                                        appointmentArray[10].toString(),
+                                        new SimpleDateFormat("yyyy-MM-dd").format(date),
+                                        statusName));
                             }
-                            final ListView list = (ListView) findViewById(R.id.groupsListView);
+                            final ListView list = (ListView) findViewById(R.id.oldGroupsListView);
 
                             ListAdapter adapter = new ListAdapter(getContext(), items);
+
                             list.setAdapter(adapter);
                             list.setOnItemClickListener(new OnItemClickListener()
                             {
@@ -177,30 +162,32 @@ public class NewGroupsListActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     // TODO Auto-generated method stub
+                                    TextView textView = (TextView) view.findViewById(R.id.name);
                                     TextView idTextView = (TextView) view.findViewById(R.id.ID);
                                     if (!idTextView.getText().toString().equals("")) {
+
                                         for(int x=0; x<items.size();x++)
                                         {
                                             if( items.get(x).getGroupId().equals(idTextView.getText().toString()))
                                             {
-                                                Intent intent = null;
-                                                switch (items.get(x).getStatusId())
-                                                {
-                                                    case "3":
-                                                        intent = new Intent(NewGroupsListActivity.this, NewGroupVoBo.class);
-                                                        break;
-                                                    case "1":
-                                                        intent = new Intent(NewGroupsListActivity.this, GroupTrainingActivity.class);
-                                                        break;
-                                                    case "2":
-                                                        intent = new Intent(NewGroupsListActivity.this, GroupTraining2Activity.class);
-                                                        break;
-                                                    case "4":
-                                                        intent = new Intent(NewGroupsListActivity.this, GroupDisrbursementActivity.class);
-                                                        break;
-                                                }
-                                                intent.putExtra("groupName", items.get(x).getGroupNumber()+"-"+items.get(x).getGroupName());
-                                                intent.putExtra("groupID", items.get(x).getGroupId());
+                                                    Intent intent=null;
+                                                    switch(items.get(x).getStatusId())
+                                                    {
+                                                        case "6":
+                                                            intent = new Intent(OldGroupsList_Activity.this, OldGroupVoBo_Activity.class);
+                                                            break;
+                                                        case "5":
+                                                            intent = new Intent(OldGroupsList_Activity.this, OldGroupRehire_Activity.class);
+                                                            break;
+                                                        case "4":
+                                                            intent = new Intent(OldGroupsList_Activity.this, OldGroupDisbursement_Activity.class);
+                                                            break;
+                                                    }
+
+                                                intent.putExtra("cicle",items.get(x).getCicle());
+                                                intent.putExtra("week",items.get(x).getWeek());
+                                                intent.putExtra("groupName",items.get(x).getGroupNumber()+"-"+items.get(x).getGroupName());
+                                                intent.putExtra("groupId",items.get(x).getGroupId());
                                                 startActivity(intent);
                                                 finish();
                                                 break;
@@ -209,6 +196,7 @@ public class NewGroupsListActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+
                             mprogressBar.setVisibility(View.GONE);
 
                         } else {
@@ -234,10 +222,8 @@ public class NewGroupsListActivity extends AppCompatActivity {
 
         MyRequestQueue.add(MyStringRequest);
     }
-
     public static Context getContext()
     {
         return context;
     }
 }
-

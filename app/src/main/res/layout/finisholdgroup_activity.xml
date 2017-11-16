@@ -8,7 +8,6 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="116dp"
 
@@ -28,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="143dp"
         android:gravity="center"
-        android:text="Has agregado 12 clientes más a tu cartera..."
+        android:text="Has renovado 12 clientes de tu cartera..."
         android:textColor="#00508C"
         android:textSize="30dp"
         />
@@ -43,13 +42,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.01"
             android:background="#FFFFFF"
-            android:paddingTop="20dp"
+            android:paddingTop="15dp"
             android:gravity="center">
         <Button
             android:id="@+id/btnNewGroups"
             android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:text="ir a Nuevo Grupos"
+            android:layout_height="50dp"
+            android:text="ir a Grupos Recontratación"
             android:background="@drawable/itemedittext"
             android:textColor="#ffffff"
             android:textSize="20dp"/>

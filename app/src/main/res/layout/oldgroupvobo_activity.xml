@@ -278,7 +278,7 @@
             android:layout_width="249dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:entries="@array/reprogramItemsDisbursement"
+            android:entries="@array/reprogramItems"
             android:background="@drawable/edittext"
             android:spinnerMode="dialog"
             android:textAlignment="center"

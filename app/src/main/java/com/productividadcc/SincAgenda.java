@@ -49,7 +49,7 @@ public class SincAgenda extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SincAgenda.this, MainActivity.class);
+                Intent intent = new Intent(SincAgenda.this, Main_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -115,7 +115,7 @@ public class SincAgenda extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Agenda Sincronizada. Se subieron un total de " +  total + " eventos.", Toast.LENGTH_LONG).show();
                 progressDialog.cancel();
 
-                Intent intent = new Intent(SincAgenda.this, MainActivity.class);
+                Intent intent = new Intent(SincAgenda.this, Main_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -124,7 +124,7 @@ public class SincAgenda extends AppCompatActivity {
             progressDialog.cancel();
             Toast.makeText(getApplicationContext(), "Necesitas tener conexión a internet para poder Sincronizar tu agenda", Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(SincAgenda.this, MainActivity.class);
+            Intent intent = new Intent(SincAgenda.this, Main_Activity.class);
             startActivity(intent);
             finish();
         }

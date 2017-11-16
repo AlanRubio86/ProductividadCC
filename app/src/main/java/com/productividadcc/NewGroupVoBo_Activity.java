@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.productividadcc.database.Event;
 import com.productividadcc.utilerias.Globales;
 
 import java.text.DateFormat;
@@ -35,7 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     private Calendar calendar,calendar2;
     EditText montoTxt, editIntegrants;
     EditText editEstimated, horaTxt,editAmount,editReprogram;
@@ -99,7 +100,7 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
         editEstimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog.newInstance(NewGroupVoBo.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+                DatePickerDialog.newInstance(NewGroupVoBo_Activity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
@@ -108,14 +109,14 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
         editReprogram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog.newInstance(NewGroupVoBo.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
+                DatePickerDialog.newInstance(NewGroupVoBo_Activity.this, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH), calendar2.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
                 if(movement==1)
                 {
                     if(editIntegrants.getText().toString().isEmpty())
@@ -140,7 +141,6 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                         integrants.setError(null);
                     }
 
-
                     if(editAmount.getText().toString().isEmpty())
                     {
                         amount.setError("This field can not be blank");
@@ -164,7 +164,6 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                     } else {
                         amount.setError(null);
                     }
-
 
                     if(editEstimated.getText().toString().isEmpty())
                     {
@@ -198,7 +197,14 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                             dispersionType="3";
                             break;
                     }
-                    updateGroup("3","",amount.toString(),editIntegrants.getText().toString(),"0","0",dateFormat.format(date),editEstimated.getText().toString(), dispersionType,"0");
+                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"3","",amount.toString(),editIntegrants.getText().toString(),"0","0",dateFormat.format(date),editEstimated.getText().toString(), dispersionType,"0",
+                            shared.getString("latitude", "0"),
+                            shared.getString("longitude", "0") );
+                    if (Utils.isNetworkAvailable(NewGroupVoBo_Activity.this)) {
+                        updateGroup(URL);
+                    } else {
+                        saveOffline(URL);
+                    }
 
                 } else if(movement==2)
                 {
@@ -216,10 +222,37 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                         Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
                         return;
                     }
-                    Toast.makeText(getApplicationContext(), "Se realizo la reprogramacion del visto bueno correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(NewGroupVoBo.this, NewGroupsListActivity.class);
-                    startActivity(intent);
-                    finish();
+                    String motive="";
+                    switch(spnMotiveReprogram.getSelectedItem().toString())
+                    {
+                        case "Clientes no llegan a tiempo":
+                            motive="1";
+                            break;
+                        case "Cambio de fecha":
+                            motive="2";
+                            break;
+                        case "No están todas las integrantes presentes":
+                            motive="3";
+                            break;
+                        case "Área de Análisis solicita reprogramación":
+                            motive="4";
+                            break;
+                        case "Se cancela una cliente y se descompleta el grupo":
+                            motive="5";
+                            break;
+                    }
+
+                    URL=String.format(Globales.URL_REPROGRAMAR_ETAPA,tokenId,employeeId,groupID,"3",editReprogram.getText().toString(),motive,
+                            shared.getString("latitude", "0"),
+                            shared.getString("longitude", "0")
+                    );
+                    if (Utils.isNetworkAvailable(NewGroupVoBo_Activity.this)) {
+                        updateGroup(URL);
+                    } else {
+                        saveOffline(URL);
+                    }
+
+
                 } else if(movement==3)
                 {
 
@@ -228,14 +261,39 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                         Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
                         return;
                     }
-                    Toast.makeText(getApplicationContext(), "Se realizo la cancelación del visto bueno correctamente", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(NewGroupVoBo.this, NewGroupsListActivity.class);
-                    startActivity(intent);
-                    finish();
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+                    String motive="";
+                    switch(spnCancelMotive.getSelectedItem().toString())
+                    {
+                        case "Se detectó prestanombres":
+                            motive="16";
+                            break;
+                        case "Información falsa":
+                            motive="17";
+                            break;
+                        case "Clientes no se conocen":
+                            motive="18";
+                            break;
+                        case "Se detectó algún riesgo":
+                            motive="19";
+                            break;
+                        case "Se cancelo una cliente y ya no quiere buscar mas":
+                            motive="20";
+                    }
+
+                    URL=String.format(Globales.URL_CANCELAR_ETAPA,tokenId,employeeId,groupID,"3",dateFormat.format(date),motive,shared.getString("latitude", "0"),shared.getString("longitude", "0") );
+                    if (Utils.isNetworkAvailable(NewGroupVoBo_Activity.this)) {
+                        updateGroup(URL);
+                    } else {
+                        saveOffline(URL);
+                    }
                 }
 
             }
         });
+
+        //region listeners
 
         editReprogram.addTextChangedListener(new TextWatcher() {
             @Override
@@ -311,7 +369,7 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewGroupVoBo.this, NewGroupsListActivity.class);
+                Intent intent = new Intent(NewGroupVoBo_Activity.this, NewGroupsList_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -364,16 +422,14 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                 movement=3;
             }
         });
+
+        //endregion
     }
 
 
-    public void updateGroup(String statusID,String groupName,String amount,String integrants,String newIntegrants, String renewIntegrants,String actualDate,String disbursementDate,String dispersionType,String groupType) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-        URL=String.format(URL,tokenId,employeeId,groupID,statusID ,groupName,amount,integrants,newIntegrants,renewIntegrants,actualDate,disbursementDate,dispersionType,groupType,shared.getString("latitude", "0"),shared.getString("longitude", "0") );
+    public void updateGroup(String URL) {
 
         Log.d("WS VoBoNewGroup:", URL);
-
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
@@ -381,7 +437,7 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
                     public void onResponse(String response) {
                         clearFields();
                         Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(NewGroupVoBo.this, NewGroupsListActivity.class);
+                        Intent intent = new Intent(NewGroupVoBo_Activity.this, NewGroupsList_Activity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -396,31 +452,22 @@ public class NewGroupVoBo extends AppCompatActivity implements DatePickerDialog.
         });
 
 
-        /*{
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("fecha", selectedStringDate);
-                params.put("hora", horaTxt.getText().toString());
-                params.put("tipEve", "6");
-                params.put("emplea", shared.getString("userNumber", "0"));
-                params.put("grupo", numGrupo.getText().toString());
-                params.put("ciclo", "%20");
-                params.put("latitu", shared.getString("latitude", "0"));
-                params.put("longit", shared.getString("longitude", "0"));
-                params.put("nuAgSe", eventID);
-                params.put("imei", imeiNumber);
-                params.put("stamp", String.valueOf(System.currentTimeMillis()/1000));
-                params.put("monGru", montoTxt.getText().toString());
-                params.put("integr", integrantesTxt.getText().toString());
-                params.put("semRen", "0");
-                params.put("coment", "%20");
-
-                return params;
-            }
-        };*/
-
         MyRequestQueue.add(MyStringRequest);
+    }
+
+    public void saveOffline(String URL) {
+        final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
+        Log.d("DB Prom:", URL);
+        Main_Activity.event = new Event();
+        Main_Activity.event.setUrlWS(URL);
+        Main_Activity.event.setStatus(0);
+        Main_Activity.event.insert();
+
+        Toast.makeText(getApplicationContext(), "Los datos han sido guardados de manera offline", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(NewGroupVoBo_Activity.this, NewGroupsList_Activity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

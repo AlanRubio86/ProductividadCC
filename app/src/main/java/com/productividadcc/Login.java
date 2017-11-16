@@ -15,7 +15,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +28,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.productividadcc.utilerias.Globales;
-import com.productividadcc.utilerias.Utilerias;
 
 
 import org.apache.commons.codec.binary.Hex;
@@ -167,7 +165,7 @@ public class Login extends AppCompatActivity implements LocationListener {
                                 strNombreEmpleado = appointmentArray[1];
                             }
                             Log.d("WS Login Emplea:", strNombreEmpleado);
-                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            Intent intent = new Intent(Login.this, Main_Activity.class);
                             intent.putExtra("nombreEmpleado", strNombreEmpleado);
                             startActivity(intent);
                             finish();
@@ -182,7 +180,7 @@ public class Login extends AppCompatActivity implements LocationListener {
                 public void onErrorResponse(VolleyError error) {
                     // SI NO TIENE CONEXION A WIFI SE DA ACCESO OFFLINE
                     if(Utils.isNetworkAvailable(getApplicationContext()) == false){
-                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        Intent intent = new Intent(Login.this, Main_Activity.class);
                         //intent.putExtra("nombreEmpleado",getIntent().getExtras().getString("eventId"));
                         intent.putExtra("nombreEmpleado", "Bienvenido Modo Off-Line");
                         startActivity(intent);

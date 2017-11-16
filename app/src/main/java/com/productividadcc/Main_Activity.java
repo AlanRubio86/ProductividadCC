@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.productividadcc.database.DatabaseHelper;
 import com.productividadcc.database.Event;
 
-public class MainActivity extends AppCompatActivity {
+public class Main_Activity extends AppCompatActivity {
 
     private String strNombreEmpleado;
     private TextView nombreEmpleado;
@@ -21,17 +21,11 @@ public class MainActivity extends AppCompatActivity {
     public static SQLiteDatabase db;
     public static Event event;
 
-    public static final int GROUP_DIGITS = 4;
-    public static final int CICLO_DIGITS = 1;
-    public static final int SEMANA_DIGITS = 1;
-    public static final int SEMANA_MAXIMO = 16;
-    public static final int INTEGRANTES_DIGITS = 2;
-    public static final int INTEGRANTES_MINIMO = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
         DatabaseHelper dbh = new DatabaseHelper(this);
         db = dbh.getWritableDatabase();
@@ -54,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.agendaBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NewGroupsListActivity.class);
+                Intent intent = new Intent(Main_Activity.this, NewGroupsList_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -63,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.agregarEventoBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, OldGroupsListActivity.class);
+                Intent intent = new Intent(Main_Activity.this, OldGroupsList_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -72,20 +66,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.sincronizarBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SincAgenda.class);
+                Intent intent = new Intent(Main_Activity.this, SincAgenda.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        /*findViewById(R.id.bitacoraBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Bitacora.class);
-                startActivity(intent);
-                finish();
-            }
-        });*/
+
     }
 
     // Menu icons are inflated just as they were with actionbar
