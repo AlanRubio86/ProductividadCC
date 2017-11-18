@@ -31,6 +31,7 @@ import com.productividadcc.database.Event;
 import com.productividadcc.utilerias.Globales;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,9 +40,10 @@ import java.util.Locale;
 public class NewGroupTraining_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
     private Calendar calendar,calendar2;
+    private String current = "";
     EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram;
     Spinner spnMotiveCancel;
-    TextView fechaTxt, horaTxt;
+    TextView ceros, horaTxt;
 
     String groupID,tokenId,employeeId;
     TextView nombreLbl;
@@ -73,13 +75,14 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
         final TextInputLayout reprogram = (TextInputLayout) findViewById(R.id.llDateReprogram);
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
 
         editAmount = (EditText) findViewById(R.id.editAmount);
         editIntegrant = (EditText) findViewById(R.id.editIntegrant);
         editDateEstimated= (EditText) findViewById(R.id.editDateEstimated);
         editDateReprogram= (EditText) findViewById(R.id.editDateReprogram);
         spnMotiveCancel=(Spinner) findViewById(R.id.spnMotiveCancel);
-
+        ceros=(TextView)findViewById(R.id.ceros);
 
         mTitle.setText("Capacitación 1");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -251,6 +254,23 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 amount.setError(null);
+                if(!s.toString().equals(current))
+                {
+                    editAmount.removeTextChangedListener(this);
+
+                                    String cleanString = s.toString().replaceAll("[$,.]", "");
+
+                                    double parsed = Double.parseDouble(cleanString);
+                                    String formatted = NumberFormat.getCurrencyInstance().format((parsed*1));
+
+                                    current = formatted;
+                    editAmount.setText(formatted);
+                    editAmount.setSelection(formatted.length());
+                    editAmount.addTextChangedListener(this);
+                }
+
+
+
             }
 
             @Override
@@ -327,6 +347,7 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
             }
         });
@@ -355,6 +376,7 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });

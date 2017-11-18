@@ -222,6 +222,9 @@ public class NewGroupsList_Activity extends AppCompatActivity {
                 Log.d("Schedule", "response error" + error.toString());
                 Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar.", Toast.LENGTH_LONG).show();
                 mprogressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(NewGroupsList_Activity.this, Main_Activity.class);
+                startActivity(intent);
+                finish();
             }
         }) {
             protected Map<String, String> getParams() {

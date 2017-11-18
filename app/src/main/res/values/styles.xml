@@ -12,6 +12,4 @@
         <item name="android:textColor">#00508C</item>
         <item name="android:textSize">14sp</item>
     </style>
-
-
 </resources>
