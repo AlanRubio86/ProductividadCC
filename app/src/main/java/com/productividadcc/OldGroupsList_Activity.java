@@ -2,6 +2,7 @@ package com.productividadcc;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,7 +29,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
+import com.productividadcc.database.Event;
+import com.productividadcc.database.NewGroups;
+import com.productividadcc.database.OldGroups;
 
 
 public class OldGroupsList_Activity extends AppCompatActivity {
@@ -100,6 +103,11 @@ public class OldGroupsList_Activity extends AppCompatActivity {
                              final ArrayList<ListCell> items = new ArrayList<ListCell>();
                             for(int i=0;i<agendaArray.length;i++)
                             {
+
+                                Main_Activity.oldGroups = new OldGroups();
+                                Main_Activity.oldGroups.setItem(agendaArray[i]);
+                                Main_Activity.oldGroups.insert();
+
                                 String[] appointmentArray = agendaArray[i].split(", ");
                                 Date date = null;
                                 try {
@@ -211,6 +219,9 @@ public class OldGroupsList_Activity extends AppCompatActivity {
                 Log.d("Schedule", "response error" + error.toString());
                 Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar.", Toast.LENGTH_LONG).show();
                 mprogressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(OldGroupsList_Activity.this, Main_Activity.class);
+                startActivity(intent);
+                finish();
             }
         }) {
             protected Map<String, String> getParams() {
@@ -222,6 +233,8 @@ public class OldGroupsList_Activity extends AppCompatActivity {
 
         MyRequestQueue.add(MyStringRequest);
     }
+
+
     public static Context getContext()
     {
         return context;

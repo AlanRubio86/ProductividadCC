@@ -41,7 +41,7 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
     EditText editIntegrant,editAmount,editDisbursement;
     Spinner spnMotiveReprogram,spnCancelMotive;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl;
+    TextView ceros,nombreLbl;
     String URL = "";
     private int movement=0;
 
@@ -77,6 +77,9 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
         editDisbursement= (EditText) findViewById(R.id.editDisbursement);
         spnCancelMotive=(Spinner) findViewById(R.id.spnCancelMotive);
         spnMotiveReprogram=(Spinner) findViewById(R.id.spnMotiveReprogram);
+
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
 
 
 
@@ -304,6 +307,7 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.GONE);
                 dateReprogram.setVisibility(View.GONE);
                 cancelMotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
 
             }
@@ -319,6 +323,7 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.VISIBLE);
                 dateReprogram.setVisibility(View.VISIBLE);
                 cancelMotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=2;
 
             }
@@ -333,6 +338,7 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.GONE);
                 dateReprogram.setVisibility(View.GONE);
                 cancelMotive.setVisibility(View.VISIBLE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });

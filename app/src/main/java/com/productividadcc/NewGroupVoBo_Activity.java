@@ -42,7 +42,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
     EditText editEstimated, horaTxt,editAmount,editReprogram;
     Spinner spnDispersion,spnMotiveReprogram,spnCancelMotive;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl;
+    TextView ceros,nombreLbl;
     String URL = Globales.URL_ACTUALIZAR_ETAPA;
     private int movement=0;
 
@@ -78,6 +78,8 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
         spnDispersion=(Spinner) findViewById(R.id.spnDispersion);
         spnMotiveReprogram=(Spinner)findViewById(R.id.spnMotiveReprogram);
         spnCancelMotive=(Spinner)findViewById(R.id.spnCancelMotive);
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
 
         editReprogram = (EditText) findViewById(R.id.editReprogram);
 
@@ -386,6 +388,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
 
             }
@@ -403,6 +406,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                     reprogrammotive.setVisibility(View.VISIBLE);
                     reprogram.setVisibility(View.VISIBLE);
                     cancelmotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.GONE);
                      movement=2;
 
             }
@@ -419,6 +423,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });

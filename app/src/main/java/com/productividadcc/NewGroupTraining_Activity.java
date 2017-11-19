@@ -40,7 +40,7 @@ import java.util.Locale;
 public class NewGroupTraining_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     String imeiNumber;
     private Calendar calendar,calendar2;
-    private String current = "";
+    private String current = "0";
     EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram;
     Spinner spnMotiveCancel;
     TextView ceros, horaTxt;
@@ -254,23 +254,6 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 amount.setError(null);
-                if(!s.toString().equals(current))
-                {
-                    editAmount.removeTextChangedListener(this);
-
-                                    String cleanString = s.toString().replaceAll("[$,.]", "");
-
-                                    double parsed = Double.parseDouble(cleanString);
-                                    String formatted = NumberFormat.getCurrencyInstance().format((parsed*1));
-
-                                    current = formatted;
-                    editAmount.setText(formatted);
-                    editAmount.setSelection(formatted.length());
-                    editAmount.addTextChangedListener(this);
-                }
-
-
-
             }
 
             @Override

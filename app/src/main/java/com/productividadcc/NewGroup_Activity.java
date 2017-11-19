@@ -165,7 +165,7 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
                 }
 
                 if (Utils.isNetworkAvailable(NewGroup_Activity.this)) {
-                    sendSaveGroup(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),
+                    saveOffline(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),
                             txtContactPhoneRef.getEditText().getText().toString(),fechaTxt.getText().toString(),fechaCap1.getText().toString());
                 } else {
                     saveOffline(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),

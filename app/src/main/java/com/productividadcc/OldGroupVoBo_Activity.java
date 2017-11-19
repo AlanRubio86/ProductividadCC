@@ -42,7 +42,7 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
     EditText editEstimated, horaTxt,editAmount,editReprogram;
     Spinner spnDispersion,spnMotiveReprogram,spnCancelMotive;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl,cicleLbl,weekLbl;
+    TextView ceros,nombreLbl,cicleLbl,weekLbl;
     String URL = "";
     private int movement=0;
 
@@ -83,6 +83,8 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
         spnCancelMotive=(Spinner)findViewById(R.id.spnCancelMotive);
 
         editReprogram = (EditText) findViewById(R.id.editReprogram);
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
 
         mTitle.setText("Visto Bueno");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -388,6 +390,8 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
+
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
 
             }
@@ -405,6 +409,8 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 reprogrammotive.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.VISIBLE);
                 cancelmotive.setVisibility(View.GONE);
+
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=2;
 
             }
@@ -421,6 +427,8 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
+
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });

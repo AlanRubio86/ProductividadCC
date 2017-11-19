@@ -42,7 +42,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
     EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram,editGroupName,editDateDisbursement;
     Spinner spnMotiveCancel;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl;
+    TextView ceros,nombreLbl;
     String URL = "";
     private int movement=0;
     int idFechaDesembolso = 0;
@@ -74,6 +74,8 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
         final TextInputLayout groupNameLayout = (TextInputLayout) findViewById(R.id.llname);
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
         editGroupName=(EditText) findViewById(R.id.editGroupName);
         editAmount = (EditText) findViewById(R.id.editAmount);
         editIntegrant = (EditText) findViewById(R.id.editIntegrant);
@@ -387,6 +389,8 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
+
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
             }
         });
@@ -402,6 +406,8 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     btnsave.setVisibility(View.VISIBLE);
                     reprogram.setVisibility(View.VISIBLE);
                     cancelmotive.setVisibility(View.GONE);
+
+                llAmountGeneral.setVisibility(View.GONE);
                      movement=2;
 
             }
@@ -418,6 +424,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });

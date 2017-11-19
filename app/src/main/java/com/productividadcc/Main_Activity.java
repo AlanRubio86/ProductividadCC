@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.productividadcc.database.DatabaseHelper;
 import com.productividadcc.database.Event;
+import com.productividadcc.database.NewGroups;
+import com.productividadcc.database.OldGroups;
 
 public class Main_Activity extends AppCompatActivity {
 
@@ -20,6 +22,8 @@ public class Main_Activity extends AppCompatActivity {
 
     public static SQLiteDatabase db;
     public static Event event;
+    public static NewGroups newGroups;
+    public static OldGroups oldGroups;
 
 
     @Override

@@ -38,7 +38,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
     private Calendar calendar,calendar2;
     EditText editIntegrant ,editNewIntegrant, editIntegrantRec,editAmount,editDateEstimated,editDateReprogram;
     Spinner spnCancelMotive;
-    TextView  horaTxt;
+    TextView ceros, horaTxt;
     String groupID,tokenId,employeeId;
     TextView nombreLbl;
     String URL ="";
@@ -78,6 +78,9 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
        editDateEstimated = (EditText) findViewById(R.id.editDateEstimated);
        editDateReprogram = (EditText) findViewById(R.id.editDateReprogram);
        spnCancelMotive=(Spinner) findViewById(R.id.spnCancelMotive);
+
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
 
 
 
@@ -344,6 +347,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
             }
         });
@@ -377,6 +381,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });

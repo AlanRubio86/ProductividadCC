@@ -41,7 +41,7 @@ public class NewGroupDisbursement_Activity extends AppCompatActivity implements 
     EditText editIntegrant,editAmount,editDisbursement;
     Spinner spnGroupType,spnMotiveReprogram,spnCancelMotive;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl;
+    TextView ceros,nombreLbl;
     String URL = "";
     private int movement=0;
 
@@ -71,6 +71,8 @@ public class NewGroupDisbursement_Activity extends AppCompatActivity implements 
         final TextInputLayout dateReprogram = (TextInputLayout) findViewById(R.id.llDate);
         final LinearLayout cancelMotive = (LinearLayout) findViewById(R.id.llCancelMotive);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
 
 
         editAmount = (EditText) findViewById(R.id.editAmount);
@@ -332,6 +334,7 @@ public class NewGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.GONE);
                 dateReprogram.setVisibility(View.GONE);
                 cancelMotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
 
             }
@@ -348,6 +351,7 @@ public class NewGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.VISIBLE);
                 dateReprogram.setVisibility(View.VISIBLE);
                 cancelMotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.GONE);
                      movement=2;
 
             }
@@ -363,6 +367,7 @@ public class NewGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.GONE);
                 dateReprogram.setVisibility(View.GONE);
                 cancelMotive.setVisibility(View.VISIBLE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });
