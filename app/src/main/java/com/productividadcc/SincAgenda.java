@@ -74,13 +74,10 @@ public class SincAgenda extends AppCompatActivity {
                 total = cursor.getCount();
 
                 while (!cursor.isAfterLast()){
-                    Event ev = new Event();
+                    final Event ev = new Event();
                     ev.copy(cursor);
 
                     Log.d("Cursos DB:", ev.toString());
-
-                    // ENVIAR UN MENSAJE AL FINAL DE LOS EVENTOS QUE SE CARGARON
-                    //publishProgress("Uploading... " + (count + 1) + "/" + total);
 
                     Log.d("WS Sincronizacion", ev.getUrlWS());
                     RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -88,10 +85,11 @@ public class SincAgenda extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    //This code is executed if the server responds, whether or not the response contains data.
-                                    //The String 'response' contains the server's response.
-                                    //clearFields();
-
+                                    Log.d("WS-Sync-response", response);
+                                    if(response.trim().equals("ok"))
+                                    {
+                                        ev.delete();
+                                    }
                                 }
                             }, new Response.ErrorListener() {
                         @Override
@@ -104,14 +102,10 @@ public class SincAgenda extends AppCompatActivity {
                     });
 
                     MyRequestQueue.add(MyStringRequest);
-
-                    ev.delete();
                     count++;
                     cursor.moveToNext();
                 }
-
                 cursor.close();
-
                 Toast.makeText(getApplicationContext(), "Agenda Sincronizada. Se subieron un total de " +  total + " eventos.", Toast.LENGTH_LONG).show();
                 progressDialog.cancel();
 

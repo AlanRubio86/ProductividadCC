@@ -125,12 +125,13 @@ public class NewGroupsList_Activity extends AppCompatActivity {
                         Log.d("Schedule", "response: " + response);
                         if (!response.equals("") && response != null) {
                             agendaArray = response.split("<br>");
+                            Main_Activity.newGroups = new NewGroups();
+                            Main_Activity.newGroups.deleteAll();
+
                             final ArrayList<ListCell> items = new ArrayList<ListCell>();
                             for(int i=0;i<agendaArray.length;i++)
                             {
-
-                                Main_Activity.newGroups = new NewGroups();
-                               Main_Activity.newGroups.setItem(agendaArray[i]);
+                                Main_Activity.newGroups.setItem(agendaArray[i]);
                                 Main_Activity.newGroups.insert();
 
                                 String[] appointmentArray = agendaArray[i].split(", ");
@@ -325,7 +326,6 @@ public class NewGroupsList_Activity extends AppCompatActivity {
                             appointmentArray[10],
                             new SimpleDateFormat("yyyy-MM-dd").format(date),
                             statusName));
-                    ev.delete();
                     count++;
                     cursor.moveToNext();
                 }
@@ -369,6 +369,7 @@ public class NewGroupsList_Activity extends AppCompatActivity {
                     }
                 });
                 mprogressBar.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), "Se cargo la lista fuera de linea", Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(getApplicationContext(), "No hay nuevos grupos que mostrar", Toast.LENGTH_LONG).show();
             }

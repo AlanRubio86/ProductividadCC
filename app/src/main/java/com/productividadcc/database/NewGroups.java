@@ -67,12 +67,4 @@ public class NewGroups extends DatabaseObject {
     }
 
 
-    public void insertItem(String item){
-        String sqlExec = "";
-
-        sqlExec = "INSERT INTO " + DB_TABLE + " (Item) values ('" + item + ");";
-        Log.d(TAG, "Inserting " + sqlExec);
-
-        db.execSQL(sqlExec);
-    }
 }

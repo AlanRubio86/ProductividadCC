@@ -33,6 +33,7 @@ public class Main_Activity extends AppCompatActivity {
 
         DatabaseHelper dbh = new DatabaseHelper(this);
         db = dbh.getWritableDatabase();
+        dbh.onCreate(db);
 
         nombreEmpleado = (TextView) findViewById(R.id.nombreEmpleado);
 
