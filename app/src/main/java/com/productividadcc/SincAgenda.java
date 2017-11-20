@@ -81,7 +81,7 @@ public class SincAgenda extends AppCompatActivity {
 
                     Log.d("WS Sincronizacion", ev.getUrlWS());
                     RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-                    StringRequest MyStringRequest = new StringRequest(Request.Method.GET, ev.getUrlWS(),
+                    StringRequest MyStringRequest = new StringRequest(Request.Method.GET, ev.getUrlWS().replace(" ","%20"),
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {

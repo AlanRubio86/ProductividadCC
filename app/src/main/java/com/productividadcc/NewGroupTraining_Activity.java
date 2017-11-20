@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.NotificationCompatSideChannelService;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
@@ -167,7 +168,7 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
                         date.setError(null);
                     }
 
-                    Double amount=Double.parseDouble(editAmount.getText().toString())*100;
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*1000;
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
                     URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"1","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0",shared.getString("latitude", "0"),shared.getString("longitude", "0"));
@@ -204,7 +205,7 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
                         Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
                         return;
                     }
-                    Double amount=Double.parseDouble(editAmount.getText().toString())*100;
+
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
 
@@ -365,7 +366,7 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
         });
     }
 
-    public void updateGroup(String URL) {
+    public void updateGroup(final String URL) {
         Log.d("WS NewGroupTraining:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -374,19 +375,23 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
                     @Override
                     public void onResponse(String response) {
                         clearFields();
-
-
-                        Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(NewGroupTraining_Activity.this, NewGroupsList_Activity.class);
-                        startActivity(intent);
-                        finish();
+                        if(response.toLowerCase().equals("ok"))
+                        {
+                            Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(NewGroupTraining_Activity.this, NewGroupsList_Activity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
+                        {
+                            saveOffline(URL);
+                        }
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
                 //This code is executed if there is an error.
-                Log.d("Send Event info", "response error" + error.toString());
-                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
+                saveOffline(URL);
                 //mprogressBar.setVisibility(View.GONE);
             }
         });

@@ -252,7 +252,7 @@ public class OldGroupNew_Activity extends AppCompatActivity implements DatePicke
 
     public void sendSaveGroup (String grupo,String nomContacto,String telContacto, String dateDisbursement, String dateRecontratation) {
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-        URL= String.format(URL,tokenId,employeeId,grupo,nomContacto,telContacto,dateDisbursement,dateRecontratation,shared.getString("latitude", "0"),shared.getString("longitude", "0")  );
+        URL= String.format(URL,tokenId,employeeId,grupo,nomContacto,telContacto,dateDisbursement,dateRecontratation,shared.getString("latitude", "0"),shared.getString("longitude", "0")  ).replace(" ","%20");
 
         Log.d("WS Prom:", URL);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -260,11 +260,17 @@ public class OldGroupNew_Activity extends AppCompatActivity implements DatePicke
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        clearFields();
-                        Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo de recontración correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(OldGroupNew_Activity.this, OldGroupsList_Activity.class);
-                        startActivity(intent);
-                        finish();
+                        if(response.toLowerCase().equals("ok")) {
+                            clearFields();
+                            Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo de recontración correctamente", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(OldGroupNew_Activity.this, OldGroupsList_Activity.class);
+                            startActivity(intent);
+                            finish();
+                        }else
+                        {
+                            Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar", Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
@@ -283,7 +289,7 @@ public class OldGroupNew_Activity extends AppCompatActivity implements DatePicke
     public void saveGroupOffline(String grupo,String nomContacto,String telContacto, String dateDisbursement, String dateRecontratation) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-        URL= String.format(URL,tokenId,employeeId,grupo,nomContacto,telContacto,dateDisbursement,dateRecontratation,shared.getString("latitude", "0"),shared.getString("longitude", "0")  );
+        URL= String.format(URL,tokenId,employeeId,grupo,nomContacto,telContacto,dateDisbursement,dateRecontratation,shared.getString("latitude", "0"),shared.getString("longitude", "0")  ).replace(" ","%20");
 
         Log.d("DB Prom:", URL);
         Main_Activity.event = new Event();

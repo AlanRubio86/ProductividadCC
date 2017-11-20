@@ -190,7 +190,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
                         date.setError(null);
                     }
 
-                    Double amount=Double.parseDouble(editAmount.getText().toString())*100;
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*1000;
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
                         URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,
@@ -222,7 +222,6 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
                     if (editDateReprogram.getText().toString().isEmpty()) {
                         reprogram.setError("This field can not be blank");
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
-                        ;
                         return;
                     } else {
                         reprogram.setError(null);
@@ -389,7 +388,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
         //endregion
     }
 
-    public void updateGroup(String URL) {
+    public void updateGroup(final String URL) {
         Log.d("WS RehireOldGroup:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -397,17 +396,21 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(OldGroupRehire_Activity.this, OldGroupsList_Activity.class);
-                        startActivity(intent);
-                        finish();
+                        if(response.toLowerCase().equals("ok")) {
+                            Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(OldGroupRehire_Activity.this, OldGroupsList_Activity.class);
+                            startActivity(intent);
+                            finish();
+                        }else
+                        {
+                            saveOffline(URL);
+                        }
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
                 //This code is executed if there is an error.
-                Log.d("Send Event info", "response error" + error.toString());
-                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
+                saveOffline(URL);
                 //mprogressBar.setVisibility(View.GONE);
             }
         });

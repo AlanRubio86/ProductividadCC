@@ -432,7 +432,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
     }
 
 
-    public void updateGroup(String URL) {
+    public void updateGroup(final String URL) {
 
         Log.d("WS VoBoNewGroup:", URL);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -440,18 +440,22 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        clearFields();
-                        Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(NewGroupVoBo_Activity.this, NewGroupsList_Activity.class);
-                        startActivity(intent);
-                        finish();
+                        if(response.toLowerCase().equals("ok")) {
+                            clearFields();
+                            Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(NewGroupVoBo_Activity.this, NewGroupsList_Activity.class);
+                            startActivity(intent);
+                            finish();
+                        }else
+                        {
+                            saveOffline(URL);
+                        }
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
                 //This code is executed if there is an error.
-                Log.d("Send Event info", "response error" + error.toString());
-                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
+                saveOffline(URL);
                 //mprogressBar.setVisibility(View.GONE);
             }
         });
