@@ -42,7 +42,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
     EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram,editGroupName,editDateDisbursement;
     Spinner spnMotiveCancel;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl;
+    TextView ceros,nombreLbl;
     String URL = "";
     private int movement=0;
     int idFechaDesembolso = 0;
@@ -74,6 +74,8 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
         final LinearLayout btnsave = (LinearLayout) findViewById(R.id.btnSave);
         final TextInputLayout groupNameLayout = (TextInputLayout) findViewById(R.id.llname);
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
         editGroupName=(EditText) findViewById(R.id.editGroupName);
         editAmount = (EditText) findViewById(R.id.editAmount);
         editIntegrant = (EditText) findViewById(R.id.editIntegrant);
@@ -190,7 +192,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     Double amount=Double.parseDouble(editAmount.getText().toString())*1000;
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
-                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"2",editGroupName.getText().toString(),amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0",shared.getString("latitude", "0"),shared.getString("longitude", "0"));
+                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"2",editGroupName.getText().toString().replace(" ","%"),amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0",shared.getString("latitude", "0"),shared.getString("longitude", "0"));
                     if (Utils.isNetworkAvailable(NewGroupTrainingTwo_Activity.this)) {
                         updateGroup(URL);
                     } else {
@@ -222,7 +224,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                         return;
                     }
 
-                    Double amount=Double.parseDouble(editAmount.getText().toString())*100;
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
                     String motive="";
@@ -387,6 +388,8 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
+
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
             }
         });
@@ -402,6 +405,8 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     btnsave.setVisibility(View.VISIBLE);
                     reprogram.setVisibility(View.VISIBLE);
                     cancelmotive.setVisibility(View.GONE);
+
+                llAmountGeneral.setVisibility(View.GONE);
                      movement=2;
 
             }
@@ -418,33 +423,36 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });
         //endregion
     }
 
-    public void updateGroup(String URL) {
+    public void updateGroup(final String URL) {
         Log.d("WS Trainin2NewGroup:", URL);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
-        StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
+        StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL.replace(" ","%20"),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        clearFields();
-
-
-                        Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(NewGroupTrainingTwo_Activity.this, NewGroupsList_Activity.class);
-                        startActivity(intent);
-                        finish();
+                        if(response.toLowerCase().equals("ok")) {
+                            clearFields();
+                            Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(NewGroupTrainingTwo_Activity.this, NewGroupsList_Activity.class);
+                            startActivity(intent);
+                            finish();
+                        }else
+                        {
+                            saveOffline(URL);
+                        }
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
                 //This code is executed if there is an error.
-                Log.d("Send Event info", "response error" + error.toString());
-                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
+                saveOffline(URL);
                 //mprogressBar.setVisibility(View.GONE);
             }
         });
@@ -457,7 +465,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         Log.d("DB Prom:", URL);
         Main_Activity.event = new Event();
-        Main_Activity.event.setUrlWS(URL);
+        Main_Activity.event.setUrlWS(URL.replace(" ","%20"));
         Main_Activity.event.setStatus(0);
         Main_Activity.event.insert();
 

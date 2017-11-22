@@ -23,10 +23,19 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public static final int 	DATABASE_VERSION 	= 1;
 
     private static final String DROP_EVENTS = "DROP TABLE IF EXISTS events";
+    private static final String DROP_NEWGROUPS = "DROP TABLE IF EXISTS NewGroups";
+    private static final String DROP_OLDGROUPS = "DROP TABLE IF EXISTS OldGroups";
     private static final String DROP_EVALUA = "DROP TABLE IF EXISTS evaluacion";
 
     private static final String TABLA_WEBSERVICE = "CREATE TABLE IF NOT EXISTS wsOffLine " +
                                                    "(_id INTEGER PRIMARY KEY AUTOINCREMENT, urlWS TEXT, status INTEGER)";
+
+    private static final String TABLA_NEWGROUPS= "CREATE TABLE IF NOT EXISTS NewGroups " +
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT, Item TEXT)";
+
+    private static final String TABLA_OLDGROUPS = "CREATE TABLE IF NOT EXISTS OldGroups " +
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT, Item TEXT)";
+
     private static final String TABLA_AGENDA = "CREATE TABLE IF NOT EXISTS agendaOffLine " +
                                                     "(_id INTEGER PRIMARY KEY, " +
                                                     "fecha TEXT, hora TEXT," +
@@ -42,12 +51,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
         String s;
-
+        Log.w(TAG, "creating database");
         try{
             InputStream in = context.getResources().openRawResource(R.raw.sql);
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -65,6 +75,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
             // CREATE TABLA EVALUACION
             db.execSQL(TABLA_AGENDA);
             db.execSQL(TABLA_WEBSERVICE);
+            db.execSQL(TABLA_NEWGROUPS);
+            db.execSQL(TABLA_OLDGROUPS);
         }catch (Exception e){
             Log.i(TAG, "onCreate Error: " + e.toString());
         }

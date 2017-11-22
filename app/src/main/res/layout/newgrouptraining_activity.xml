@@ -5,7 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:baselineAligned="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Toolbar Title"
             android:textColor="#00508C"
+            android:background="#FFFFFF"
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:layout_gravity="center"
             />
@@ -43,7 +45,8 @@
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/colorTitleLabel"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:background="#FFFFFF"/>
     </LinearLayout>
 
 
@@ -103,7 +106,7 @@
             android:id="@+id/llAmount"
             android:layout_width="159dp"
             android:layout_height="65dp"
-            android:hint="Monto grupal estimado"
+            android:hint="Monto grupal"
             android:orientation="horizontal"
             android:paddingTop="10dp"
             android:textColorHint="#00508C"
@@ -118,10 +121,10 @@
                 android:layout_gravity="end"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/edittext"
-                android:imeOptions="actionNext"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textAlignment="textEnd"
+                android:focusable="true"
                 android:textColor="@color/colorPrimaryLabels"
                 android:textColorHint="@color/colorPrimaryLabels"
                 android:textColorLink="@color/colorPrimaryLabels"
@@ -134,11 +137,11 @@
         <TextView
             android:id="@+id/ceros"
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text=".00"
             android:textSize="20dp"
             android:layout_marginTop="10dp"
-            android:paddingTop="18dp"
+            android:paddingTop="19dp"
             android:textColor="@color/colorPrimaryLabels"
             />
     </LinearLayout>
@@ -161,7 +164,7 @@
         <EditText
             android:id="@+id/editIntegrant"
             android:layout_width="249dp"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:ems="2"
@@ -191,7 +194,7 @@
         <EditText
             android:id="@+id/editDateEstimated"
             android:layout_width="340dp"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
@@ -272,7 +275,8 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:visibility="invisible"
-        android:id="@+id/btnSave">
+        android:id="@+id/btnSave"
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:id="@+id/guardarGpoBtn"

@@ -105,7 +105,8 @@
             android:gravity="center"
             android:text="Entrar"
             android:textColor="#ffffff"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:clickable="true"/>
     </LinearLayout>
 
     <LinearLayout

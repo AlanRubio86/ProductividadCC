@@ -41,7 +41,7 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
     EditText editIntegrant,editAmount,editDisbursement;
     Spinner spnMotiveReprogram,spnCancelMotive;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl;
+    TextView ceros,nombreLbl;
     String URL = "";
     private int movement=0;
 
@@ -77,6 +77,9 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
         editDisbursement= (EditText) findViewById(R.id.editDisbursement);
         spnCancelMotive=(Spinner) findViewById(R.id.spnCancelMotive);
         spnMotiveReprogram=(Spinner) findViewById(R.id.spnMotiveReprogram);
+
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
 
 
 
@@ -304,6 +307,7 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.GONE);
                 dateReprogram.setVisibility(View.GONE);
                 cancelMotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
 
             }
@@ -319,6 +323,7 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.VISIBLE);
                 dateReprogram.setVisibility(View.VISIBLE);
                 cancelMotive.setVisibility(View.GONE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=2;
 
             }
@@ -333,43 +338,47 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
                 motiveReprogram.setVisibility(View.GONE);
                 dateReprogram.setVisibility(View.GONE);
                 cancelMotive.setVisibility(View.VISIBLE);
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });
         //endregion
     }
 
-    public void updateGroup(final int movement, String URL,final String integrants) {
+    public void updateGroup(final int movement, final String URL,final String integrants) {
 
         Log.d("WS VoBoNewGroup:", URL);
-
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        clearFields();
-                        if(movement==1)
-                        {
-                            Toast.makeText(getApplicationContext(), "Se realizo el desembolso correctamente", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(OldGroupDisbursement_Activity.this, FinishOldGroup_Activity.class);
-                            intent.putExtra("integrants",integrants);
-                            startActivity(intent);
-                            finish();
-                        }else
-                        {
-                            Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(OldGroupDisbursement_Activity.this, OldGroupsList_Activity.class);
-                            startActivity(intent);
-                            finish();
-                        }
+                    if(response.toLowerCase().equals("ok")) {
+                            clearFields();
+                            if(movement==1)
+                            {
+                                Toast.makeText(getApplicationContext(), "Se realizo el desembolso correctamente", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(OldGroupDisbursement_Activity.this, FinishOldGroup_Activity.class);
+                                intent.putExtra("integrants",integrants);
+                                startActivity(intent);
+                                finish();
+                            }else
+                            {
+                                Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(OldGroupDisbursement_Activity.this, OldGroupsList_Activity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                    }else
+                    {
+                        saveOffline(movement,URL,integrants);
+                    }
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
                 //This code is executed if there is an error.
-                Log.d("Send Event info", "response error" + error.toString());
-                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
+                    saveOffline(movement,URL,integrants);
                 //mprogressBar.setVisibility(View.GONE);
             }
         });

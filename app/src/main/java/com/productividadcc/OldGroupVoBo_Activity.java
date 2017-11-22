@@ -42,7 +42,7 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
     EditText editEstimated, horaTxt,editAmount,editReprogram;
     Spinner spnDispersion,spnMotiveReprogram,spnCancelMotive;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl,cicleLbl,weekLbl;
+    TextView ceros,nombreLbl,cicleLbl,weekLbl;
     String URL = "";
     private int movement=0;
 
@@ -83,6 +83,8 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
         spnCancelMotive=(Spinner)findViewById(R.id.spnCancelMotive);
 
         editReprogram = (EditText) findViewById(R.id.editReprogram);
+        final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
+        ceros=(TextView)findViewById(R.id.ceros);
 
         mTitle.setText("Visto Bueno");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -185,7 +187,7 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                             break;
                     }
 
-                    Double amount=Double.parseDouble(editAmount.getText().toString())*100;
+                    Double amount=Double.parseDouble(editAmount.getText().toString())*1000;
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
                     URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,
@@ -388,6 +390,8 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.GONE);
+
+                llAmountGeneral.setVisibility(View.VISIBLE);
                 movement=1;
 
             }
@@ -405,6 +409,8 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 reprogrammotive.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.VISIBLE);
                 cancelmotive.setVisibility(View.GONE);
+
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=2;
 
             }
@@ -421,13 +427,15 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 reprogrammotive.setVisibility(View.GONE);
                 reprogram.setVisibility(View.GONE);
                 cancelmotive.setVisibility(View.VISIBLE);
+
+                llAmountGeneral.setVisibility(View.GONE);
                 movement=3;
             }
         });
     }
 
 
-    public void updateGroup(String URL) {
+    public void updateGroup(final String URL) {
         Log.d("WS OldGroupVoBo:", URL);
 
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
@@ -435,17 +443,21 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                    if(response.toLowerCase().equals("ok")) {
                         Toast.makeText(getApplicationContext(), "Se realizo la actualización correctamente", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(OldGroupVoBo_Activity.this, OldGroupsList_Activity.class);
                         startActivity(intent);
                         finish();
+                    }else
+                    {
+                        saveOffline(URL);
+                    }
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
                 //This code is executed if there is an error.
-                Log.d("Send Event info", "response error" + error.toString());
-                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
+                    saveOffline(URL);
                 //mprogressBar.setVisibility(View.GONE);
             }
         });

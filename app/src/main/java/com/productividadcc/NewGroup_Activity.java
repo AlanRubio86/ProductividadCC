@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ import com.android.volley.toolbox.Volley;
 import com.productividadcc.database.Event;
 import com.productividadcc.utilerias.Globales;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -61,9 +64,7 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
         EditText editContact = (EditText) findViewById(R.id.editContact);
         EditText editContactPhone = (EditText) findViewById(R.id.editContactPhone);
         EditText editContactPhoneRef = (EditText) findViewById(R.id.editContactPhoneRef);
-
         //endregion
-
 
         // Remove default title text
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -119,6 +120,9 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
         findViewById(R.id.btnSaveGroup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 if(txtContact.getEditText().getText().toString().isEmpty())
                 {
                     txtContact.setError("This field can not be blank");
@@ -165,7 +169,7 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
                 }
 
                 if (Utils.isNetworkAvailable(NewGroup_Activity.this)) {
-                    sendSaveGroup(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),
+                    saveOffline(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),
                             txtContactPhoneRef.getEditText().getText().toString(),fechaTxt.getText().toString(),fechaCap1.getText().toString());
                 } else {
                     saveOffline(txtContact.getEditText().getText().toString(),txtContactPhone.getEditText().getText().toString(),
@@ -265,28 +269,34 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
 
 
     //region Public Methods
-    public void sendSaveGroup (String nomContacto,String telContacto,String refContacto, String dateDisbursement, String dateTraining) {
+    public void sendSaveGroup (final String nomContacto, final String telContacto, final String refContacto, final String dateDisbursement, final String dateTraining) throws UnsupportedEncodingException {
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
-        URL= String.format(URL,tokenId,employeeId,nomContacto,telContacto,refContacto,dateDisbursement,dateTraining,shared.getString("latitude", "0"),shared.getString("longitude", "0")  );
-
+        URL= String.format(URL,tokenId,employeeId,nomContacto,telContacto,refContacto,dateDisbursement,dateTraining,shared.getString("latitude", "0"),shared.getString("longitude", "0")  ).replace(" ","%20");
+        URLEncoder.encode(URL, "UTF-8");
         Log.d("WS Prom:", URL);
         RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
         StringRequest MyStringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(NewGroup_Activity.this, NewGroupsList_Activity.class);
-                        startActivity(intent);
-                        finish();
+
+                        if(response.toLowerCase().equals("ok"))
+                        {
+                            Toast.makeText(getApplicationContext(), "Se guardo el nuevo grupo correctamente", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(NewGroup_Activity.this, NewGroupsList_Activity.class);
+                            startActivity(intent);
+                            finish();
+                        }     else
+                        {
+                            saveOffline(nomContacto,telContacto,refContacto,dateDisbursement,dateTraining);
+                        }
+
                     }
                 }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
             @Override
             public void onErrorResponse(VolleyError error) {
                 //This code is executed if there is an error.
-                Log.d("Send Event info", "response error" + error.toString());
-                Toast.makeText(getApplicationContext(), "Error de conexión, por favor vuelve a intentar: " + error.toString(), Toast.LENGTH_LONG).show();
-                //mprogressBar.setVisibility(View.GONE);
+                saveOffline(nomContacto,telContacto,refContacto,dateDisbursement,dateTraining);
             }
         });
 

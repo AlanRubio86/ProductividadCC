@@ -6,8 +6,8 @@
     android:layout_height="fill_parent"
     android:baselineAligned="false"
     android:orientation="vertical"
-    android:background="#0D47A1"
-    tools:context="com.productividadcc.Main_Activity">
+    android:background="#FFFFFF"
+    tools:context="com.productividadcc.Main_Activity" >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

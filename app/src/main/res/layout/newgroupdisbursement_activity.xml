@@ -5,7 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:baselineAligned="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -105,7 +106,7 @@
         <EditText
             android:id="@+id/editIntegrant"
             android:layout_width="200dp"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:ems="2"
@@ -121,34 +122,55 @@
 
 
     </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
-        android:hint="Monto grupal a otorgar"
-        android:paddingTop="10dp"
-        android:id="@+id/llAmount"
-        android:visibility="invisible"
-        android:textColorHint="#00508C"
-        app:errorTextAppearance="@drawable/edittext"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/llAmountGeneral"
+        android:visibility="invisible">
 
-        <EditText
-            android:id="@+id/editAmount"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/edittext"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/llAmount"
+            android:layout_width="159dp"
+            android:layout_height="65dp"
+            android:hint="Monto grupal"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
             android:textColorHint="#00508C"
-            android:imeOptions="actionNext"
-            android:inputType="numberDecimal"
-            android:textAlignment="center"
-            android:singleLine="true"
-            android:text="0.0"
-            android:textColor="#00508C"
-            android:textColorLink="#00508C"
-            android:textCursorDrawable="@drawable/edittextcursor"/>
-    </android.support.design.widget.TextInputLayout>
+            android:visibility="invisible"
+            app:errorTextAppearance="@drawable/edittext"
+            app:hintTextAppearance="@style/AppTheme.TextInputLayout">
+
+            <EditText
+                android:id="@+id/editAmount"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/edittext"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimaryLabels"
+                android:textColorHint="@color/colorPrimaryLabels"
+                android:textColorLink="@color/colorPrimaryLabels"
+                android:textCursorDrawable="@drawable/edittextcursor"
+                android:textSize="20dp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/ceros"
+            android:layout_width="50dp"
+            android:layout_height="42dp"
+            android:text=".00"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:paddingTop="19dp"
+            android:textColor="@color/colorPrimaryLabels"
+            />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="109dp"
