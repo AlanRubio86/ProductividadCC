@@ -395,18 +395,18 @@ public class Tasks extends Activity
 
     public interface CheckinListener
     {
-        public void checkinFinished();
+        void checkinFinished();
 
         void onCheckedChanged(View v);
     }
 
     public interface CheckoutListener
     {
-        public void checkoutFinished();
+        void checkoutFinished();
     }
 
     public interface UploadListener
     {
-        public void uploadFinished();
+        void uploadFinished();
     }
 }

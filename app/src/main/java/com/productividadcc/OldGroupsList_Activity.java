@@ -152,17 +152,17 @@ public class OldGroupsList_Activity extends AppCompatActivity {
                                         break;
 
                                 }
-                                items.add(new ListCell(appointmentArray[0].toString(),
-                                        appointmentArray[1].toString(),
-                                        appointmentArray[2].toString(),
-                                        appointmentArray[3].toString(),
-                                        appointmentArray[4].toString(),
-                                        appointmentArray[5].toString(),
-                                        appointmentArray[6].toString(),
-                                        appointmentArray[7].toString(),
-                                        appointmentArray[8].toString(),
-                                        appointmentArray[9].toString(),
-                                        appointmentArray[10].toString(),
+                                items.add(new ListCell(appointmentArray[0],
+                                        appointmentArray[1],
+                                        appointmentArray[2],
+                                        appointmentArray[3],
+                                        appointmentArray[4],
+                                        appointmentArray[5],
+                                        appointmentArray[6],
+                                        appointmentArray[7],
+                                        appointmentArray[8],
+                                        appointmentArray[9],
+                                        appointmentArray[10],
                                         new SimpleDateFormat("yyyy-MM-dd").format(date),
                                         statusName));
                             }

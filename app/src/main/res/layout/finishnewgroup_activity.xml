@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="143dp"
         android:gravity="center"
-        android:text="Has agregado 12 clientes más a tu cartera..."
+        android:text="@string/has_agregado_12_clientes_m_s_a_tu_cartera"
         android:textColor="#00508C"
         android:textSize="30dp"
         />

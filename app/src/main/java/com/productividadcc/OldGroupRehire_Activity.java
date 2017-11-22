@@ -175,7 +175,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
                     } else {
                         if(Double.parseDouble(editAmount.getText().toString())<=0){
                             amount.setError("El monto tiene que ser mayor que 0");
-                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
                             return;
                         }else{
                             amount.setError(null);
@@ -239,7 +239,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
                 }else if(movement==3) {
                     if (spnCancelMotive.getSelectedItem().toString().trim().equals("(Seleccionar)"))
                     {
-                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();
                         return;
                     }
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

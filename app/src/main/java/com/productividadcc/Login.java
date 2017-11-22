@@ -56,12 +56,7 @@ public class Login extends AppCompatActivity implements LocationListener {
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-
-        boolean isGPSEnabled = locationManager
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-        Criteria criteria = new Criteria();
-        mprovider = locationManager.GPS_PROVIDER.toString();
+        mprovider = LocationManager.GPS_PROVIDER.toString();
 
         if (mprovider != null && !mprovider.equals("")) {
             try

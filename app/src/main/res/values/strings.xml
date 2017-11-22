@@ -16,6 +16,7 @@
 
     <string name="data_saved">Eventos Almacenados offline!</string>
     <string name="wifi_error">Wifi No Disponible!</string>
+    <string name="has_agregado_12_clientes_m_s_a_tu_cartera">Has agregado 12 clientes más a tu cartera...</string>
 
     <string-array name="dispersionItems">
         <item name="none">(Seleccionar)</item>

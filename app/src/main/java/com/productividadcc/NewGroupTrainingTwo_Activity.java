@@ -126,7 +126,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     if(editGroupName.getText().toString().isEmpty())
                     {
                         groupNameLayout.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         groupNameLayout.setError(null);
@@ -135,12 +135,12 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     if(editAmount.getText().toString().isEmpty())
                     {
                         amount.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         if(Double.parseDouble(editAmount.getText().toString())<=0){
                             amount.setError("El monto tiene que ser mayor que 0");
-                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            Toast.makeText(getApplicationContext(), "El monto tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
                             return;
                         }else{
                         amount.setError(null);
@@ -149,13 +149,13 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     if(editIntegrant.getText().toString().isEmpty())
                     {
                         integrants.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         if(Integer.parseInt(editIntegrant.getText().toString())<=0)
                         {
                             integrants.setError("El total de integrantes tiene que ser mayor que 0");
-                            Toast.makeText(getApplicationContext(), "El total de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            Toast.makeText(getApplicationContext(), "El total de integrantes tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
                             return;
                         }else{
                             integrants.setError(null);
@@ -164,7 +164,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     if(editDateEstimated.getText().toString().isEmpty())
                     {
                         date.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         date.setError(null);
@@ -184,7 +184,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     if(editDateReprogram.getText().toString().isEmpty())
                     {
                         reprogram.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         reprogram.setError(null);
@@ -201,7 +201,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                 }else if(movement==3){
                     if (spnMotiveCancel.getSelectedItem().toString().trim().equals("(Seleccionar)"))
                     {
-                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();
                         return;
                     }
 
