@@ -172,7 +172,7 @@ public class NewGroupDisbursement_Activity extends AppCompatActivity implements 
                             groupType="4";
                             break;
                     }
-                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"4","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),"", "0",groupType,
+                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"4","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),"1901-01-01", "0",groupType,
                             shared.getString("latitude", "0"),
                             shared.getString("longitude", "0"));
 
