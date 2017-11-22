@@ -143,7 +143,7 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
 
-                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"4","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),"", "0","0",
+                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"4","",amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),"1901-01-01", "0","0",
                             shared.getString("latitude", "0"),
                             shared.getString("longitude", "0"));
                     updateGroup(movement,URL,editIntegrant.getText().toString());
