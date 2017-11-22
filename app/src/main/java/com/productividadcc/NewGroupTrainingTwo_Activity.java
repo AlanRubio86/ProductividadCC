@@ -37,9 +37,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
-    String imeiNumber;
-    private Calendar calendar,calendar2,calendar3;
-    EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram,editGroupName,editDateDisbursement;
+    private Calendar calendar,calendar2;
+    EditText editAmount, editIntegrant,editDateEstimated,editDateReprogram,editGroupName;
     Spinner spnMotiveCancel;
     String groupID,tokenId,employeeId;
     TextView ceros,nombreLbl;
@@ -68,7 +67,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
         final TextInputLayout integrants = (TextInputLayout) findViewById(R.id.llIntegrant);
         final TextInputLayout date = (TextInputLayout) findViewById(R.id.llDate);
-        final TextInputLayout llDateDisbursement = (TextInputLayout) findViewById(R.id.llDateDisbursement);
         final TextInputLayout amount = (TextInputLayout) findViewById(R.id.llAmount);
         final TextInputLayout reprogram = (TextInputLayout) findViewById(R.id.llDateReprogram);
         final LinearLayout cancelmotive = (LinearLayout) findViewById(R.id.llmotivecancel);
@@ -80,7 +78,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
         editAmount = (EditText) findViewById(R.id.editAmount);
         editIntegrant = (EditText) findViewById(R.id.editIntegrant);
         editDateEstimated= (EditText) findViewById(R.id.editDateEstimated);
-        editDateDisbursement= (EditText) findViewById(R.id.editDateDisbursement);
         editDateReprogram= (EditText) findViewById(R.id.editDateReprogram);
         spnMotiveCancel=(Spinner) findViewById(R.id.spnMotiveCancel);
 
@@ -119,14 +116,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
             }
         });
 
-        calendar3 = Calendar.getInstance();
-        editDateDisbursement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                idFechaDesembolso = 1;
-                DatePickerDialog.newInstance(NewGroupTrainingTwo_Activity.this, calendar3.get(Calendar.YEAR), calendar3.get(Calendar.MONTH), calendar3.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
-            }
-        });
 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,14 +161,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                             integrants.setError(null);
                         }
                     }
-                    if(editDateDisbursement.getText().toString().isEmpty())
-                    {
-                        llDateDisbursement.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
-                        return;
-                    } else {
-                        llDateDisbursement.setError(null);
-                    }
                     if(editDateEstimated.getText().toString().isEmpty())
                     {
                         date.setError("This field can not be blank");
@@ -192,7 +173,7 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                     Double amount=Double.parseDouble(editAmount.getText().toString())*1000;
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
-                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"2",editGroupName.getText().toString().replace(" ","%"),amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0",shared.getString("latitude", "0"),shared.getString("longitude", "0"));
+                    URL=String.format(Globales.URL_ACTUALIZAR_ETAPA,tokenId,employeeId,groupID,"2",editGroupName.getText().toString(),amount.toString(),editIntegrant.getText().toString(),"0","0",dateFormat.format(date),editDateEstimated.getText().toString(),"0","0",shared.getString("latitude", "0"),shared.getString("longitude", "0"));
                     if (Utils.isNetworkAvailable(NewGroupTrainingTwo_Activity.this)) {
                         updateGroup(URL);
                     } else {
@@ -334,22 +315,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
             }
         });
 
-        editDateDisbursement.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                llDateDisbursement.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         editDateReprogram.addTextChangedListener(new TextWatcher() {
             @Override
@@ -383,7 +348,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                 groupNameLayout.setVisibility(View.VISIBLE);
                 integrants.setVisibility(View.VISIBLE);
                 date.setVisibility(View.VISIBLE);
-                llDateDisbursement.setVisibility(View.VISIBLE);
                 amount.setVisibility(View.VISIBLE);
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
@@ -400,7 +364,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                 groupNameLayout.setVisibility(View.GONE);
                     integrants.setVisibility(View.GONE);
                     date.setVisibility(View.GONE);
-                    llDateDisbursement.setVisibility(View.GONE);
                     amount.setVisibility(View.GONE);
                     btnsave.setVisibility(View.VISIBLE);
                     reprogram.setVisibility(View.VISIBLE);
@@ -418,7 +381,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
                 groupNameLayout.setVisibility(View.GONE);
                 integrants.setVisibility(View.GONE);
                 date.setVisibility(View.GONE);
-                llDateDisbursement.setVisibility(View.GONE);
                 amount.setVisibility(View.GONE);
                 btnsave.setVisibility(View.VISIBLE);
                 reprogram.setVisibility(View.GONE);
@@ -480,10 +442,6 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        if(idFechaDesembolso == 1){
-            calendar3.set(year, monthOfYear, dayOfMonth);
-            editDateDisbursement.setText(df.format(calendar3.getTime()));
-        }
         if(idFechaDesembolso == 2)
             {
                 calendar.set(year, monthOfYear, dayOfMonth);

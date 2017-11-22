@@ -136,14 +136,13 @@
 
         <TextView
             android:id="@+id/ceros"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:text=".00"
-            android:textSize="20dp"
             android:layout_marginTop="10dp"
             android:paddingTop="19dp"
+            android:text="000.00"
             android:textColor="@color/colorPrimaryLabels"
-            />
+            android:textSize="20dp" />
     </LinearLayout>
 
 
@@ -168,7 +167,6 @@
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
             android:ems="2"
-            android:text="0"
             android:textColor="#00508C"
             android:textColorHint="#00508C"
             android:inputType="number"
@@ -198,13 +196,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
-            android:focusable="false"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="#00508C"
-            android:textColorHint="#00508C" />
+            android:textColorHint="#00508C"
+            android:textColorLink="#00508C"/>
 
     </android.support.design.widget.TextInputLayout>
 

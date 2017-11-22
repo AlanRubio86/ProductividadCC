@@ -157,14 +157,13 @@
 
         <TextView
             android:id="@+id/ceros"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="42dp"
-            android:text=".00"
-            android:textSize="20dp"
             android:layout_marginTop="10dp"
             android:paddingTop="19dp"
+            android:text="000.00"
             android:textColor="@color/colorPrimaryLabels"
-            />
+            android:textSize="20dp" />
     </LinearLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -191,41 +190,12 @@
             android:inputType="number"
             android:singleLine="true"
             android:textColor="#00508C"
-            android:text="0"
             android:textAlignment="center"
             android:textColorHint="#00508C"
             android:textColorLink="#00508C"
             android:textCursorDrawable="@drawable/edittextcursor" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:paddingTop="10dp"
-        android:orientation="horizontal"
-        android:id="@+id/llDateDisbursement"
-        android:hint="Fecha estimada de desemholso"
-        android:visibility="invisible"
-        android:textColorHint="#00508C"
-        app:errorTextAppearance="@drawable/edittext"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
-
-        <EditText
-            android:id="@+id/editDateDisbursement"
-            android:layout_width="330dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/edittext"
-            android:focusable="false"
-            android:imeOptions="actionNext"
-            android:paddingTop="17dp"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:textColor="#00508C"
-            android:textColorHint="#00508C" />
-
-    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="fill_parent"
@@ -246,7 +216,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
-            android:focusable="false"
+            android:textColorLink="#00508C"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
             android:singleLine="true"
@@ -262,7 +232,7 @@
         android:paddingTop="10dp"
         android:orientation="horizontal"
         android:id="@+id/llDateReprogram"
-        android:hint="Fecha de reprogramacion de Cap. 2"
+        android:hint="Fecha de reprogramación de Cap. 2"
         android:textColorHint="#00508C"
         android:visibility="invisible"
         app:errorTextAppearance="@drawable/edittext"
@@ -275,7 +245,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
-            android:focusable="false"
+            android:textColorLink="#00508C"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
             android:singleLine="true"

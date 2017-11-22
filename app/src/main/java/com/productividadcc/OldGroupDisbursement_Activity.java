@@ -213,10 +213,10 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
                     String motive="";
                     switch(spnCancelMotive.getSelectedItem().toString())
                     {
-                        case "Se detectó algun riesgo":
+                        case "Se detectó algún riesgo":
                             motive="21";
                             break;
-                        case "El grupo ya no desea el credito":
+                        case "El grupo ya no desea el crédito":
                             motive="22";
                             break;
                         case "Mal comportamiento del grupo":
