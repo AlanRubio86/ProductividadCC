@@ -1,5 +1,6 @@
 package com.productividadcc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -45,6 +48,7 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
     TextView ceros,nombreLbl,cicleLbl,weekLbl;
     String URL = "";
     private int movement=0;
+    boolean estimated=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +90,15 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
         final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
         ceros=(TextView)findViewById(R.id.ceros);
 
+        ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this,R.array.dispersionItems, R.layout.spinner_item);
+        spnDispersion.setAdapter(adapter3);
+
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this,R.array.reprogramItems, R.layout.spinner_item);
+        spnMotiveReprogram.setAdapter(adapter2);
+
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.cancelItems, R.layout.spinner_item);
+        spnCancelMotive.setAdapter(adapter);
+
         mTitle.setText("Visto Bueno");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -108,6 +121,7 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
         editEstimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                estimated=true;
                 DatePickerDialog.newInstance(OldGroupVoBo_Activity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
@@ -333,6 +347,15 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
             }
         });
 
+        editEstimated.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        });
+
 
         editIntegrants.addTextChangedListener(new TextWatcher() {
             @Override
@@ -464,7 +487,6 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
         MyRequestQueue.add(MyStringRequest);
     }
 
-
     public void saveOffline(String URL) {
         final SharedPreferences shared = getSharedPreferences("userInfo", MODE_PRIVATE);
         Log.d("DB Prom:", URL);
@@ -472,30 +494,33 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
         Main_Activity.event.setUrlWS(URL);
         Main_Activity.event.setStatus(0);
         Main_Activity.event.insert();
-
         Toast.makeText(getApplicationContext(), "Los datos han sido guardados de manera offline", Toast.LENGTH_LONG).show();
-
         Intent intent = new Intent(OldGroupVoBo_Activity.this, OldGroupsList_Activity.class);
         startActivity(intent);
         finish();
     }
 
-
-
     @Override
-    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth)
+    {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        calendar.set(year, monthOfYear, dayOfMonth);
-        editEstimated.setText(df.format(calendar.getTime()));
-        calendar2.set(year, monthOfYear, dayOfMonth);
-        editReprogram.setText(df.format(calendar2.getTime()));
+
+        if(estimated)
+        {
+            calendar.set(year, monthOfYear, dayOfMonth);
+            editEstimated.setText(df.format(calendar.getTime()));
+            estimated=false;
+        }else
+            {
+                calendar2.set(year, monthOfYear, dayOfMonth);
+                editReprogram.setText(df.format(calendar2.getTime()));
+            }
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
         String time = String.format(Locale.ENGLISH, "%02d:%02d", hourOfDay, minute);
         horaTxt.setText(time);
-
     }
 
     public void clearFields () {

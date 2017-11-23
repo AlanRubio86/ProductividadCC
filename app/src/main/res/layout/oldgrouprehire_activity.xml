@@ -255,9 +255,8 @@
         android:paddingTop="5dp"
         android:visibility="invisible"
         app:errorTextAppearance="@drawable/edittext"
-        app:hintTextAppearance="@style/AppTheme.TextInputLayout">
-
-
+        app:hintTextAppearance="@style/AppTheme.TextInputLayout"
+        android:textColorHint="#00508C">
         <EditText
             android:id="@+id/editDateEstimated"
             android:layout_width="331dp"
@@ -268,6 +267,9 @@
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
             android:singleLine="true"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="date"
             android:textAlignment="center"
             android:textColor="#00508C"
             android:textColorHint="#00508C"
@@ -293,7 +295,9 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:focusable="false"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="date"
             android:background="@drawable/edittext"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
@@ -327,7 +331,6 @@
             android:layout_width="289dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:entries="@array/recontratationCancelItems"
             android:textColorHint="#00508C"
             android:textAlignment="center"
             android:spinnerMode="dialog"

@@ -1,5 +1,6 @@
 package com.productividadcc;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -82,7 +85,8 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
         final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
         ceros=(TextView)findViewById(R.id.ceros);
 
-
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this, R.array.recontratationCancelItems, R.layout.spinner_item);
+        spnCancelMotive.setAdapter(adapter2);
 
         mTitle.setText("Inicio de Recontratación");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -316,6 +320,16 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
             @Override
             public void afterTextChanged(Editable s) { }
         });
+
+        editDateEstimated.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        });
+
         editDateReprogram.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

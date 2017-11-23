@@ -1,5 +1,6 @@
 package com.productividadcc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -45,6 +48,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
     TextView ceros,nombreLbl;
     String URL = Globales.URL_ACTUALIZAR_ETAPA;
     private int movement=0;
+    boolean estimatedDate=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,15 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
 
         editReprogram = (EditText) findViewById(R.id.editReprogram);
 
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.cancelItems, R.layout.spinner_item);
+        spnCancelMotive.setAdapter(adapter);
+
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this,R.array.reprogramItems, R.layout.spinner_item);
+        spnMotiveReprogram.setAdapter(adapter2);
+
+        ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this,R.array.dispersionItems, R.layout.spinner_item);
+        spnDispersion.setAdapter(adapter3);
+
         mTitle.setText("Visto Bueno");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -102,6 +115,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
         editEstimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                estimatedDate=true;
                 DatePickerDialog.newInstance(NewGroupVoBo_Activity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show(getFragmentManager(), "datePicker");
             }
         });
@@ -331,6 +345,15 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
             }
         });
 
+        editEstimated.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        });
+
 
         editIntegrants.addTextChangedListener(new TextWatcher() {
             @Override
@@ -482,10 +505,20 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
         java.text.DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        calendar.set(year, monthOfYear, dayOfMonth);
-        editEstimated.setText(df.format(calendar.getTime()));
-        calendar2.set(year, monthOfYear, dayOfMonth);
-        editReprogram.setText(df.format(calendar2.getTime()));
+
+        if(estimatedDate)
+        {
+            spnDispersion.requestFocus();
+            calendar.set(year, monthOfYear, dayOfMonth);
+            editEstimated.setText(df.format(calendar.getTime()));
+            estimatedDate=false;
+        }else
+            {
+                calendar2.set(year, monthOfYear, dayOfMonth);
+                editReprogram.setText(df.format(calendar2.getTime()));
+            }
+
+
     }
 
     @Override

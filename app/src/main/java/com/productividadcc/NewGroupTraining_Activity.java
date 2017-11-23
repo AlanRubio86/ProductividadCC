@@ -1,5 +1,6 @@
 package com.productividadcc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -84,10 +87,14 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
         editDateReprogram= (EditText) findViewById(R.id.editDateReprogram);
         spnMotiveCancel=(Spinner) findViewById(R.id.spnMotiveCancel);
         ceros=(TextView)findViewById(R.id.ceros);
-
+        editAmount.requestFocus();
         mTitle.setText("Capacitación 1");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.trainingCancelItems, R.layout.spinner_item);
+        spnMotiveCancel.setAdapter(adapter2);
 
         TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         //imeiNumber = telephonyManager.getDeviceId();
@@ -295,6 +302,16 @@ public class NewGroupTraining_Activity extends AppCompatActivity implements Date
 
             }
         });
+
+        editDateEstimated.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        });
+
         editDateReprogram.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

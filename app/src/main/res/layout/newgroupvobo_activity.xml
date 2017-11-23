@@ -196,7 +196,10 @@
             android:textColorHint="#00508C"
             android:imeOptions="actionNext"
             android:textColorLink="#00508C"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="date"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -220,12 +223,10 @@
 
         <Spinner
             android:id="@+id/spnDispersion"
-            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="249dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:entries="@array/dispersionItems"
             android:spinnerMode="dialog"
             android:focusable="true"
             android:textAlignment="center"
@@ -282,7 +283,6 @@
             android:layout_width="249dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:entries="@array/reprogramItems"
             android:background="@drawable/edittext"
             android:spinnerMode="dialog"
             android:textAlignment="center"
@@ -308,11 +308,12 @@
             android:layout_width="249dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:entries="@array/cancelItems"
             android:textColorHint="#00508C"
             android:textAlignment="center"
             android:background="@drawable/edittext"
-            style="@style/Widget.AppCompat.Spinner.Underlined"/>
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+
+            />
 
     </LinearLayout>
 

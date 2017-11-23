@@ -207,7 +207,6 @@
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:entries="@array/oldGroupReprogramItemsDisbursement"
             android:spinnerMode="dialog"
             android:textAlignment="center"
             android:textColorHint="#00508C" />
@@ -249,9 +248,7 @@
         android:layout_height="109dp"
         android:orientation="vertical"
         android:visibility="invisible"
-        android:id="@+id/llCancelMotive"
-
-        >
+        android:id="@+id/llCancelMotive">
 
         <TextView
             android:layout_width="70dp"
@@ -259,14 +256,12 @@
             android:text="Motivo:"
             android:paddingTop="17dp"
             android:textColor="#00508C"
-            android:layout_marginLeft="10dp"
-            />
+            android:layout_marginLeft="10dp"/>
         <Spinner
             android:id="@+id/spnCancelMotive"
             android:layout_width="289dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
-            android:entries="@array/cancelMotiveItems"
             android:textColorHint="#00508C"
             android:textAlignment="center"
             android:background="@drawable/edittext"

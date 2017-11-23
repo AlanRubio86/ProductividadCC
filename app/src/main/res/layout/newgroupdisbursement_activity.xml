@@ -193,7 +193,6 @@
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:entries="@array/groupTypeItems"
             android:spinnerMode="dialog"
             android:textAlignment="center"
             android:textColorHint="#00508C" />
@@ -221,7 +220,6 @@
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:entries="@array/reprogramItemsDisbursement"
             android:spinnerMode="dialog"
             android:textAlignment="center"
             android:textColorHint="#00508C" />
@@ -278,7 +276,6 @@
             android:layout_width="328dp"
             android:layout_height="45dp"
             android:layout_marginLeft="10dp"
-            android:entries="@array/cancelMotiveItems"
             android:textColorHint="#00508C"
             android:textAlignment="center"
             android:background="@drawable/edittext"

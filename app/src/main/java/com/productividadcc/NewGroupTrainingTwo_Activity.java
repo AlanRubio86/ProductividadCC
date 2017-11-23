@@ -1,5 +1,6 @@
 package com.productividadcc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -88,6 +91,8 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
         TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         //imeiNumber = telephonyManager.getDeviceId();
 
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this,R.array.training2CancelItems, R.layout.spinner_item);
+        spnMotiveCancel.setAdapter(adapter2);
 
         if (getIntent().getExtras() != null) {
             String groupName = getIntent().getExtras().getString("groupName");
@@ -312,6 +317,15 @@ public class NewGroupTrainingTwo_Activity extends AppCompatActivity implements D
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        editDateEstimated.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
             }
         });
 

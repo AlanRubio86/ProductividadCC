@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -82,6 +83,15 @@ public class NewGroupDisbursement_Activity extends AppCompatActivity implements 
         spnMotiveReprogram=(Spinner) findViewById(R.id.spnMotiveReprogram);
         spnGroupType=(Spinner) findViewById(R.id.spnGroupType);
 
+
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this,R.array.groupTypeItems, R.layout.spinner_item);
+        spnGroupType.setAdapter(adapter2);
+
+        ArrayAdapter adapter1 = ArrayAdapter.createFromResource(this,R.array.reprogramItemsDisbursement, R.layout.spinner_item);
+        spnMotiveReprogram.setAdapter(adapter1);
+
+        ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this,R.array.cancelMotiveItems, R.layout.spinner_item);
+        spnCancelMotive.setAdapter(adapter3);
 
         mTitle.setText("Desembolso");
         getSupportActionBar().setHomeButtonEnabled(true);

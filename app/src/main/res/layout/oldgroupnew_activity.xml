@@ -133,6 +133,9 @@
             android:background="@drawable/edittext"
             android:textColorLink="#00508C"
             android:hint="Fecha Estimada de Desembolso"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="date"
             android:imeOptions="actionNext"
             android:textColor="#00508C"
             android:textColorHint="#00508C" />
@@ -160,7 +163,10 @@
             android:hint="Fecha de inicio de recontratación"
             android:imeOptions="actionNext"
             android:textColor="#00508C"
-            android:textColorHint="#00508C" />
+            android:textColorHint="#00508C"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="date"/>
     </android.support.design.widget.TextInputLayout>
 
 

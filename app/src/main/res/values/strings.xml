@@ -29,7 +29,7 @@
         <item name="changedate">Cambio de fecha</item>
         <item name="incomplete">No están todas las integrantes presentes</item>
         <item name="changed">Área de Análisis solicita reprogramación</item>
-        <item name="cancelclient">Se cancela una cliente y se descompleta el grupo"></item>
+        <item name="cancelclient">Se cancela una cliente y se descompleta el grupo"</item>
     </string-array>
     <string-array name="cancelItems">
         <item name="none">(Seleccionar)</item>

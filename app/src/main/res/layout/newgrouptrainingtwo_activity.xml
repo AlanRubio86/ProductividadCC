@@ -219,6 +219,9 @@
             android:textColorLink="#00508C"
             android:imeOptions="actionNext"
             android:paddingTop="17dp"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="date"
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="#00508C"
@@ -279,7 +282,6 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/edittext"
-            android:entries="@array/training2CancelItems"
             android:spinnerMode="dialog"
             android:textAlignment="center"
             android:textColorHint="#00508C" />

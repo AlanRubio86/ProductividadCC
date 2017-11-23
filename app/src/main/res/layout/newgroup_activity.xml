@@ -135,6 +135,9 @@
             android:textColorLink="#00508C"
             android:hint="Fecha Estimada de Desembolso"
             android:imeOptions="actionNext"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="date"
             android:textColor="#00508C"
             android:textColorHint="#00508C" />
     </android.support.design.widget.TextInputLayout>
@@ -158,8 +161,11 @@
             android:layout_marginRight="5dp"
             android:background="@drawable/edittext"
             android:textColorLink="#00508C"
-            android:hint="Fecha de Capacitacion 1"
+            android:hint="Fecha de Capacitación 1"
             android:imeOptions="actionNext"
+            android:focusable="true"
+            android:clickable="true"
+            android:inputType="date"
             android:textColor="#00508C"
             android:textColorHint="#00508C" />
     </android.support.design.widget.TextInputLayout>

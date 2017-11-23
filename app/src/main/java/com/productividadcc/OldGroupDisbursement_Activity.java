@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -81,6 +82,11 @@ public class OldGroupDisbursement_Activity extends AppCompatActivity implements 
         final LinearLayout llAmountGeneral=(LinearLayout) findViewById(R.id.llAmountGeneral);
         ceros=(TextView)findViewById(R.id.ceros);
 
+        ArrayAdapter adapter1 = ArrayAdapter.createFromResource(this,R.array.oldGroupReprogramItemsDisbursement, R.layout.spinner_item);
+        spnMotiveReprogram.setAdapter(adapter1);
+
+        ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this,R.array.cancelMotiveItems, R.layout.spinner_item);
+        spnCancelMotive.setAdapter(adapter3);
 
 
         mTitle.setText("Desembolso");

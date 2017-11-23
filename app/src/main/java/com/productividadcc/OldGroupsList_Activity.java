@@ -127,25 +127,25 @@ public class OldGroupsList_Activity extends AppCompatActivity {
                                 String  input = appointmentArray[10].trim();
                                 switch (input) {
                                     case "1":
-                                        statusName = "Capacitacion 1";
+                                        statusName = "Capacitación 1";
                                         break;
                                     case "2":
-                                        statusName = "Capacitacion 2";
+                                        statusName = "Capacitación 2";
                                         break;
                                     case "3":
-                                        statusName = "VoBo";
+                                        statusName = "Visto Bueno";
                                         break;
                                     case "4":
                                         statusName = "Desembolso";
                                         break;
                                     case "5":
-                                        statusName = "Recontratacion";
+                                        statusName = "Recontratación";
                                         break;
                                     case "6":
-                                        statusName = "VoBo Renovacion";
+                                        statusName = "Visto Bueno";
                                         break;
                                     case "7":
-                                        statusName = "Cancelacion";
+                                        statusName = "Cancelación";
                                         break;
                                     case "8":
                                         statusName = "Reagendar";
