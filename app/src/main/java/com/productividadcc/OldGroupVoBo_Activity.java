@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -355,6 +356,8 @@ public class OldGroupVoBo_Activity extends AppCompatActivity implements DatePick
                 }
             }
         });
+
+        editEstimated.setInputType(InputType.TYPE_NULL);
 
 
         editIntegrants.addTextChangedListener(new TextWatcher() {

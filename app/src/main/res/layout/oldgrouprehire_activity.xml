@@ -172,7 +172,7 @@
         android:id="@+id/llRecontratation"
         android:layout_width="fill_parent"
         android:layout_height="62dp"
-        android:hint="Recontratados:"
+        android:hint="Recontratados"
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:visibility="invisible"

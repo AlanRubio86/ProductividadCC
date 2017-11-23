@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -268,6 +269,8 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
                 }
             }
         });
+        fechaTxt.setInputType(InputType.TYPE_NULL);
+        fechaCap1.setInputType(InputType.TYPE_NULL);
 
 
         fechaCap1.addTextChangedListener(new TextWatcher() {

@@ -64,9 +64,9 @@
     <string-array name="groupTypeItems">
         <item name="none">(Seleccionar)</item>
         <item name="superstar">Super Estrella (27.32% -$70.00)</item>
-        <item name="start">Super Estrella (43.35% -$72.00)</item>
-        <item name="consolidated">Super Estrella (55.22% -$73.50)</item>
-        <item name="new">Super Estrella (59.13% -$74.00)</item>
+        <item name="start">Estrella (43.35% -$72.00)</item>
+        <item name="consolidated">Consolidado (55.22% -$73.50)</item>
+        <item name="new">Nuevo (59.13% -$74.00)</item>
     </string-array>
     <string-array name="cancelMotiveItems">
         <item name="none">(Seleccionar)</item>
