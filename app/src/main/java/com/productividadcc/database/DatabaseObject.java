@@ -9,7 +9,7 @@ import com.productividadcc.Main_Activity;
 abstract class DatabaseObject {
     protected String 	TAG 			= "DatabaseObject";
     protected String 	DATABASE_TABLE;
-    protected String[] 	columns			= new String[]{};;
+    protected String[] 	columns			= new String[]{};
     protected String 	KEY_ID			= "_id";
 
     public long 		id;

@@ -138,7 +138,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                     if(editIntegrants.getText().toString().isEmpty())
                     {
                         integrants.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         integrants.setError(null);
@@ -160,7 +160,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                     if(editAmount.getText().toString().isEmpty())
                     {
                         amount.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         amount.setError(null);
@@ -173,7 +173,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                         if(money<=0)
                         {
                             amount.setError("El monto autorizado tiene que ser mayor que 0");
-                            Toast.makeText(getApplicationContext(), "El monto autorizado tiene que ser mayor que 0", Toast.LENGTH_LONG).show();;
+                            Toast.makeText(getApplicationContext(), "El monto autorizado tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
                             return;
                         }
 
@@ -184,7 +184,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                     if(editEstimated.getText().toString().isEmpty())
                     {
                         date.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         amount.setError(null);
@@ -192,7 +192,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
 
                     if (spnDispersion.getSelectedItem().toString().trim().equals("(Seleccionar)"))
                     {
-                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un tipo de dispersión", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un tipo de dispersión", Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -227,7 +227,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
                     if(editReprogram.getText().toString().isEmpty())
                     {
                         reprogram.setError("This field can not be blank");
-                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
                         reprogram.setError(null);
@@ -235,7 +235,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
 
                     if (spnMotiveReprogram.getSelectedItem().toString().trim().equals("(Seleccionar)"))
                     {
-                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();
                         return;
                     }
                     String motive="";
@@ -274,7 +274,7 @@ public class NewGroupVoBo_Activity extends AppCompatActivity implements DatePick
 
                     if (spnCancelMotive.getSelectedItem().toString().trim().equals("(Seleccionar)"))
                     {
-                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getApplicationContext(), "Favor de seleccionar un motivo", Toast.LENGTH_LONG).show();
                         return;
                     }
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

@@ -54,7 +54,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
                 public void onClick(View view) {
 
 
-                    if(Integer.parseInt(cell.getStatusId().toString())<=4){
+                    if(Integer.parseInt(cell.getStatusId())<=4){
                         String url = "http://maps.google.com/maps?daddr=" + cell.getLatitute()+","+cell.getLongitude();
                         Intent goZe = new Intent(Intent.ACTION_VIEW);
                         goZe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -62,7 +62,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
                         context.startActivity(goZe);
                     }
 
-                    if(Integer.parseInt(cell.getStatusId().toString())>4){
+                    if(Integer.parseInt(cell.getStatusId())>4){
                         String url = "http://maps.google.com/maps?daddr=" + cell.getLatitute()+","+cell.getLongitude();
                         Intent goZe = new Intent(Intent.ACTION_VIEW);
                         goZe.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -75,7 +75,7 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
             });
 
             name.setText(cell.getDate()+","+cell.getGroupNumber()+"-"+cell.getGroupName()+","+cell.getStatusName());
-            id.setText(cell.getGroupId().toString());
+            id.setText(cell.getGroupId());
         }
         return v;
     }

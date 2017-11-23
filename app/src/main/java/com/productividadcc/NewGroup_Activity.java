@@ -128,7 +128,7 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
                 if(txtContact.getEditText().getText().toString().isEmpty())
                 {
                     txtContact.setError("This field can not be blank");
-                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     txtContact.setError(null);
@@ -137,7 +137,7 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
                 if(txtContactPhone.getEditText().getText().toString().isEmpty())
                 {
                     txtContactPhone.setError("This field can not be blank");
-                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     txtContactPhone.setError(null);
@@ -146,7 +146,7 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
                 if(txtContactPhoneRef.getEditText().getText().toString().isEmpty())
                 {
                     txtContactPhoneRef.setError("This field can not be blank");
-                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     txtContactPhoneRef.setError(null);
@@ -155,7 +155,7 @@ public class NewGroup_Activity extends AppCompatActivity implements DatePickerDi
                 if(fechaTxt.getText().toString().isEmpty())
                 {
                     txtDisbursement.setError("This field can not be blank");
-                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();;
+                    Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     txtDisbursement.setError(null);
