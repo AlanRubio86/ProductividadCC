@@ -12,8 +12,9 @@
         android:layout_height="62dp"
         android:layout_weight="1"
         android:textSize="17sp"
-        android:text="Name"
+        android:text="Name \n Segunda linea"
         android:textColor="#FFFFFF"
+        android:singleLine="false"
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
         android:background="@drawable/itemedittext" />

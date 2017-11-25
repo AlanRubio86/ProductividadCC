@@ -74,7 +74,11 @@ public class ListAdapter extends ArrayAdapter<ListCell> {
                 }
             });
 
-            name.setText(cell.getDate()+","+cell.getGroupNumber()+"-"+cell.getGroupName()+","+cell.getStatusName());
+            name.setText(cell.getDate()+"\n");
+            name.append(cell.getGroupNumber()+" "+cell.getGroupName()+"\n");
+            name.append(cell.getStatusName());
+
+
             id.setText(cell.getGroupId());
         }
         return v;
