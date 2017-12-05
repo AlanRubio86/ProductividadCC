@@ -148,15 +148,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
                         Toast.makeText(getApplicationContext(), "Favor de capturar los datos solicitados", Toast.LENGTH_LONG).show();
                         return;
                     } else {
-                        if(Integer.parseInt(editNewIntegrant.getText().toString())<=0)
-                        {
-                            llnews.setError("Nuevos tiene que ser mayor que 0");
-                            Toast.makeText(getApplicationContext(), "Nuevos tiene que ser mayor que 0", Toast.LENGTH_LONG).show();
-                            return;
-                        }else
-                        {
                             llnews.setError(null);
-                        }
                     }
                     if (editIntegrantRec.getText().toString().isEmpty()) {
                         llrecontratation.setError("This field can not be blank");
