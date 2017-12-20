@@ -44,7 +44,7 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
     Spinner spnCancelMotive;
     TextView ceros, horaTxt;
     String groupID,tokenId,employeeId;
-    TextView nombreLbl;
+    TextView nombreLbl,cicleLbl,weekLbl;
     String URL ="";
     private int movement=0;
 
@@ -65,6 +65,8 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
 
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         nombreLbl = (TextView) findViewById(R.id.nombreLabel);
+        cicleLbl = (TextView) findViewById(R.id.cicleLbl);
+        weekLbl = (TextView) findViewById(R.id.weekLbl);
 
         final TextInputLayout integrants = (TextInputLayout) findViewById(R.id.llIntegrant);
         final TextInputLayout llnews = (TextInputLayout) findViewById(R.id.llNews);
@@ -96,7 +98,11 @@ public class OldGroupRehire_Activity extends AppCompatActivity implements DatePi
 
         if (getIntent().getExtras() != null) {
             String groupName = getIntent().getExtras().getString("groupName");
+            String cicle = getIntent().getExtras().getString("cicle");
+            String week = getIntent().getExtras().getString("week");
             nombreLbl.setText(groupName);
+            cicleLbl.setText("Ciclo: "+cicle);
+            weekLbl.setText("Semana: "+week);
             groupID = getIntent().getExtras().getString("groupId");
         } else {
             groupID = "0";
